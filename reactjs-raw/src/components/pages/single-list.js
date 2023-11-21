@@ -1,18 +1,18 @@
 function SingleList() {
     return (
         <>
-            <div class="single-list">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="list-image overlay">
+            <div className="single-list">
+                <div className="row">
+                    <div className="col-lg-6 col-md-6 col-12">
+                        <div className="list-image overlay">
                             <img src="https://via.placeholder.com/115x140" alt="#" />
-                            <a href="#" class="buy"><i class="fa fa-shopping-bag"></i></a>
+                            <a href="#" className="buy"><i className="fa fa-shopping-bag"></i></a>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-12 no-padding">
-                        <div class="content">
-                            <h4 class="title"><a href="#">Licity jelly leg flat Sandals</a></h4>
-                            <p class="price with-discount">$59</p>
+                    <div className="col-lg-6 col-md-6 col-12 no-padding">
+                        <div className="content">
+                            <h4 className="title"><a href="#">Licity jelly leg flat Sandals</a></h4>
+                            <p className="price with-discount">$59</p>
                         </div>
                     </div>
                 </div>

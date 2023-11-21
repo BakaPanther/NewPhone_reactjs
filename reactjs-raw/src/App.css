@@ -384,6 +384,8 @@
 }
 .header.shop .list-main li a{
 	color:#333;
+	text-decoration: none;
+    font-weight: 500;
 }
 .header.shop .list-main li a:hover{
 	color:#F7941D;
@@ -473,6 +475,7 @@
 	color: #222;
 	font-size: 13px;
 	font-weight: 600;
+	text-decoration: none;
 }
 .header .shopping .dropdown-cart-header a:hover{
 	color:#F7941D;
@@ -530,6 +533,7 @@
 	font-weight: 600;
 	font-size: 13px;
 	color: #333;
+	text-decoration: none;
 }
 .header .shopping-list h4 a:hover{
 	color:#F7941D;
@@ -797,7 +801,8 @@
 }
 .header.shop .main-category li a{
 	text-transform:capitalize;
-	font-weight:400;
+	font-weight:500;
+	text-decoration: none;
 }
 .header.shop .main-category li a:hover{
 	color:#F7941D;
@@ -1543,6 +1548,7 @@
 	display: inline-block;
 	text-transform:uppercase;
 	border-bottom:2px solid #333;
+	text-decoration: none;
 }
 .small-banner .single-banner a:hover{
 	color:#F7941D;
@@ -1609,6 +1615,7 @@
 	border-radius: 30px;
 	margin-top: 25px;
 	text-transform: uppercase;
+	text-decoration: none;
 }
 .midium-banner .single-banner a:hover{
 	background:#F7941D;
@@ -1806,6 +1813,7 @@
 	height: 52px;
 	position: relative;
 	top: 2px;
+	text-decoration: none;
 }
 .single-product .product-img .product-action a:last-child{
 	margin-right:0;
@@ -1887,6 +1895,7 @@
 	text-transform: uppercase;
 	line-height: 1;
 	display: inline-block;
+	text-decoration: none;
 }
 .single-product .product-img .product-action-2 a:hover {
   color:#F7941D;
@@ -1973,6 +1982,8 @@
 	font-size: 14px;
 	font-weight: 500;
 	margin: 0;
+	text-decoration: none;
+    color: black;
 }
 .single-product .product-content h3 a:hover{
 	color:#F7941D;
@@ -2858,6 +2869,7 @@
 .shop-home-list .single-list .content .title a{
 	font-size: 14px;
 	font-weight: 600;
+	text-decoration: none;
 }
 .shop-home-list .single-list .content .titlea {
 	color: #333;
@@ -3799,11 +3811,11 @@
 	top: 0;
 	background: #F7941D;
 	color: #fff;
-	left: -4px;
 	border-radius: 0 30px 30px 0;
 	font-size: 14px;
 	font-weight: 500;
 	text-transform: uppercase;
+	top: -3px;
 }
 .shop-newsletter .newsletter-inner .btn:hover{
 	background:#333;
@@ -4032,6 +4044,7 @@
 	font-size: 17px;
 	font-weight: 600;
 	color: #333;
+	text-decoration: none;
 }
 .shop-blog .shop-single-blog .content .title:hover{
 	color:#F7941D;
@@ -4048,6 +4061,7 @@
 	color: #3c3c3c;
 	margin-top: 10px;
 	display: block;
+	text-decoration: none;
 }
 .shop-blog .shop-single-blog .content .more-btn:hover{
 	color:#F7941D;
@@ -4854,6 +4868,7 @@
 .footer .links ul li a{
 	color:#fff;
 	font-weight: 400;
+	text-decoration: none;
 }
 .footer .links ul li a:hover{
 	color:#F7941D;

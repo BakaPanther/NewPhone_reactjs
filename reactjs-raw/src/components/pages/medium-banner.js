@@ -3,9 +3,9 @@ import MeSingleBanner from "./medium-single-banner";
 function MeBanner(){
     return(
         <>
-	<section class="midium-banner">
-		<div class="container">
-			<div class="row">
+	<section className="midium-banner">
+		<div className="container">
+			<div className="row">
                 <MeSingleBanner/>
                 <MeSingleBanner/>
 			</div>

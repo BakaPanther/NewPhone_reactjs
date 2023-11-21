@@ -1,13 +1,13 @@
 function SingleBlog() {
     return (
         <>
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="shop-single-blog">
+            <div className="col-lg-4 col-md-6 col-12">
+                <div className="shop-single-blog">
                     <img src="https://via.placeholder.com/370x300" alt="#"/>
-                        <div class="content">
-                            <p class="date">22 July , 2020. Monday</p>
-                            <a href="#" class="title">Sed adipiscing ornare.</a>
-                            <a href="#" class="more-btn">Continue Reading</a>
+                        <div className="content">
+                            <p className="date">22 July , 2020. Monday</p>
+                            <a href="#" className="title">Sed adipiscing ornare.</a>
+                            <a href="#" className="more-btn">Continue Reading</a>
                         </div>
                 </div>
 

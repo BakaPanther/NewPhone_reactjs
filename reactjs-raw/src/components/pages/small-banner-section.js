@@ -3,9 +3,9 @@ import SmSingleBanner from "./small-single-banner";
 function SmBannerSection(){
     return (
         <>
-	<section class="small-banner section">
-		<div class="container-fluid">
-			<div class="row">
+	<section className="small-banner section">
+		<div className="container-fluid">
+			<div className="row">
 				<SmSingleBanner/>
                 <SmSingleBanner/>
                 <SmSingleBanner/>

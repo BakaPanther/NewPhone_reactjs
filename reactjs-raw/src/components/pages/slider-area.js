@@ -2,7 +2,7 @@ import SingleSlider from "./single-slider";
 function SliderArea(){
     return (
         <>
-            <section class="hero-slider">
+            <section className="hero-slider">
                 <SingleSlider/>
             </section>
         </>
