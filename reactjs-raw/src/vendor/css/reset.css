@@ -308,8 +308,9 @@ big {
 .breadcrumbs ul li a {
 	color: #333;
 	font-size: 14px;
-	font-weight: 400;
+	font-weight: 500;
 	text-transform: capitalize;
+	text-decoration: none;
 }
 .breadcrumbs ul li.active a {
 	color: #333;

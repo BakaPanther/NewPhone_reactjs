@@ -1,4 +1,4 @@
-import SingleBlog from "./main/single-blog";
+import SingleBlog from "./single-blog";
 
 function ShopBlog(){
     return(

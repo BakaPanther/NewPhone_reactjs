@@ -1,18 +1,3 @@
-// import './App.css';
-// import './vendor/css/bootstrap.min.css';
-// import './vendor/css/bootstrap.css';
-// import './vendor/css/magnific-popup.min.css';
-// import './vendor/css/font-awesome.css';
-// import './vendor/css/jquery.fancybox.min.css';
-// import './vendor/css/themify-icons.css';
-// import './vendor/css/niceselect.css';
-// import './vendor/css/animate.css';
-// import './vendor/css/flex-slider.min.css';
-// import './vendor/css/owl-carousel.css';
-// import './vendor/css/slicknav.min.css';
-// import './vendor/css/reset.css';
-// import './vendor/css/responsive.css';
-
 import './vendor/css/bootstrap.css';
 import './vendor/css/magnific-popup.min.css';
 import './vendor/css/font-awesome.css';
@@ -27,36 +12,47 @@ import './vendor/css/reset.css';
 import './vendor/css/responsive.css';
 import './App.css';
 
-
-
-
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { Index } from './components';
+import { Cart } from './components/pages/cart/cart';
+import { ProductContainer } from './components/pages/product/product-container';
+import { useEffect, useState } from 'react';
 import Header from './components/header';
-import Footer from './components/footer';
-import SliderArea from './components/pages/slider-area';
-import SmBannerSection from './components/pages/small-banner-section';
-import ProductArea from './components/pages/product-area';
-import MeBanner from './components/pages/medium-banner';
-import PopularArea from './components/pages/popular-area';
-import ShopHomeList from './components/pages/shop-home-list';
-import CountDownArea from './components/pages/countdown-area';
-import ShopBlog from './components/pages/shop-blog';
-import ServiceArea from './components/pages/service-area';
+import { NocateHeader } from './components/nocate-header';
+import { CheckOut } from './components/pages/checkout/checkout';
+import { Contact } from './components/pages/contact-us/contact';
 
 function App() {
- 
+  const location=useLocation();
+  const isIndexPage= location.pathname === '/';
+  // const [sticky,setSticky]= useState(false);
+  // useEffect(()=>{
+  //   document.addEventListener("scroll",checkScroll);
+  //   return () => document.removeEventListener("scroll", checkScroll);
+  // },[]);
+  // const checkScroll=(e)=>{
+  //   const bar=document.getElementById("myHeader");
+  //   console.log(window.scrollY,bar.offsetTop);
+  //   console.log(sticky);
+  //   if(window.scrollY>=bar.offsetTop){
+  //     setSticky(true);
+  //   }else{
+  //     setSticky(false);
+  //   }
+  // };
   return (
     <>
-    <Header/>
-    <SliderArea/>
-    <SmBannerSection/>
-    <ProductArea/>
-    <MeBanner/>
-    <PopularArea/>
-    <ShopHomeList/>
-    <CountDownArea/>
-    <ShopBlog/>
-    <ServiceArea/>
-    <Footer/>
+    <div className='App'>
+      {isIndexPage ? <Header/>:<NocateHeader/>}
+    
+    <Routes>
+      <Route path='/' element={<Index/>}/>
+      <Route path='/cart' element={<Cart/>}/>
+      <Route path='/product' element={<ProductContainer/>}/>
+      <Route path='/checkout' element={<CheckOut/>}/>
+      <Route path='/contact-us' element={<Contact/>}/>
+    </Routes> 
+    </div>
     </>
   );
 }

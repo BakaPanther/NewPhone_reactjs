@@ -8,13 +8,7 @@ function SingleSlider(){
 						<div className="text-inner">
 							<div className="row">
 								<div className="col-lg-7 col-12">
-									<div className="hero-text">
-										<h1><span>UP TO 50% OFF </span>Shirt For Man</h1>
-										<p>Maboriosam in a nesciung eget magnae dapibus disting tloctio in the find it pereri odiy maboriosm.</p>
-										<div className="button">
-											<a href="#" className="btn">Shop Now!</a>
-										</div>
-									</div>
+								
 								</div>
 							</div>
 						</div>

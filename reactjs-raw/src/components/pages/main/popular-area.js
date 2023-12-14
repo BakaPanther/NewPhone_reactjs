@@ -1,4 +1,5 @@
-import SingleProduct from "./single-product";
+import SingleProduct from "../../single-product";
+
 
 function PopularArea() {
     return (
@@ -17,9 +18,9 @@ function PopularArea() {
                             <div className="row">
                                 <div className="col-12">
                                     <div className="owl-carousel popular-slider">
-                                        <SingleProduct />
-                                        <SingleProduct />
-                                        <SingleProduct />
+                                        <SingleProduct/>
+                                        <SingleProduct/>
+                                        <SingleProduct/>
                                     </div>
                                 </div>
                             </div>
