@@ -1,13 +1,12 @@
-function SingleBlog() {
+function SingleBlog(props) {
     return (
         <>
             <div className="col-lg-4 col-md-6 col-12">
                 <div className="shop-single-blog">
-                    <img src="https://via.placeholder.com/370x300" alt="#"/>
+                    <img src={`http://localhost:8000/` + props.data.hinh_anh[0].duong_dan} alt="#"/>
                         <div className="content">
-                            <p className="date">22 July , 2020. Monday</p>
-                            <a href="#" className="title">Sed adipiscing ornare.</a>
-                            <a href="#" className="more-btn">Continue Reading</a>
+                            <a href="#" className="title">{props.data.ten}</a>
+                            <a href="#" className="more-btn">{props.data.chi_tiet_dien_thoai[0].gia_ban}</a>
                         </div>
                 </div>
 
