@@ -8,7 +8,7 @@ function SingleSlider(){
 						<div className="text-inner">
 							<div className="row">
 								<div className="col-lg-7 col-12">
-								
+							
 								</div>
 							</div>
 						</div>

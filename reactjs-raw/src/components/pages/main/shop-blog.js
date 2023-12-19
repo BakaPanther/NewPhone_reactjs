@@ -1,6 +1,11 @@
 import SingleBlog from "./single-blog";
 
-function ShopBlog(){
+function ShopBlog(props){
+	const lst_dien_thoai = props.data.dienThoai.map((item,key) =>{
+		return(
+			<SingleBlog data={item} key={key}/>
+		)
+	})
     return(
         <>
         <section className="shop-blog section">
@@ -8,14 +13,12 @@ function ShopBlog(){
 			<div className="row">
 				<div className="col-12">
 					<div className="section-title">
-						<h2>From Our Blog</h2>
+						<h2>{props.data.ten}</h2>
 					</div>
 				</div>
 			</div>
 			<div className="row">
-				<SingleBlog/>
-				<SingleBlog/>
-                <SingleBlog/>
+				{lst_dien_thoai}
 			</div>
 		</div>
 	</section>
