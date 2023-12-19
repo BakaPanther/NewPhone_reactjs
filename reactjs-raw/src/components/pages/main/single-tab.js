@@ -1,14 +1,20 @@
+
 function SingleTab(props) {
+    // console.log(props.data.hinh_anh);
     return (
         <>
             <div className="col-xl-3 col-lg-4 col-md-4 col-12">
                 <div className="single-product">
                     <div className="product-img">
-                        <a href="product-details.html">
-                            <img className="default-img" src={`http://localhost/8000/` + props.data.hinh_anh[0].duong_dan} alt="#"  />
-                            <img className="hover-img" src={`http://localhost/8000/` + props.data.hinh_anh[0].duong_dan} alt="#" />
-                            <span className="out-of-stock">Hot</span>
+                        <a href="#">
+                            {props.data.hinh_anh && props.data.hinh_anh.length > 0 ? (
+                                <img src={`http://localhost:8000/` + props.data.hinh_anh[0].duong_dan} alt="#" />
+                            
+                                ) : (
+                                <span>Không có dữ liệu</span>
+                            )}
                         </a>
+                        {/* <span className="out-of-stock">Hot</span> */}
                         <div className="button-head">
                             <div className="product-action">
                                 <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i className=" ti-eye"></i><span>Quick Shop</span></a>

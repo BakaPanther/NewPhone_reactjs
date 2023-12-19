@@ -38,13 +38,14 @@ function ProductArea(){
 		// Khi điện thoại thay đổi, cập nhật danh sách sản phẩm hiển thị
 		setHienThi(dienThoai.slice(0, 9));
 	}, [dienThoai, 9]);
-
+	// console.log(hienThi);
 
 	const lst_nha_san_xuat = nhaSanXuat.map((item,key) => {
 		return(
 			<TabNav data={item} key={key}/>
 		)
 	})
+	// console.log(nhaSanXuat);
     return (
         <> 
     <div className="product-area section">
