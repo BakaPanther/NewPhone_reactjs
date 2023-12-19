@@ -21,10 +21,12 @@ import Header from './components/header';
 import { NocateHeader } from './components/nocate-header';
 import { CheckOut } from './components/pages/checkout/checkout';
 import { Contact } from './components/pages/contact-us/contact';
+import Login from './components/login';
 
 function App() {
   const location=useLocation();
   const isIndexPage= location.pathname === '/';
+  const isLoginPage= location.pathname ==='/login';
   // const [sticky,setSticky]= useState(false);
   // useEffect(()=>{
   //   document.addEventListener("scroll",checkScroll);
@@ -43,9 +45,11 @@ function App() {
   return (
     <>
     <div className='App'>
-      {isIndexPage ? <Header/>:<NocateHeader/>}
+
+      {isLoginPage? <></>:isIndexPage ? <Header/>:<NocateHeader/>}
     
     <Routes>
+      <Route path='/login' element={<Login/>}/>
       <Route path='/' element={<Index/>}/>
       <Route path='/cart' element={<Cart/>}/>
       <Route path='/product' element={<ProductContainer/>}/>
