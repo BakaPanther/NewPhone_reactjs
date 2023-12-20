@@ -22,6 +22,7 @@ import { NocateHeader } from './components/nocate-header';
 import { CheckOut } from './components/pages/checkout/checkout';
 import { Contact } from './components/pages/contact-us/contact';
 import Login from './components/login';
+import ProductDetails from './components/product-details';
 
 function App() {
   const location=useLocation();
@@ -53,6 +54,7 @@ function App() {
       <Route path='/' element={<Index/>}/>
       <Route path='/cart' element={<Cart/>}/>
       <Route path='/product' element={<ProductContainer/>}/>
+      <Route path='/product-details' element={<ProductDetails/>}/>
       <Route path='/checkout' element={<CheckOut/>}/>
       <Route path='/contact-us' element={<Contact/>}/>
     </Routes> 
