@@ -22,7 +22,7 @@ import { NocateHeader } from './components/nocate-header';
 import { CheckOut } from './components/pages/checkout/checkout';
 import { Contact } from './components/pages/contact-us/contact';
 import Login from './components/login';
-import ProductDetails from './components/product-details';
+import ProductDetails from './components/pages/product-detail/product-details';
 
 function App() {
   const location=useLocation();
