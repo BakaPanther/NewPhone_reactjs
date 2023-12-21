@@ -1,6 +1,7 @@
 *{
   /* margin-left: 1%; */
-
+	padding:0;
+	margin:0;
 }
 .color-plate {
 	position: fixed;
@@ -5019,4 +5020,89 @@
 }
 .product-detail-container .button6 .btn:hover{
 	background: #f7941d;
+}
+/*=============================
+	Similar product
+===============================*/
+.similar-product-area{
+
+}
+.similar-items{
+	text-decoration: none;
+	font-size: 18px;
+	
+}
+.similar-items:hover{
+	.similar-product-name{
+		color:#f7941d;
+	}
+	.similar-product-img{
+		transform: translateY(-10px);
+	}
+}
+.similar-items .similar-product-img {
+	transition: transform 0.3s ease; 
+  }
+
+/*=============================
+	Comments
+===============================*/
+.comments-container{
+	border: 1px solid black;
+	border-radius: 10px;
+	flex-wrap: wrap;
+}
+/*=============================
+	Rating
+===============================*/
+.rating-area{
+	display: flex;
+}
+.comment-rating{
+	transform: translate(0px,-1px);
+}
+.rating-value{
+	margin: 3px;
+}
+.post {
+	font-family: 'Lexend', sans-serif;
+	display: flex;
+	justify-content: flex-end;
+}
+
+
+.post-image {
+	display: block;
+	width: 100%;
+}
+
+.post-ratings-container {
+	display: flex;
+	justify-content: end;
+	padding: 12px 0;
+}
+
+.post-rating {
+	display: flex;
+	align-items: center;
+	cursor: default;
+}
+
+.post-rating:not(:last-child) {
+	margin-right: 12px;
+}
+
+.post-rating-selected > .post-rating-button,
+.post-rating-selected > .post-rating-count {
+	color: #009578;
+}
+
+.post-rating-button {
+	margin-right: 6px;
+	cursor: pointer;
+	color: #555555;
+}
+
+.post-rating:not(.post-rating-selected) > .post-rating-button:hover {
+	color: #f7941d;
 }

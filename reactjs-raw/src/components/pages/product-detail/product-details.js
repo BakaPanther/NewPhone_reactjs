@@ -1,4 +1,6 @@
 import Footer from "../../footer";
+import CommentsArea from "./comments-area";
+import ProductSpec from "./product-spec";
 import QuantityPicker from "./quantity-picker";
 import SimilarProducts from "./similar-products";
 
@@ -67,6 +69,8 @@ export default function ProductDetails() {
                         </div>
                         
                     </div>
+                    <ProductSpec/>
+                    <CommentsArea/>
                     <SimilarProducts/>
                 </div>
             </div>
