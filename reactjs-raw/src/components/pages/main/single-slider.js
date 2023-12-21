@@ -1,49 +1,31 @@
 import { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 
-function SingleSlider(){
-	const [index, setIndex] = useState(0);
+function SingleSlider(props) {
+  const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
-    return(
-        <>
-		<Carousel activeIndex={index} onSelect={handleSelect}>
-      <Carousel.Item>
-	  <img
-          src="https://via.placeholder.com/1900x700"
-          alt="First slide"
-        />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-	  <img
-          src="https://via.placeholder.com/1900x700"
-          alt="Second slide"
-        />
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-	  <img
-          src="https://via.placeholder.com/1900x700"
-          alt="Third slide"
-        />
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
-        </>
-    )
+  //  console.log(props.data);
+  //  console.log(props.data.data);
+  return (
+    <>
+      <Carousel activeIndex={index} onSelect={handleSelect}>
+        {props.data && props.data.data && props.data.data.map((item, key) => (
+          <Carousel.Item key={key}>
+            <img
+              src={`http://localhost:8000/${item.duong_dan}`}
+              alt={`Slide ${key + 1}`}
+            />
+            <Carousel.Caption>
+              <h3>{item.ten}</h3>
+              <p>{item.mo_ta && item.mo_ta.length > 50 ? `${item.mo_ta.substring(0, 50)}...` : item.mo_ta}</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+        ))}
+      </Carousel>
+    </>
+  )
 }
 export default SingleSlider;

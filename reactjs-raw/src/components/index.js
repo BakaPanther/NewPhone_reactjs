@@ -34,6 +34,7 @@ export function Index() {
             return <ShopBlog data={{...item, dienThoai: firstSixItems}} key={key}/>
         }
       });
+      
     return (
         <>
             <SliderArea />
