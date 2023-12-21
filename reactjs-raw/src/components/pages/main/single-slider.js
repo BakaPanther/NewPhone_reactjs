@@ -20,7 +20,6 @@ function SingleSlider(props) {
             />
             <Carousel.Caption>
               <h3>{item.ten}</h3>
-              <p>{item.mo_ta && item.mo_ta.length > 50 ? `${item.mo_ta.substring(0, 50)}...` : item.mo_ta}</p>
             </Carousel.Caption>
           </Carousel.Item>
         ))}
