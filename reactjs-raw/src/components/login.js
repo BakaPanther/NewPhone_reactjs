@@ -21,10 +21,10 @@ export default function Login() {
         
         axios.post('http://127.0.0.1:8000/api/khach-hang/dang-nhap', formData)
           .then((response) => {
-            const { token } = response.data;
+            const token  = response.data.access_token;
             // Lưu token vào cookie với tên là 'accessToken' và cấu hình an toàn
-            Cookies.set('accessToken', token, { secure: true, sameSite: 'strict', expires: 7 });
-            navigate("/index");
+            Cookies.set('accessToken', JSON.stringify(token), { secure: true, sameSite: 'strict', expires: 7 });
+            window.location.href = "/";
           })
           .catch((error) => {
             console.error('Lỗi khi gửi request POST:', error);

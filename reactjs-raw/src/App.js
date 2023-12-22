@@ -50,7 +50,6 @@ function App() {
       {isLoginPage? <></>:isIndexPage ? <Header/>:<NocateHeader/>}
     
     <Routes>
-      <Route path='/index' element={<Index/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/' element={<Index/>}/>
       <Route path='/cart' element={<Cart/>}/>
