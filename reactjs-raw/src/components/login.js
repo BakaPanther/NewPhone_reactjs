@@ -24,7 +24,8 @@ export default function Login() {
             const { token } = response.data;
             // Lưu token vào cookie với tên là 'accessToken' và cấu hình an toàn
             Cookies.set('accessToken', token, { secure: true, sameSite: 'strict', expires: 7 });
-            navigate("/index");
+            console.log("Đăng Nhập Thành Công");
+            navigate("/");
           })
           .catch((error) => {
             console.error('Lỗi khi gửi request POST:', error);
