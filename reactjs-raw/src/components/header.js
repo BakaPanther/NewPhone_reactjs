@@ -1,15 +1,11 @@
-import { NavLink, useLocation,useNavigate  } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Cookies from 'js-cookie';
 function Header() {
-  const navigate = useNavigate();
-  let location= useLocation();
-  console.log(location);
-  // Hàm đăng xuất
-  const handleLogout = () => {
-    // Xóa cookie 'accessToken'
+  function handleLogout() {
+    // Xóa accessToken từ cookie khi người dùng đăng xuất
     Cookies.remove('accessToken');
-    navigate('/login');
-  };
+    window.location.href = "/login";
+  }
   return (
     <>
       {/* <div className="preloader">
@@ -42,11 +38,13 @@ function Header() {
                     <li><i className="ti-location-pin"></i> Store location</li>
                     <li><i className="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
                     <li><i className="ti-user"></i> <a href="#">My account</a></li>
-                    {Cookies.get('accessToken') ? (
-                      <li><i className="ti-user"></i><NavLink to='#' onClick={handleLogout}>Logout</NavLink></li>
-                    ) : (
-                      <li><i className="ti-power-off"></i><NavLink to='/login'>Login</NavLink></li>
-                    )}
+                    {
+                      Cookies.get('accessToken') ? (
+                        <li><i className="ti-user"></i><NavLink onClick={handleLogout}>Logout</NavLink></li>
+                      ) : (
+                        <li><i className="ti-power-off"></i><NavLink to='/login'>Login</NavLink></li>
+                      )
+                    }
                   </ul>
                 </div>
 
