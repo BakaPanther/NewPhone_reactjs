@@ -2,24 +2,25 @@ import { } from '../vendor/css/login.css';
 import Cookies from 'js-cookie';
 import axios, { Axios } from "axios";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
 export default function Login() {
-    const navigate = useNavigate();
+
+    //login
     //lưu thông tin đăng nhập của người dùng
-    const [formData, setFormData] = useState({
+    const [formLogin, setformLogin] = useState({
         email: '',
         password: '',
         // Thêm các trường khác nếu cần thiết
       });
-    const handleInputChange = (event) => {
+    const handleInputChangeLogin = (event) => {
         const { name, value } = event.target;
-        setFormData({ ...formData, [name]: value });
+        setformLogin({ ...formLogin, [name]: value });
       };
 
-    const handleSubmit = (event) => {
+    const handleSubmitLogin = (event) => {
         event.preventDefault();
         
-        axios.post('http://127.0.0.1:8000/api/khach-hang/dang-nhap', formData)
+        axios.post('http://127.0.0.1:8000/api/khach-hang/dang-nhap', formRegis)
           .then((response) => {
             const token  = response.data.access_token;
             // Lưu token vào cookie với tên là 'accessToken' và cấu hình an toàn
@@ -27,7 +28,32 @@ export default function Login() {
             window.location.href = "/";
           })
           .catch((error) => {
-            console.error('Lỗi khi gửi request POST:', error);
+            console.error('Lỗi đăng nhập:', error);
+          });
+      };
+
+      //registration
+          //lưu thông tin đăng nhập của người dùng
+    const [formRegis, setformRegis] = useState({
+        email: '',
+        password: '',
+        // Thêm các trường khác nếu cần thiết
+    });
+    const handleInputChangeRegis= (event) => {
+        const { name, value } = event.target;
+        setformRegis({ ...formRegis, [name]: value });
+    };
+
+    const handleSubmitRegis= (event) => {
+        event.preventDefault();
+        
+        axios.post('http://127.0.0.1:8000/api/khach-hang/dang-ky', formRegis)
+          .then((response) => {
+            console.log(response.data);
+            window.location.href = "/authen";
+          })
+          .catch((error) => {
+            console.error('Lỗi đăng ký:', error);
           });
       };
     return (
@@ -36,9 +62,9 @@ export default function Login() {
                 <input type="checkbox" id="check" />
                 <div className="login form">
                     <header>Login</header>
-                    <form onSubmit={handleSubmit}>
-                        <input type="text" placeholder="Enter your email" name="email" value={formData.email}   onChange={handleInputChange}/>
-                        <input type="password" placeholder="Enter your password"  name="password" value={formData.password}   onChange={handleInputChange}/>
+                    <form onSubmit={handleSubmitLogin}>
+                        <input type="text" placeholder="Enter your email" name="email" value={formLogin.email}   onChange={handleInputChangeLogin}/>
+                        <input type="password" placeholder="Enter your password"  name="password" value={formLogin.password}   onChange={handleInputChangeLogin}/>
                         <a href="#">Forgot password?</a>
                         <input type="submit" className="button" value="Login" />
                     </form>
@@ -63,11 +89,13 @@ export default function Login() {
                 </div>
                 <div className="registration form">
                     <header>Signup</header>
-                    <form action="#">
-                        <input type="text" placeholder="Enter your email" />
-                        <input type="password" placeholder="Create a password" />
-                        <input type="password" placeholder="Confirm your password" />
-                        <input type="button" className="button" value="Signup" />
+                    <form onSubmit={handleSubmitRegis}>
+                        <input type="text" placeholder="Enter your Name" name="ten" value={formRegis.ten}   onChange={handleInputChangeRegis} />
+                        <input type="text" placeholder="Enter your Location" name="dia_chi" value={formRegis.dia_chi}   onChange={handleInputChangeRegis} />
+                        <input type="tel" placeholder="Enter your Phone" name="so_dien_thoai" value={formRegis.so_dien_thoai}   onChange={handleInputChangeRegis} />
+                        <input type="text" placeholder="Enter your email" name="email" value={formRegis.email}   onChange={handleInputChangeRegis} />
+                        <input type="password" placeholder="Create a password" name="password" value={formRegis.password}   onChange={handleInputChangeRegis} />
+                        <input type="submit" className="button" value="Signup" />
                     </form>
                     <div className="signup">
                         <span className="signup">Already have an account?
