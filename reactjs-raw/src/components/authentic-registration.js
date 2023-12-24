@@ -2,7 +2,9 @@ import { } from '../vendor/css/login.css';
 import Cookies from 'js-cookie';
 import axios, { Axios } from "axios";
 import React, { useState, useEffect } from "react";
-
+import notifySuccess from './items/noti_success';
+import notifyInfor from './items/noti_infor';
+import notifyError from './items/noti_error';
 export default function Login() {
     const [token, setToken] = useState('');
     const handleChangeToken = (event) => {
@@ -13,12 +15,17 @@ export default function Login() {
         
         axios.post('http://127.0.0.1:8000/api/khach-hang/xac-thuc-dang-ky',  { token: token })
           .then((response) => {
-            alert('xác thực thành công');
-            window.location.href = "/login";
+            notifySuccess('Xác Thực Thành Công');
+            setTimeout(() => {
+              window.location.href = "/login";
+            }, 1000);
           })
           .catch((error) => {
-            console.log(token);
-            console.error('Lỗi đăng ký:', error);
+            if(error.response && error.response.status === 400)
+            {
+              const errors = error.response.data.message; 
+              notifyError(Object.values(errors).join(''));
+            }
           });
       };
     return (

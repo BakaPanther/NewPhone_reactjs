@@ -1,6 +1,6 @@
 body {}
 
-.login-container {
+.login-container,.reset-password-container {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -28,7 +28,7 @@ body {}
   display: none;
 }
 
-.login-container .form {
+.login-container .form ,.reset-password-container .form{
   padding: 2rem;
 }
 

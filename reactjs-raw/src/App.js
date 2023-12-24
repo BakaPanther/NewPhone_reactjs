@@ -24,11 +24,15 @@ import { Contact } from './components/pages/contact-us/contact';
 import Login from './components/login';
 import ProductDetails from './components/pages/product-detail/product-details';
 import Authen_Regis from './components/authentic-registration';
+import ResetPassword from './components/reset-password';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const location=useLocation();
   const isIndexPage= location.pathname === '/';
   const isLoginPage= location.pathname ==='/login';
+  const isResetPage= location.pathname === '/reset-password';
   const isAuthenPage= location.pathname ==='/authen';
   // const [sticky,setSticky]= useState(false);
   // useEffect(()=>{
@@ -48,12 +52,13 @@ function App() {
   return (
     <>
     <div className='App'>
-    {isLoginPage ? <></> : isIndexPage ? <Header/> : isAuthenPage ? <></> : <NocateHeader/>}
+    {isLoginPage||isResetPage ? <></> : isIndexPage ? <Header/> : isAuthenPage ? <></> : <NocateHeader/>}
 
     
     <Routes>
       <Route path='/authen' element={<Authen_Regis/>}/>
       <Route path='/login' element={<Login/>}/>
+      <Route path='/reset-password' element={<ResetPassword/>}/>
       <Route path='/' element={<Index/>}/>
       <Route path='/cart' element={<Cart/>}/>
       <Route path='/product' element={<ProductContainer/>}/>
@@ -61,6 +66,20 @@ function App() {
       <Route path='/checkout' element={<CheckOut/>}/>
       <Route path='/contact-us' element={<Contact/>}/>
     </Routes> 
+    <ToastContainer
+                    position="top-right"
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="colored"
+                />
+                {/* Same as */}
+            <ToastContainer />
     </div>
     </>
   );

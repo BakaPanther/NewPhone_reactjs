@@ -3,7 +3,19 @@ import Cookies from 'js-cookie';
 import axios, { Axios } from "axios";
 import React, { useState, useEffect } from "react";
 
+import 'react-toastify/dist/ReactToastify.css';
+import notifySuccess from './items/noti_success';
+import notifyInfor from './items/noti_infor';
+import notifyError from './items/noti_error';
+
+import { NavLink } from 'react-router-dom';
+
+
 export default function Login() {
+
+
+
+
 
     //login
     //lưu thông tin đăng nhập của người dùng
@@ -11,7 +23,7 @@ export default function Login() {
         email: '',
         password: '',
         // Thêm các trường khác nếu cần thiết
-    });
+      });
     const handleInputChangeLogin = (event) => {
         const { name, value } = event.target;
         setformLogin({ ...formLogin, [name]: value });
@@ -19,29 +31,24 @@ export default function Login() {
 
     const handleSubmitLogin = (event) => {
         event.preventDefault();
-
+        
         axios.post('http://127.0.0.1:8000/api/khach-hang/dang-nhap', formRegis)
-            .then((response) => {
-                const token = response.data.access_token;
-                // Lưu token vào cookie với tên là 'accessToken' và cấu hình an toàn
-
-                Cookies.set('accessToken', JSON.stringify(token), { secure: true, sameSite: 'strict', expires: 7 });
-                window.location.href = "/";
-
-            })
-            .catch((error) => {
-                console.error('Lỗi đăng nhập:', error);
-            });
-    };
+          .then((response) => {
+            const token  = response.data.access_token;
+            // Lưu token vào cookie với tên là 'accessToken' và cấu hình an toàn
+            Cookies.set('accessToken', JSON.stringify(token), { secure: true, sameSite: 'strict', expires: 7 });
+            window.location.href = "/";
+          })
+          .catch((error) => {
+            console.error('Lỗi đăng nhập:', error);
+          });
+      };
 
     //registration
     //lưu thông tin đăng nhập của người dùng
     const [formRegis, setformRegis] = useState({
         email: '',
         password: '',
-        ten: '',
-        dia_chi: '',
-        so_dien_thoai: '',
         // Thêm các trường khác nếu cần thiết
     });
     const handleInputChangeRegis = (event) => {
@@ -53,14 +60,14 @@ export default function Login() {
         event.preventDefault();
 
         axios.post('http://127.0.0.1:8000/api/khach-hang/dang-ky', formRegis)
-            .then((response) => {
-                console.log(response.data);
-                window.location.href = "/authen";
-            })
-            .catch((error) => {
-                console.error('Lỗi đăng ký:', error);
-            });
-    };
+          .then((response) => {
+            console.log(response.data);
+            window.location.href = "/authen";
+          })
+          .catch((error) => {
+            console.error('Lỗi đăng ký:', error);
+          });
+      };
     return (
         <>
             <div className="login-container">
@@ -68,8 +75,8 @@ export default function Login() {
                 <div className="login form">
                     <header>Login</header>
                     <form onSubmit={handleSubmitLogin}>
-                        <input type="text" placeholder="Enter your email" name="email" value={formLogin.email} onChange={handleInputChangeLogin} />
-                        <input type="password" placeholder="Enter your password" name="password" value={formLogin.password} onChange={handleInputChangeLogin} />
+                        <input type="text" placeholder="Enter your email" name="email" value={formLogin.email}   onChange={handleInputChangeLogin}/>
+                        <input type="password" placeholder="Enter your password"  name="password" value={formLogin.password}   onChange={handleInputChangeLogin}/>
                         <a href="#">Forgot password?</a>
                         <input type="submit" className="button" value="Login" />
                     </form>
