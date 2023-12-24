@@ -2,6 +2,7 @@ import { } from '../vendor/css/login.css';
 import Cookies from 'js-cookie';
 import axios, { Axios } from "axios";
 import React, { useState, useEffect } from "react";
+import { NavLink } from 'react-router-dom';
 
 export default function Login() {
 
@@ -65,7 +66,7 @@ export default function Login() {
                     <form onSubmit={handleSubmitLogin}>
                         <input type="text" placeholder="Enter your email" name="email" value={formLogin.email}   onChange={handleInputChangeLogin}/>
                         <input type="password" placeholder="Enter your password"  name="password" value={formLogin.password}   onChange={handleInputChangeLogin}/>
-                        <a href="#">Forgot password?</a>
+                        <NavLink to='/reset-password'>Forgot password?</NavLink>
                         <input type="submit" className="button" value="Login" />
                     </form>
                     <div className="signup">
