@@ -13,10 +13,6 @@ import { NavLink } from 'react-router-dom';
 
 export default function Login() {
 
-
-
-
-
     //login
     //lưu thông tin đăng nhập của người dùng
     const [formLogin, setformLogin] = useState({
@@ -49,6 +45,9 @@ export default function Login() {
     const [formRegis, setformRegis] = useState({
         email: '',
         password: '',
+        ten: '',
+        dia_chi: '',
+        so_dien_thoai: '',
         // Thêm các trường khác nếu cần thiết
     });
     const handleInputChangeRegis = (event) => {
@@ -77,7 +76,7 @@ export default function Login() {
                     <form onSubmit={handleSubmitLogin}>
                         <input type="text" placeholder="Enter your email" name="email" value={formLogin.email}   onChange={handleInputChangeLogin}/>
                         <input type="password" placeholder="Enter your password"  name="password" value={formLogin.password}   onChange={handleInputChangeLogin}/>
-                        <a href="#">Forgot password?</a>
+                        <NavLink to={'/reset-password'}>Forgot password?</NavLink>
                         <input type="submit" className="button" value="Login" />
                     </form>
                     <div className="signup">
