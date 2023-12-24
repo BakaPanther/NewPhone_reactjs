@@ -18,7 +18,6 @@ export default function Login() {
     const [formLogin, setformLogin] = useState({
         email: '',
         password: '',
-        // Thêm các trường khác nếu cần thiết
       });
     const handleInputChangeLogin = (event) => {
         const { name, value } = event.target;
@@ -28,15 +27,32 @@ export default function Login() {
     const handleSubmitLogin = (event) => {
         event.preventDefault();
         
-        axios.post('http://127.0.0.1:8000/api/khach-hang/dang-nhap', formRegis)
+        axios.post('http://127.0.0.1:8000/api/khach-hang/dang-nhap', formLogin)
           .then((response) => {
             const token  = response.data.access_token;
             // Lưu token vào cookie với tên là 'accessToken' và cấu hình an toàn
             Cookies.set('accessToken', JSON.stringify(token), { secure: true, sameSite: 'strict', expires: 7 });
-            window.location.href = "/";
+            notifySuccess('Đăng Nhập Thành Công');
+            setTimeout(() => {
+              window.location.href = "/";
+            }, 1000);
           })
           .catch((error) => {
-            console.error('Lỗi đăng nhập:', error);
+            if (error.response && error.response.status === 422) {
+                if (error.response.data.errors) {
+                  const { email, password } = error.response.data.errors;
+                  if (email) {
+                    notifyError(Object.values(email).join(''));
+                  }
+                  if (password) {
+                    notifyError(Object.values(password).join(''));
+                  }
+                }
+            }
+            else
+            {
+                notifyError(Object.values(error.response.data.errors).join(''));
+            }
           });
       };
 
@@ -48,7 +64,6 @@ export default function Login() {
         ten: '',
         dia_chi: '',
         so_dien_thoai: '',
-        // Thêm các trường khác nếu cần thiết
     });
     const handleInputChangeRegis = (event) => {
         const { name, value } = event.target;
@@ -60,11 +75,39 @@ export default function Login() {
 
         axios.post('http://127.0.0.1:8000/api/khach-hang/dang-ky', formRegis)
           .then((response) => {
-            console.log(response.data);
-            window.location.href = "/authen";
+            notifySuccess('Đăng Ký Thành Công');
+            setTimeout(() => {
+              window.location.href = "/authen";
+            }, 1000);
           })
           .catch((error) => {
-            console.error('Lỗi đăng ký:', error);
+            if (error.response && error.response.status === 422) {
+                if (error.response.data.errors) {
+                  const { email, password,dia_chi,so_dien_thoai,ten } = error.response.data.errors;
+                  if (email) {
+                    notifyError(Object.values(email).join(''));
+                  }
+                  if (password) {
+                    notifyError(Object.values(password).join(''));
+                  }
+                  if (dia_chi) {
+                    notifyError(Object.values(dia_chi).join(''));
+                  }
+                  if (so_dien_thoai) {
+                    notifyError(Object.values(so_dien_thoai).join(''));
+                  }
+                  if (ten) {
+                    notifyError(Object.values(ten).join(''));
+                  }
+                }
+                if(error.response.data.errors_email){
+                    notifyError(Object.values(error.response.data.errors_email).join(''));
+                }
+            }
+            else
+            {
+                notifyError(Object.values(error.response.data.errors).join(''));
+            }
           });
       };
     return (
