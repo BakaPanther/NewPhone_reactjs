@@ -1,10 +1,15 @@
 import { NavLink } from "react-router-dom";
+import notifySuccess from './items/noti_success';
 import Cookies from 'js-cookie';
 function Header() {
   function handleLogout() {
     // Xóa accessToken từ cookie khi người dùng đăng xuất
     Cookies.remove('accessToken');
-    window.location.href = "/login";
+    
+    notifySuccess("Đăng Xuất Thành Công");
+    setTimeout(() => {
+        window.location.href = "/login";
+      }, 1000);
   }
   return (
     <>

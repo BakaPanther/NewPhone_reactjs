@@ -25,6 +25,8 @@ import Login from './components/login';
 import ProductDetails from './components/pages/product-detail/product-details';
 import Authen_Regis from './components/authentic-registration';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const location=useLocation();
   const isIndexPage= location.pathname === '/';
@@ -61,6 +63,20 @@ function App() {
       <Route path='/checkout' element={<CheckOut/>}/>
       <Route path='/contact-us' element={<Contact/>}/>
     </Routes> 
+    <ToastContainer
+                    position="top-right"
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="colored"
+                />
+                {/* Same as */}
+            <ToastContainer />
     </div>
     </>
   );
