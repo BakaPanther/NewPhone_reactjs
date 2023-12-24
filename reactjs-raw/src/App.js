@@ -23,11 +23,13 @@ import { CheckOut } from './components/pages/checkout/checkout';
 import { Contact } from './components/pages/contact-us/contact';
 import Login from './components/login';
 import ProductDetails from './components/pages/product-detail/product-details';
+import Authen_Regis from './components/authentic-registration';
 
 function App() {
   const location=useLocation();
   const isIndexPage= location.pathname === '/';
   const isLoginPage= location.pathname ==='/login';
+  const isAuthenPage= location.pathname ==='/authen';
   // const [sticky,setSticky]= useState(false);
   // useEffect(()=>{
   //   document.addEventListener("scroll",checkScroll);
@@ -46,10 +48,11 @@ function App() {
   return (
     <>
     <div className='App'>
+    {isLoginPage ? <></> : isIndexPage ? <Header/> : isAuthenPage ? <></> : <NocateHeader/>}
 
-      {isLoginPage? <></>:isIndexPage ? <Header/>:<NocateHeader/>}
     
     <Routes>
+      <Route path='/authen' element={<Authen_Regis/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/' element={<Index/>}/>
       <Route path='/cart' element={<Cart/>}/>
