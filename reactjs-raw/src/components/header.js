@@ -98,8 +98,8 @@ function Header() {
                     <a href="#" className="single-icon"><i className="fa fa-heart-o" aria-hidden="true"></i></a>
                   </div>
                   <div className="sinlge-bar shopping">
-                    <a href="#" className="single-icon"><i className="ti-bag"></i> <span className="total-count">2</span></a>
-
+                    <a href="#" className="single-icon"><i className="ti-bag"></i> <span className="total-count">2</span>
+                    </a>
                     <div className="shopping-item">
                       <div className="dropdown-cart-header">
                         <span>2 Items</span>

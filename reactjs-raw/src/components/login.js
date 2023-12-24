@@ -32,10 +32,22 @@ export default function Login() {
             const token  = response.data.access_token;
             // Lưu token vào cookie với tên là 'accessToken' và cấu hình an toàn
             Cookies.set('accessToken', JSON.stringify(token), { secure: true, sameSite: 'strict', expires: 7 });
+            axios.get('http://127.0.0.1:8000/api/khach-hang/thong-tin', {
+              headers: {
+                Authorization: `Bearer ${token}` // Gửi token trong header Authorization
+              }
+            })
+            .then((response) => {
+              console.log(response.data);
+              Cookies.set('user', JSON.stringify(response.data), { secure: true, sameSite: 'strict', expires: 7 });
+            })
+            .catch((error) => {
+
+            });
             notifySuccess('Đăng Nhập Thành Công');
-            setTimeout(() => {
-              window.location.href = "/";
-            }, 1000);
+            // setTimeout(() => {
+            //   window.location.href = "/";
+            // }, 1000);
           })
           .catch((error) => {
             if (error.response && error.response.status === 422) {

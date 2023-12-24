@@ -1,11 +1,13 @@
 import SingleBlog from "./single-blog";
 
 function ShopBlog(props){
-	const lst_dien_thoai = props.data.dienThoai.map((item,key) =>{
-		return(
-			<SingleBlog data={item} key={key}/>
-		)
-	})
+	const lst_dien_thoai_sliced = props.data.dienThoai.slice(0, 6);
+
+	const lst_dien_thoai = lst_dien_thoai_sliced.map((item, key) => {
+		return (
+			<SingleBlog data={item} key={key} />
+		);
+	});
     return(
         <>
         <section className="shop-blog section">
