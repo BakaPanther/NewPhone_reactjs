@@ -5,18 +5,18 @@ export default function ResetPassword(){
         <>
         <div className="reset-password-container">
             <div className="reset-password form">
-                    <header>Recovery password</header>
-                    <form>
-                        <input type="text" placeholder="Enter your email" name="email" />
-                        <input type="submit" className="button" value="Send" />
-                    </form>
-                    <div className="signup">
-                        <span className="signup">Remember your password?
-                            <label><NavLink to='/login'>Login</NavLink></label>
-                        </span>
-                    </div>  
-                </div>
-                </div>
+                <header>Recovery password</header>
+                <form>
+                    <input type="text" placeholder="Enter your email" name="email" />
+                    <input type="submit" className="button" value="Send" />
+                </form>
+                <div className="signup">
+                    <span className="signup">Remember your password?
+                        <label><NavLink to='/login'>Login</NavLink></label>
+                    </span>
+                </div>  
+            </div>
+            </div>
         </>
     )
 }
