@@ -1,5 +1,6 @@
 import Footer from "../../footer";
 import CommentsArea from "./comments-area";
+import ProductInfo from "./product-info";
 import ProductSpec from "./product-spec";
 import QuantityPicker from "./quantity-picker";
 import SimilarProducts from "./similar-products";
@@ -64,14 +65,19 @@ export default function ProductDetails() {
                         <div className="product-detail-price col-8">100$</div>
                         </div>
                         <div className="button6">
-                        <a href="#" class="btn">Thêm vào giỏ hàng</a>
-                        <a href="#" class="btn">Mua ngay</a>
+                        <a href="#" className="btn">Thêm vào giỏ hàng</a>
+                        <a href="#" className="btn">Mua ngay</a>
                         </div>
                         
                     </div>
+                    <div className="product-detail-body">
+                    <div className="row">
+                    <ProductInfo/>
                     <ProductSpec/>
                     <CommentsArea/>
                     <SimilarProducts/>
+                    </div>
+                    </div>
                 </div>
             </div>
             <Footer />
