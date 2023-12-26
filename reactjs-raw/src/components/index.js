@@ -11,8 +11,19 @@ import SliderArea from "./pages/main/slider-area";
 import SmBannerSection from "./pages/main/small-banner-section";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ClipLoader from "react-spinners/ClipLoader";
+
 
 export function Index() {
+    //loader
+    let [loading, setLoading] = useState(true);
+    let [color, setColor] = useState("#ffffff");
+    const override = {
+        display: "block",
+        margin: "0 auto",
+        borderColor: "red",
+    };
+
     const [nhaSanXuat, setNhaSanXuat] = useState([]);
     //lay danh sach nhà sản xuất
     useEffect(() => {
@@ -21,6 +32,7 @@ export function Index() {
         .then(response => {
             // Lưu dữ liệu nhận được vào state
             setNhaSanXuat(response.data.data);
+            setLoading(false);
         })
         .catch(error => {
             // Hiện thông báo nếu có lỗi xảy ra
@@ -37,6 +49,8 @@ export function Index() {
       
     return (
         <>
+           {(!loading) ? (
+            <div>
             <SliderArea />
             {/* <SmBannerSection /> */}
             {/* <ProductArea /> */}
@@ -47,6 +61,17 @@ export function Index() {
             {lst_nha_san_xuat}
             <ServiceArea />
             <Footer />
+            </div>
+            ) : (
+                <ClipLoader
+                color={color}
+                loading={true}
+                size={150}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+                cssOverride={override}
+            />
+        )}
         </>
     )
 }

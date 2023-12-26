@@ -4,7 +4,16 @@ import { BreadCrumbs } from "../breadcrumbs";
 import React, { useState, useEffect } from "react";
 import Cookies from 'js-cookie';
 import axios from "axios";
+import ClipLoader from "react-spinners/ClipLoader";
 export function Cart() {
+  //loader
+  let [loading, setLoading] = useState(true);
+  let [color, setColor] = useState("#ffffff");
+  const override = {
+      display: "block",
+      margin: "0 auto",
+      borderColor: "red",
+  };
   const [cart, setCart] = useState([]);
   const [khach_hang_id, setKhach_hang_id] = useState(JSON.parse(Cookies.get('user')));
 
@@ -16,7 +25,8 @@ export function Cart() {
         }
       })
         .then((response) => {
-          setCart(response.data.data)
+          setCart(response.data.data);
+          setLoading(false);
         })
         .catch(error => {
           // Hiện thông báo nếu có lỗi xảy ra
@@ -27,9 +37,22 @@ export function Cart() {
   // console.log(setCart);
   return (
     <>
-      <BreadCrumbs />
-      <ShoppingCart data={cart} setData={setCart}/>
-      <Footer />
+          {(!loading) ? (
+            <div>
+              <BreadCrumbs />
+              <ShoppingCart data={cart} setData={setCart}/>
+              <Footer />
+            </div>
+                ) : (
+                  <ClipLoader
+                  color={color}
+                  loading={true}
+                  size={150}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                  cssOverride={override}
+              />
+          )}
     </>
   )
 }
