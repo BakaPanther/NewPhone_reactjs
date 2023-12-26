@@ -1,4 +1,4 @@
-export function TotalAmount() {
+export function TotalAmount(props) {
     return (
         <>
             <div className="total-amount">
@@ -16,10 +16,9 @@ export function TotalAmount() {
                     <div className="col-lg-4 col-md-7 col-12">
                         <div className="right">
                             <ul>
-                                <li>Cart Subtotal<span>$330.00</span></li>
                                 <li>Shipping<span>Free</span></li>
-                                <li>You Save<span>$20.00</span></li>
-                                <li className="last">You Pay<span>$310.00</span></li>
+                                <li>Số lượng<span>{props.soluong}</span></li>
+                                <li className="last">Tổng tiền<span>{props.tongtien}</span></li>
                             </ul>
                             <div className="button5">
                                 <a href="#" className="btn">Checkout</a>
