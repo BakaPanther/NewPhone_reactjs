@@ -5,6 +5,7 @@ import notifyInfor from "../../items/noti_infor";
 import notifyError from "../../items/noti_error";
 import notifySuccess from "../../items/noti_success";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { NavLink } from "react-router-dom";
 
 
 
@@ -52,7 +53,6 @@ function SingleBlog(props) {
         setModal(!modal)
     };
 
-
     return (
         <>
             <div className="col-lg-4 col-md-6 col-12">
@@ -64,8 +64,9 @@ function SingleBlog(props) {
                             <a href="#" className="more-btn" style={{ fontWeight: 'bold', fontSize: '16px', color: '#f00' }} >{props.data.chi_tiet_dien_thoai[0].gia_ban}</a>
                         </div>
                         <div className="icons">
-                            <a href="#" className="single-icon"><i className="fa fa-heart-o" aria-hidden="true"></i></a>
-                            <button  className="single-icon"><i className="ti-bag" onClick={() => handleAddToCart(props.data.chi_tiet_dien_thoai[0].id)}></i></button>
+                            <NavLink to={`/product-details/${props.data.id}`} className="single-icon"><i className="fa fa-info" aria-hidden="true"></i></NavLink>||
+                            <a href="#" className="single-icon"><i className="fa fa-heart-o" aria-hidden="true"></i></a>||
+                            <a  className="single-icon"><i className="ti-bag" onClick={() => handleAddToCart(props.data.chi_tiet_dien_thoai[0].id)}></i></a>
                         </div>
                     </div>
                 </div>
@@ -74,7 +75,7 @@ function SingleBlog(props) {
             {/* modal */}
             <div>
             <div>
-            <Modal isOpen={modal}  size="sm" className="custom-modal">
+            <Modal isOpen={modal}  size="sm" className="my-modal">
                 <ModalHeader>Tiêu đề Modal</ModalHeader>
                 <ModalBody>
                     Nội dung của modal ở đây.
