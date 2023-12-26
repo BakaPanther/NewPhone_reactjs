@@ -34,14 +34,14 @@ export default function LikeDislike() {
     });
     return (
         <>
-            <div class="post" >
-                    <div class="post-rating">
-                        <span class="post-rating-button material-icons">thumb_up</span>
-                        <span class="post-rating-count">0</span>
+            <div className="post" >
+                    <div className="post-rating">
+                        <span className="post-rating-button material-icons">thumb_up</span>
+                        <span className="post-rating-count">0</span>
                     </div>
-                    <div class="post-rating">
-                        <span class="post-rating-button material-icons">thumb_down</span>
-                        <span class="post-rating-count">0</span>
+                    <div className="post-rating">
+                        <span className="post-rating-button material-icons">thumb_down</span>
+                        <span className="post-rating-count">0</span>
                     </div>
                 </div>
         </>

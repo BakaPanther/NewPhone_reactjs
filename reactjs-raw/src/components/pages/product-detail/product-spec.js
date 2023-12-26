@@ -1,18 +1,39 @@
-export default function ProductSpec(){
+import notifySuccess from "../../items/noti_success";
+import notifyInfor from '../../items/noti_infor';
+import notifyError from '../../items/noti_error';
+import Cookies from 'js-cookie';
+import axios, { Axios } from "axios";
+import React, { useState, useEffect } from "react";
+import { Table } from "react-bootstrap";
+
+export default function ProductSpec(props){
     return(
         <>
-            <div className="products-spec-container">
-                <div class='container-fluid' >
-                    <div className="row title">
-                        <h3>Thông số kỹ thuật</h3>
-                        <div>Ram</div>
-                        <div>Hệ điều hành</div>
-                        <div>...</div>
-                        <div>???</div>
-                        <div>!!!</div>
-                    </div>
-                </div>
-            </div>
+          <Table
+            borderless
+            hover
+            responsive
+          >
+            <thead>
+              <tr>
+                <b> Thông số kỹ thuật </b>
+              </tr>
+            </thead>
+            <tbody>
+              {props && props.data && props.data.map(function(item,key){
+                return(
+                  <tr>
+                    <th scope="row">
+                      {item.thong_so.ten}
+                    </th>
+                    <td>
+                    {item.gia_tri}
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </Table>
         </>
     )
 }
