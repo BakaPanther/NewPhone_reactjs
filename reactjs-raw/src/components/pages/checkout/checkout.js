@@ -4,48 +4,48 @@ import { CheckOutForm } from "./checkout-form";
 export function CheckOut(){
     return(
         <>
-        		<section class="shop checkout section">
-			<div class="container">
-				<div class="row"> 
-					<div class="col-lg-8 col-12">
-						<div class="checkout-form">
+        		<section className="shop checkout section">
+			<div className="container">
+				<div className="row"> 
+					<div className="col-lg-8 col-12">
+						<div className="checkout-form">
 							<h2>Make Your Checkout Here</h2>
 							<p>Please register in order to checkout more quickly</p>
 							<CheckOutForm/>
 						</div>
 					</div>
-					<div class="col-lg-4 col-12">
-						<div class="order-details">
+					<div className="col-lg-4 col-12">
+						<div className="order-details">
 
-							<div class="single-widget">
+							<div className="single-widget">
 								<h2>CART  TOTALS</h2>
-								<div class="content">
+								<div className="content">
 									<ul>
 										<li>Sub Total<span>$330.00</span></li>
 										<li>(+) Shipping<span>$10.00</span></li>
-										<li class="last">Total<span>$340.00</span></li>
+										<li className="last">Total<span>$340.00</span></li>
 									</ul>
 								</div>
 							</div>
-							<div class="single-widget">
+							<div className="single-widget">
 								<h2>Payments</h2>
-								<div class="content">
-									<div class="checkbox">
-										<label class="checkbox-inline" for="1"><input name="updates" id="1" type="checkbox"/> Check Payments</label>
-										<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox"/> Cash On Delivery</label>
-										<label class="checkbox-inline" for="3"><input name="news" id="3" type="checkbox"/> PayPal</label>
+								<div className="content">
+									<div className="checkbox">
+										<label className="checkbox-inline" for="1"><input name="updates" id="1" type="checkbox"/> Check Payments</label>
+										<label className="checkbox-inline" for="2"><input name="news" id="2" type="checkbox"/> Cash On Delivery</label>
+										<label className="checkbox-inline" for="3"><input name="news" id="3" type="checkbox"/> PayPal</label>
 									</div>
 								</div>
 							</div>
-							<div class="single-widget payement">
-								<div class="content">
+							<div className="single-widget payement">
+								<div className="content">
 									<img src="images/payment-method.png" alt="#"/>
 								</div>
 							</div>
-							<div class="single-widget get-button">
-								<div class="content">
-									<div class="button">
-										<a href="#" class="btn">proceed to checkout</a>
+							<div className="single-widget get-button">
+								<div className="content">
+									<div className="button">
+										<a href="#" className="btn">proceed to checkout</a>
 									</div>
 								</div>
 							</div>

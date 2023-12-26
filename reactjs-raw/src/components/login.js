@@ -138,12 +138,12 @@ export default function Login() {
                         <span className="signup">Or login with:
                         </span>
                     </div>
-                    <div class="login-with">
-                        <a href="#" class="fb btn">
-                            <i class="fa fa-facebook fa-fw"></i>
+                    <div className="login-with">
+                        <a href="#" className="fb btn">
+                            <i className="fa fa-facebook fa-fw"></i>
                             Facebook
                         </a>
-                        <a href="#" class="google btn"><i class="fa fa-google fa-fw"></i>
+                        <a href="#" className="google btn"><i className="fa fa-google fa-fw"></i>
                             Google+
                         </a>
                     </div>

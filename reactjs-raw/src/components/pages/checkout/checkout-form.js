@@ -1,34 +1,34 @@
 export function CheckOutForm(){
     return (
         <>
-        <form class="form" method="post" action="#">
-								<div class="row">
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
+        <form className="form" method="post" action="#">
+								<div className="row">
+									<div className="col-lg-6 col-md-6 col-12">
+										<div className="form-group">
 											<label>First Name<span>*</span></label>
 											<input type="text" name="name" placeholder="" required="required"/>
 										</div>
 									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
+									<div className="col-lg-6 col-md-6 col-12">
+										<div className="form-group">
 											<label>Last Name<span>*</span></label>
 											<input type="text" name="name" placeholder="" required="required"/>
 										</div>
 									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
+									<div className="col-lg-6 col-md-6 col-12">
+										<div className="form-group">
 											<label>Email Address<span>*</span></label>
 											<input type="email" name="email" placeholder="" required="required"/>
 										</div>
 									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
+									<div className="col-lg-6 col-md-6 col-12">
+										<div className="form-group">
 											<label>Phone Number<span>*</span></label>
 											<input type="number" name="number" placeholder="" required="required"/>
 										</div>
 									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
+									<div className="col-lg-6 col-md-6 col-12">
+										<div className="form-group">
 											<label>Country
                                             <select name="country_name" id="country">
 												<option value="AF">Afghanistan</option>
@@ -281,8 +281,8 @@ export function CheckOutForm(){
 											
 										</div>
 									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
+									<div className="col-lg-6 col-md-6 col-12">
+										<div className="form-group">
 											<label>State / Divition
                                             <select name="state-province" id="state-province">
 												<option value="divition" selected="selected">New Yourk</option>
@@ -297,26 +297,26 @@ export function CheckOutForm(){
 											
 										</div>
 									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
+									<div className="col-lg-6 col-md-6 col-12">
+										<div className="form-group">
 											<label>Address Line 1<span>*</span></label>
 											<input type="text" name="address" placeholder="" required="required"/>
 										</div>
 									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
+									<div className="col-lg-6 col-md-6 col-12">
+										<div className="form-group">
 											<label>Address Line 2<span>*</span></label>
 											<input type="text" name="address" placeholder="" required="required"/>
 										</div>
 									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
+									<div className="col-lg-6 col-md-6 col-12">
+										<div className="form-group">
 											<label>Postal Code<span>*</span></label>
 											<input type="text" name="post" placeholder="" required="required"/>
 										</div>
 									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
+									<div className="col-lg-6 col-md-6 col-12">
+										<div className="form-group">
 											<label>Company
                                             <select name="company_name" id="company">
 												<option value="company" selected="selected">Microsoft</option>
@@ -331,8 +331,8 @@ export function CheckOutForm(){
 											
 										</div>
 									</div>
-									<div class="col-12">
-										<div class="form-group create-account">
+									<div className="col-12">
+										<div className="form-group create-account">
 											<input id="cbox" type="checkbox"/>
 											<label>Create an account?</label>
 										</div>
