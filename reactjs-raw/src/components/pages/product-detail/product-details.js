@@ -9,7 +9,7 @@ import notifyInfor from '../../items/noti_infor';
 import notifyError from '../../items/noti_error';
 import Cookies from 'js-cookie';
 import axios, { Axios } from "axios";
-import React, { useState, useEffect, CSSProperties } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from "reactstrap";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -18,11 +18,13 @@ export default function ProductDetails() {
 
     let [loading1, setLoading1] = useState(true);
     let [loading2, setLoading2] = useState(true);
-    const override: CSSProperties = {
+    const override = {
         display: "block",
         margin: "0 auto",
         borderColor: "red",
     };
+    
+    
     let [color, setColor] = useState("#ffffff");
       
     const { id } = useParams();//id của điện thoại
