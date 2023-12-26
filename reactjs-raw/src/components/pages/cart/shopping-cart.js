@@ -52,6 +52,7 @@ export function ShoppingCart(props) {
 				console.error('Lỗi khi xóa sản phẩm:', error);
 			});
 	};
+	
 	return (
 		<>
 			<div className="shopping-cart section">
