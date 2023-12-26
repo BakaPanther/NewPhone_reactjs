@@ -1,18 +1,41 @@
-export function InputOrder() {
+import axios from "axios";
+import React, { useState, useEffect } from "react"
+
+export function InputOrder(props) {
+    const [soluong, setSoLuong] = useState(props.data);
+    const [inputChanged, setInputChanged] = useState(false);
+
+    const handleInputChange = (e) => {
+        if (e.target.validity.valid) {
+            const newSoLuong = parseInt(e.target.value, 10);
+            setSoLuong(newSoLuong);
+            setInputChanged(true);
+            props.onSoLuongChange(newSoLuong);
+        }
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (inputChanged && soluong > 0) {
+                await axios.post('http://127.0.0.1:8000/api/khach-hang/cap-nhat-gio-hang', {
+                    "khach_hang_id": props.khach_hang_data.id,
+                    "chi_tiet_dien_thoai_id": props.chi_tiet_data,
+                    "so_luong": soluong
+                });
+                setInputChanged(false); // Đánh dấu rằng đã xử lý xong
+            }
+        };
+
+        fetchData();
+    }, [soluong, inputChanged, props.khach_hang_data.id, props.chi_tiet_data]);
+
+
+
     return (
         <>
             <div className="input-group">
-                <div className="button minus">
-                    <button type="button" className="btn btn-primary btn-number" disabled="disabled" data-type="minus" data-field="quant[3]">
-                        <i className="ti-minus"></i>
-                    </button>
-                </div>
-                <input type="text" name="quant[3]" className="input-number" data-min="1" data-max="100" defaultValue="3" />
-                <div className="button plus">
-                    <button type="button" className="btn btn-primary btn-number" data-type="plus" data-field="quant[3]">
-                        <i className="ti-plus"></i>
-                    </button>
-                </div>
+                <input type="number" name="so_luong" className="input-number" value={soluong}
+                    onChange={handleInputChange} />
             </div>
         </>
     )
