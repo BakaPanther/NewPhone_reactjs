@@ -52,7 +52,7 @@ function App() {
   return (
     <>
     <div className='App'>
-    {isLoginPage||isResetPage ? <></> : isIndexPage ? <Header/> : isAuthenPage ? <></> : <NocateHeader/>}
+    {/* {isLoginPage||isResetPage ? <></> : isIndexPage ? <Header/> : isAuthenPage ? <></> : <NocateHeader/>} */}
 
     
     <Routes>

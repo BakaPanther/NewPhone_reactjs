@@ -18,18 +18,20 @@ export default function ProductDetails() {
 
     let [loading1, setLoading1] = useState(true);
     let [loading2, setLoading2] = useState(true);
+    const [khach_hang_id, setKhach_hang_id] = useState(JSON.parse(Cookies.get('user')));
+
     const override = {
         display: "block",
         margin: "0 auto",
         borderColor: "red",
     };
-    
-    
+
+
     let [color, setColor] = useState("#ffffff");
-      
+
     const { id } = useParams();//id của điện thoại
 
-    const [dienThoai,setDienThoai] = useState({});//chi tiet dien thoai
+    const [dienThoai, setDienThoai] = useState({});//chi tiet dien thoai
 
     const [quantity, setQuantity] = useState(1);//so_luong
 
@@ -39,138 +41,154 @@ export default function ProductDetails() {
 
     const [thongSo, setThongSo] = useState({});//thong so
 
-        //giam sl mua
-        const decreaseQuantity = () => {
-            if (quantity > 1) {
+    //giam sl mua
+    const decreaseQuantity = () => {
+        if (quantity > 1) {
             setQuantity(quantity - 1);
-            }
-        };
-      
-        //tăng sl mua
-        const increaseQuantity = () => {
-            setQuantity(quantity + 1);
-        };
-        //luu sp đã chọn
-        const handlSanPhamChange = (item) => {
-            setSanPham(item);
         }
-      useEffect(() => {
+    };
+
+    //tăng sl mua
+    const increaseQuantity = () => {
+        setQuantity(quantity + 1);
+    };
+    //luu sp đã chọn
+    const handlSanPhamChange = (item) => {
+        setSanPham(item);
+    }
+    useEffect(() => {
         // Tính toán tổng giá khi số lượng hoặc sanPham thay đổi
         setTongTien(quantity * (sanPham.gia_ban || 0));
-      }, [quantity, sanPham]);
+    }, [quantity, sanPham]);
 
     //load san phẩm lúc nhấn nút từ trang nào đó
     useEffect(() => {
         // Thực hiện yêu cầu GET khi component được render
         axios.get(`http://127.0.0.1:8000/api/dien-thoai-chi-tiet/${id}`)
-        .then(response => {
-            setDienThoai(response.data.data);
-            setLoading1(false)
-        })
-        .catch(error => {
-            // Hiện thông báo nếu có lỗi xảy ra
-            console.error("Lỗi thông số: ",error);
-            setLoading1(false)
-        });
+            .then(response => {
+                setDienThoai(response.data.data);
+                setLoading1(false)
+            })
+            .catch(error => {
+                // Hiện thông báo nếu có lỗi xảy ra
+                console.error("Lỗi thông số: ", error);
+                setLoading1(false)
+            });
     }, []); // [] để đảm bảo chỉ gửi yêu cầu một lần khi component mount
-
+    console.log(quantity);
     //load thông số kỹ thuật của điện thoại
     useEffect(() => {
         // Thực hiện yêu cầu GET khi component được render
         axios.get(`http://127.0.0.1:8000/api/thong-so/${id}`)
-        .then(response => {
-            setThongSo(response.data.data);
-            setLoading2(false)
-        })
-        .catch(error => {
-            // Hiện thông báo nếu có lỗi xảy ra
-            setLoading2(false)
-            console.error("Lỗi: ",error);
-        });
+            .then(response => {
+                setThongSo(response.data.data);
+                setLoading2(false)
+            })
+            .catch(error => {
+                // Hiện thông báo nếu có lỗi xảy ra
+                setLoading2(false)
+                console.error("Lỗi: ", error);
+            });
     }, []); // [] để đảm bảo chỉ gửi yêu cầu một lần khi component mount
+
+    const handlAddCartChange = () => {
+        axios.post('http://127.0.0.1:8000/api/khach-hang/gio-hang-them-moi', {
+            khach_hang_id: khach_hang_id.id,
+            chi_tiet_dien_thoai_id: sanPham.id,
+            so_luong:quantity,
+        })
+            .then((response) => {
+                notifySuccess('Thêm vào giỏ hàng thành công');
+            })
+            .catch((error) => {
+
+            });
+    }
+
+
     return (
         <>
-          {(!loading1 && !loading2) ? (
-            <div>
-            <div className="product-detail-container">
-                <div className="row">
-                    <div className="col-4">
-                        <div className="product-detail-img">
-                        {dienThoai.hinh_anh && dienThoai.hinh_anh.length > 0 && dienThoai.hinh_anh[0].duong_dan &&
-                            <img src={`http://localhost:8000/` + dienThoai.hinh_anh[0].duong_dan} alt="#" />
-                        }
+            {(!loading1 && !loading2) ? (
+                <div>
+                    <div className="product-detail-container">
+                        <div className="row">
+                            <div className="col-4">
+                                <div className="product-detail-img">
+                                    {dienThoai.hinh_anh && dienThoai.hinh_anh.length > 0 && dienThoai.hinh_anh[0].duong_dan &&
+                                        <img src={`http://localhost:8000/` + dienThoai.hinh_anh[0].duong_dan} alt="#" />
+                                    }
 
+                                </div>
+                            </div>
+                            <div className="col-8">
+                                <h1>{dienThoai.ten}</h1>
+                                <ul className="product-capacity">
+                                    {
+                                        dienThoai &&
+                                        dienThoai.chi_tiet_dien_thoai &&
+                                        dienThoai.chi_tiet_dien_thoai.map(function (item, key) {
+                                            if (item.so_luong > 0)
+                                                return (
+                                                    <li className="capacity" key={key} onClick={() => handlSanPhamChange(item)}>
+                                                        <a className="capacity-text">{item.dung_luong_id.ten}</a>
+                                                        <a className="capacity-text">{item.mau_sac_id.ten}</a>
+                                                        <a className="capacity-text">{item.gia_ban}</a>
+                                                    </li>
+                                                );
+                                        })
+                                    }
+                                </ul>
+                                <div className="product-quantity">
+                                    <h4 className="col-2">Số lượng: </h4>
+                                    <div className='input-quantity col-2'>
+                                        <button onClick={decreaseQuantity}>-</button>
+                                        <span >{quantity}</span>
+                                        <button onClick={increaseQuantity}>+</button>
+                                    </div>
+                                    <div className="product-detail-price col-8">{tongTien}</div>
+                                </div>
+                                <div className="button6">
+                                    <button onClick={handlAddCartChange} className="btn">Thêm vào giỏ hàng</button>
+                                    <a href="#" className="btn">Mua ngay</a>
+                                </div>
+
+                            </div>
+
+                            <Container >
+                                <Row>
+                                    <Col
+                                        className="bg-light border"
+                                        sm="4"
+                                        xs="6"
+                                    >
+                                        <ProductSpec data={thongSo} />
+                                    </Col>
+                                    <Col
+                                        className="bg-light border"
+                                        sm="8"
+                                        xs="6"
+                                    >
+                                        <div dangerouslySetInnerHTML={{ __html: dienThoai.mo_ta }} />
+                                    </Col>
+                                </Row>
+
+                            </Container>
+                            <CommentsArea />
+                            <SimilarProducts />
                         </div>
                     </div>
-                    <div className="col-8">
-                        <h1>{dienThoai.ten}</h1>
-                        <ul className="product-capacity">
-                        {
-                            dienThoai &&
-                            dienThoai.chi_tiet_dien_thoai &&
-                            dienThoai.chi_tiet_dien_thoai.map(function (item, key) {
-                            if (item.so_luong > 0)
-                                return (
-                                <li className="capacity" key={key} onClick={() => handlSanPhamChange(item)}>
-                                    <a className="capacity-text">{item.dung_luong_id.ten}</a>
-                                    <a className="capacity-text">{item.mau_sac_id.ten}</a>
-                                    <a className="capacity-text">{item.gia_ban}</a>
-                                </li>
-                                );
-                            })
-                        }
-                        </ul>
-                        <div className="product-quantity">
-                        <h4 className="col-2">Số lượng :</h4>
-                        <div className='input-quantity col-2'>
-                        <button onClick={decreaseQuantity}>-</button>
-                        <span >{quantity}</span>
-                        <button onClick={increaseQuantity}>+</button>
-                        </div>
-                        <div className="product-detail-price col-8">{tongTien}</div>
-                        </div>
-                        <div className="button6">
-                        <a href="#" className="btn">Thêm vào giỏ hàng</a>
-                        <a href="#" className="btn">Mua ngay</a>
-                        </div>
-                        
-                    </div>
-
-                    <Container >
-                        <Row>
-                            <Col
-                            className="bg-light border"
-                            sm="4"
-                            xs="6"
-                            >
-                               <ProductSpec data={thongSo}/>
-                            </Col>
-                            <Col
-                            className="bg-light border"
-                            sm="8"
-                            xs="6"
-                            >
-                             <div dangerouslySetInnerHTML={{ __html: dienThoai.mo_ta }} />
-                            </Col>
-                        </Row>
-                   
-                    </Container>
-                    <CommentsArea/>
-                    <SimilarProducts/>
+                    <Footer />
                 </div>
-            </div>
-            <Footer />
-            </div>
             ) : (
                 <ClipLoader
-                color={color}
-                loading={true}
-                size={150}
-                aria-label="Loading Spinner"
-                data-testid="loader"
-                cssOverride={override}
-            />
-        )}
+                    color={color}
+                    loading={true}
+                    size={150}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                    cssOverride={override}
+                />
+            )}
         </>
     )
 }

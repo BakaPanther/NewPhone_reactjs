@@ -1,4 +1,5 @@
 import Footer from "../../footer";
+import Header from "../../header";
 import SingleProduct from "../../single-product";
 import { Categories } from "./categories";
 import { Manufacturers } from "./manufactures";
@@ -10,6 +11,7 @@ import { ShopTop } from "./shop-top";
 export function ProductContainer(){
     return(
         <>
+		<Header />
         <section className="product-area shop-sidebar shop section">
 			<div className="container">
 				<div className="row">
