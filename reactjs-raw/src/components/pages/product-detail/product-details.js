@@ -13,12 +13,15 @@ import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from "reactstrap";
 import ClipLoader from "react-spinners/ClipLoader";
-
+import Header from "../../header";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 export default function ProductDetails() {
 
     let [loading1, setLoading1] = useState(true);
     let [loading2, setLoading2] = useState(true);
     const [khach_hang_id, setKhach_hang_id] = useState(JSON.parse(Cookies.get('user')));
+    const [modal, setModal] = useState(false);
+    // State để theo dõi id của điện thoại được chọn
 
     const override = {
         display: "block",
@@ -30,6 +33,8 @@ export default function ProductDetails() {
     let [color, setColor] = useState("#ffffff");
 
     const { id } = useParams();//id của điện thoại
+    // // State để theo dõi id của điện thoại được chọn
+    // const [selectedDienThoaiId, setSelectedDienThoaiId] = useState(id);
 
     const [dienThoai, setDienThoai] = useState({});//chi tiet dien thoai
 
@@ -55,6 +60,8 @@ export default function ProductDetails() {
     //luu sp đã chọn
     const handlSanPhamChange = (item) => {
         setSanPham(item);
+        // //lấy id đc chọn
+        // setSelectedDienThoaiId(item.dien_thoai_id.id);
     }
     useEffect(() => {
         // Tính toán tổng giá khi số lượng hoặc sanPham thay đổi
@@ -75,7 +82,7 @@ export default function ProductDetails() {
                 setLoading1(false)
             });
     }, []); // [] để đảm bảo chỉ gửi yêu cầu một lần khi component mount
-    console.log(quantity);
+    // console.log(quantity);
     //load thông số kỹ thuật của điện thoại
     useEffect(() => {
         // Thực hiện yêu cầu GET khi component được render
@@ -92,22 +99,45 @@ export default function ProductDetails() {
     }, []); // [] để đảm bảo chỉ gửi yêu cầu một lần khi component mount
 
     const handlAddCartChange = () => {
-        axios.post('http://127.0.0.1:8000/api/khach-hang/gio-hang-them-moi', {
-            khach_hang_id: khach_hang_id.id,
-            chi_tiet_dien_thoai_id: sanPham.id,
-            so_luong:quantity,
-        })
-            .then((response) => {
-                notifySuccess('Thêm vào giỏ hàng thành công');
+
+        if (!sanPham || !sanPham.dien_thoai_id) {
+            // Nếu sanPham hoặc sanPham.dien_thoai_id không tồn tại hoặc là falsy value (null, undefined, rỗng)
+            notifyError('Vui lòng chọn sản phẩm muốn thêm vào giỏ hàng');
+            return; // Dừng hàm nếu id không hợp lệ
+        }
+        if (Cookies.get('accessToken') === undefined) {
+            setModal(!modal)
+        }
+        else {
+            axios.post('http://127.0.0.1:8000/api/khach-hang/gio-hang-them-moi', {
+                khach_hang_id: khach_hang_id.id,
+                chi_tiet_dien_thoai_id: sanPham.id,
+                so_luong: quantity,
             })
-            .catch((error) => {
+                .then((response) => {
+                    notifySuccess('Thêm vào giỏ hàng thành công');
+                })
+                .catch((error) => {
 
-            });
+                });
+        }
+
     }
+    const handleYes = () => {
+        notifyInfor('Đang chuyển hướng đến đăng nhập');
+        setTimeout(() => {
+            window.location.href = "/login";
+        }, 1000);
+    };
 
+    const handleNo = () => {
+        setModal(!modal)
+    };
 
+    // console.log(dienThoai)
     return (
         <>
+            <Header />
             {(!loading1 && !loading2) ? (
                 <div>
                     <div className="product-detail-container">
@@ -173,8 +203,8 @@ export default function ProductDetails() {
                                 </Row>
 
                             </Container>
+                            <SimilarProducts dien_thoai_id={dienThoai.id} nha_san_xuat_id={dienThoai.nha_san_xuat.id} />
                             <CommentsArea />
-                            <SimilarProducts />
                         </div>
                     </div>
                     <Footer />
@@ -189,6 +219,15 @@ export default function ProductDetails() {
                     cssOverride={override}
                 />
             )}
+            <Modal isOpen={modal} size="sm" className="my-modal">
+                <ModalBody style={{ backgroundColor: '#f8f9fa', color: '#333', padding: '20px', maxHeight: '100px', overflowY: 'auto' }}>
+                    Đăng nhập rồi mới thêm vào được khách yêu owii!!!
+                </ModalBody>
+                <ModalFooter style={{ backgroundColor: '#f8f9fa', borderRadius: '0 0 10px 10px', borderTop: 'none', padding: '0px' }}>
+                    <Button color="primary" style={{ backgroundColor: '#007bff', color: '#fff', borderRadius: '5px', marginRight: '10px' }} onClick={handleYes}>Okey đi thôi!!</Button>
+                    <Button color="secondary" style={{ backgroundColor: '#6c757d', color: '#fff', borderRadius: '5px' }} onClick={handleNo}>Honggg</Button>
+                </ModalFooter>
+            </Modal>
         </>
     )
 }
