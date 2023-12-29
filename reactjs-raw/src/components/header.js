@@ -140,7 +140,7 @@ function Header() {
             <div className="cat-nav-head">
               <div className="row">
                 <div className="col-lg-3">
-                  <div className="all-category">
+                  {/* <div className="all-category">
                     <h3 className="cat-heading"><i className="fa fa-bars" aria-hidden="true"></i>CATEGORIES</h3>
                     <ul className="main-category">
                       <li><a href="#">New Arrivals <i className="fa fa-angle-right" aria-hidden="true"></i></a>
@@ -199,7 +199,7 @@ function Header() {
                       <li><a href="#">accessories</a></li>
                       <li><a href="#">top 100 offer</a></li>
                     </ul>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="col-lg-9 col-12">
                   <div className="menu-area">
@@ -208,9 +208,9 @@ function Header() {
                       <div className="navbar-collapse">
                         <div className="nav-inner">
                           <ul className="nav main-menu menu navbar-nav">
-                            <li className="active"><a href="#">Home</a></li>
+                            <li className="active"><NavLink to={"/"}>Home</NavLink></li>
                             <li><NavLink to="/product">Product</NavLink></li>
-                            <li><a href="#">Payment<i className="ti-angle-down"></i>{/*<span className="new">New</span>*/}</a>
+                            <li><NavLink to="/cart">Payment<i className="ti-angle-down"></i></NavLink>
                               <ul className="dropdown">
                                 <li><NavLink to="/cart">Cart</NavLink></li>
                                 <li><NavLink to="/checkout">Checkout</NavLink></li>

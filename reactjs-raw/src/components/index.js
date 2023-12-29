@@ -29,49 +29,50 @@ export function Index() {
     useEffect(() => {
         // Thực hiện yêu cầu GET khi component được render
         axios.get('http://127.0.0.1:8000/api/nha-san-xuat')
-        .then(response => {
-            // Lưu dữ liệu nhận được vào state
-            setNhaSanXuat(response.data.data);
-            setLoading(false);
-        })
-        .catch(error => {
-            // Hiện thông báo nếu có lỗi xảy ra
-            console.error("Lỗi: ",error);
-        });
+            .then(response => {
+                // Lưu dữ liệu nhận được vào state
+                setNhaSanXuat(response.data.data);
+                setLoading(false);
+            })
+            .catch(error => {
+                // Hiện thông báo nếu có lỗi xảy ra
+                console.error("Lỗi: ", error);
+            });
     }, []); // [] để đảm bảo chỉ gửi yêu cầu một lần khi component mount
 
     const lst_nha_san_xuat = nhaSanXuat.map((item, key) => {
-        if(item.dienThoai && item.dienThoai.length > 0)  {      
+        if (item.dienThoai && item.dienThoai.length > 0) {
             const firstSixItems = item.dienThoai.slice(0, 6); // Lấy 6 phần tử đầu tiên
-            return <ShopBlog data={{...item, dienThoai: firstSixItems}} key={key}/>
+            return <ShopBlog data={{ ...item, dienThoai: firstSixItems }} key={key} />
         }
-      });
-      
+    });
+
     return (
         <>
-           {(!loading) ? (
-            <div>
-            <SliderArea />
-            {/* <SmBannerSection /> */}
-            {/* <ProductArea /> */}
-            {/* <MeBanner /> */}
-            <PopularArea />
-            <ShopHomeList />
-            {/* <CountDownArea /> */}
-            {lst_nha_san_xuat}
-            <ServiceArea />
-            <Footer />
-            </div>
+            {(!loading) ? (
+                <div>
+                    <Header />
+                    <SliderArea />
+                    {/* <SmBannerSection /> */}
+                    {/* <ProductArea /> */}
+                    {/* <MeBanner /> */}
+                    <PopularArea />
+                    <ShopHomeList />
+                    {/* <CountDownArea /> */}
+                    {lst_nha_san_xuat}
+                    <ServiceArea />
+                    <Footer />
+                </div>
             ) : (
                 <ClipLoader
-                color={color}
-                loading={true}
-                size={150}
-                aria-label="Loading Spinner"
-                data-testid="loader"
-                cssOverride={override}
-            />
-        )}
+                    color={color}
+                    loading={true}
+                    size={150}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                    cssOverride={override}
+                />
+            )}
         </>
     )
 }

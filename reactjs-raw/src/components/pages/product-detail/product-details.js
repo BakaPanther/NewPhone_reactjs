@@ -13,23 +13,30 @@ import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from "reactstrap";
 import ClipLoader from "react-spinners/ClipLoader";
-
+import Header from "../../header";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 export default function ProductDetails() {
 
     let [loading1, setLoading1] = useState(true);
     let [loading2, setLoading2] = useState(true);
+    const [khach_hang_id, setKhach_hang_id] = useState(JSON.parse(Cookies.get('user')));
+    const [modal, setModal] = useState(false);
+    // State để theo dõi id của điện thoại được chọn
+
     const override = {
         display: "block",
         margin: "0 auto",
         borderColor: "red",
     };
-    
-    
-    let [color, setColor] = useState("#ffffff");
-      
-    const { id } = useParams();//id của điện thoại
 
-    const [dienThoai,setDienThoai] = useState({});//chi tiet dien thoai
+
+    let [color, setColor] = useState("#ffffff");
+
+    const { id } = useParams();//id của điện thoại
+    // // State để theo dõi id của điện thoại được chọn
+    // const [selectedDienThoaiId, setSelectedDienThoaiId] = useState(id);
+
+    const [dienThoai, setDienThoai] = useState({});//chi tiet dien thoai
 
     const [quantity, setQuantity] = useState(1);//so_luong
 
@@ -39,138 +46,188 @@ export default function ProductDetails() {
 
     const [thongSo, setThongSo] = useState({});//thong so
 
-        //giam sl mua
-        const decreaseQuantity = () => {
-            if (quantity > 1) {
+    //giam sl mua
+    const decreaseQuantity = () => {
+        if (quantity > 1) {
             setQuantity(quantity - 1);
-            }
-        };
-      
-        //tăng sl mua
-        const increaseQuantity = () => {
-            setQuantity(quantity + 1);
-        };
-        //luu sp đã chọn
-        const handlSanPhamChange = (item) => {
-            setSanPham(item);
         }
-      useEffect(() => {
+    };
+
+    //tăng sl mua
+    const increaseQuantity = () => {
+        setQuantity(quantity + 1);
+    };
+    //luu sp đã chọn
+    const handlSanPhamChange = (item) => {
+        setSanPham(item);
+        // //lấy id đc chọn
+        // setSelectedDienThoaiId(item.dien_thoai_id.id);
+    }
+    useEffect(() => {
         // Tính toán tổng giá khi số lượng hoặc sanPham thay đổi
         setTongTien(quantity * (sanPham.gia_ban || 0));
-      }, [quantity, sanPham]);
+    }, [quantity, sanPham]);
 
     //load san phẩm lúc nhấn nút từ trang nào đó
     useEffect(() => {
         // Thực hiện yêu cầu GET khi component được render
         axios.get(`http://127.0.0.1:8000/api/dien-thoai-chi-tiet/${id}`)
-        .then(response => {
-            setDienThoai(response.data.data);
-            setLoading1(false)
-        })
-        .catch(error => {
-            // Hiện thông báo nếu có lỗi xảy ra
-            console.error("Lỗi thông số: ",error);
-            setLoading1(false)
-        });
+            .then(response => {
+                setDienThoai(response.data.data);
+                setLoading1(false)
+            })
+            .catch(error => {
+                // Hiện thông báo nếu có lỗi xảy ra
+                console.error("Lỗi thông số: ", error);
+                setLoading1(false)
+            });
     }, []); // [] để đảm bảo chỉ gửi yêu cầu một lần khi component mount
-
+    // console.log(quantity);
     //load thông số kỹ thuật của điện thoại
     useEffect(() => {
         // Thực hiện yêu cầu GET khi component được render
         axios.get(`http://127.0.0.1:8000/api/thong-so/${id}`)
-        .then(response => {
-            setThongSo(response.data.data);
-            setLoading2(false)
-        })
-        .catch(error => {
-            // Hiện thông báo nếu có lỗi xảy ra
-            setLoading2(false)
-            console.error("Lỗi: ",error);
-        });
+            .then(response => {
+                setThongSo(response.data.data);
+                setLoading2(false)
+            })
+            .catch(error => {
+                // Hiện thông báo nếu có lỗi xảy ra
+                setLoading2(false)
+                console.error("Lỗi: ", error);
+            });
     }, []); // [] để đảm bảo chỉ gửi yêu cầu một lần khi component mount
+
+    const handlAddCartChange = () => {
+
+        if (!sanPham || !sanPham.dien_thoai_id) {
+            // Nếu sanPham hoặc sanPham.dien_thoai_id không tồn tại hoặc là falsy value (null, undefined, rỗng)
+            notifyError('Vui lòng chọn sản phẩm muốn thêm vào giỏ hàng');
+            return; // Dừng hàm nếu id không hợp lệ
+        }
+        if (Cookies.get('accessToken') === undefined) {
+            setModal(!modal)
+        }
+        else {
+            axios.post('http://127.0.0.1:8000/api/khach-hang/gio-hang-them-moi', {
+                khach_hang_id: khach_hang_id.id,
+                chi_tiet_dien_thoai_id: sanPham.id,
+                so_luong: quantity,
+            })
+                .then((response) => {
+                    notifySuccess('Thêm vào giỏ hàng thành công');
+                })
+                .catch((error) => {
+
+                });
+        }
+
+    }
+    const handleYes = () => {
+        notifyInfor('Đang chuyển hướng đến đăng nhập');
+        setTimeout(() => {
+            window.location.href = "/login";
+        }, 1000);
+    };
+
+    const handleNo = () => {
+        setModal(!modal)
+    };
+
+    // console.log(dienThoai)
     return (
         <>
-          {(!loading1 && !loading2) ? (
-            <div>
-            <div className="product-detail-container">
-                <div className="row">
-                    <div className="col-4">
-                        <div className="product-detail-img">
-                        {dienThoai.hinh_anh && dienThoai.hinh_anh.length > 0 && dienThoai.hinh_anh[0].duong_dan &&
-                            <img src={`http://localhost:8000/` + dienThoai.hinh_anh[0].duong_dan} alt="#" />
-                        }
+            <Header />
+            {(!loading1 && !loading2) ? (
+                <div>
+                    <div className="product-detail-container">
+                        <div className="row">
+                            <div className="col-4">
+                                <div className="product-detail-img">
+                                    {dienThoai.hinh_anh && dienThoai.hinh_anh.length > 0 && dienThoai.hinh_anh[0].duong_dan &&
+                                        <img src={`http://localhost:8000/` + dienThoai.hinh_anh[0].duong_dan} alt="#" />
+                                    }
 
+                                </div>
+                            </div>
+                            <div className="col-8">
+                                <h1>{dienThoai.ten}</h1>
+                                <ul className="product-capacity">
+                                    {
+                                        dienThoai &&
+                                        dienThoai.chi_tiet_dien_thoai &&
+                                        dienThoai.chi_tiet_dien_thoai.map(function (item, key) {
+                                            if (item.so_luong > 0)
+                                                return (
+                                                    <li className="capacity" key={key} onClick={() => handlSanPhamChange(item)}>
+                                                        <a className="capacity-text">{item.dung_luong_id.ten}</a>
+                                                        <a className="capacity-text">{item.mau_sac_id.ten}</a>
+                                                        <a className="capacity-text">{item.gia_ban}</a>
+                                                    </li>
+                                                );
+                                        })
+                                    }
+                                </ul>
+                                <div className="product-quantity">
+                                    <h4 className="col-2">Số lượng: </h4>
+                                    <div className='input-quantity col-2'>
+                                        <button onClick={decreaseQuantity}>-</button>
+                                        <span >{quantity}</span>
+                                        <button onClick={increaseQuantity}>+</button>
+                                    </div>
+                                    <div className="product-detail-price col-8">{tongTien}</div>
+                                </div>
+                                <div className="button6">
+                                    <button onClick={handlAddCartChange} className="btn">Thêm vào giỏ hàng</button>
+                                    <a href="#" className="btn">Mua ngay</a>
+                                </div>
+
+                            </div>
+
+                            <Container >
+                                <Row>
+                                    <Col
+                                        className="bg-light border"
+                                        sm="4"
+                                        xs="6"
+                                    >
+                                        <ProductSpec data={thongSo} />
+                                    </Col>
+                                    <Col
+                                        className="bg-light border"
+                                        sm="8"
+                                        xs="6"
+                                    >
+                                        <div dangerouslySetInnerHTML={{ __html: dienThoai.mo_ta }} />
+                                    </Col>
+                                </Row>
+
+                            </Container>
+                            <SimilarProducts dien_thoai_id={dienThoai.id} nha_san_xuat_id={dienThoai.nha_san_xuat.id} />
+                            <CommentsArea />
                         </div>
                     </div>
-                    <div className="col-8">
-                        <h1>{dienThoai.ten}</h1>
-                        <ul className="product-capacity">
-                        {
-                            dienThoai &&
-                            dienThoai.chi_tiet_dien_thoai &&
-                            dienThoai.chi_tiet_dien_thoai.map(function (item, key) {
-                            if (item.so_luong > 0)
-                                return (
-                                <li className="capacity" key={key} onClick={() => handlSanPhamChange(item)}>
-                                    <a className="capacity-text">{item.dung_luong_id.ten}</a>
-                                    <a className="capacity-text">{item.mau_sac_id.ten}</a>
-                                    <a className="capacity-text">{item.gia_ban}</a>
-                                </li>
-                                );
-                            })
-                        }
-                        </ul>
-                        <div className="product-quantity">
-                        <h4 className="col-2">Số lượng :</h4>
-                        <div className='input-quantity col-2'>
-                        <button onClick={decreaseQuantity}>-</button>
-                        <span >{quantity}</span>
-                        <button onClick={increaseQuantity}>+</button>
-                        </div>
-                        <div className="product-detail-price col-8">{tongTien}</div>
-                        </div>
-                        <div className="button6">
-                        <a href="#" className="btn">Thêm vào giỏ hàng</a>
-                        <a href="#" className="btn">Mua ngay</a>
-                        </div>
-                        
-                    </div>
-
-                    <Container >
-                        <Row>
-                            <Col
-                            className="bg-light border"
-                            sm="4"
-                            xs="6"
-                            >
-                               <ProductSpec data={thongSo}/>
-                            </Col>
-                            <Col
-                            className="bg-light border"
-                            sm="8"
-                            xs="6"
-                            >
-                             <div dangerouslySetInnerHTML={{ __html: dienThoai.mo_ta }} />
-                            </Col>
-                        </Row>
-                   
-                    </Container>
-                    <CommentsArea/>
-                    <SimilarProducts/>
+                    <Footer />
                 </div>
-            </div>
-            <Footer />
-            </div>
             ) : (
                 <ClipLoader
-                color={color}
-                loading={true}
-                size={150}
-                aria-label="Loading Spinner"
-                data-testid="loader"
-                cssOverride={override}
-            />
-        )}
+                    color={color}
+                    loading={true}
+                    size={150}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                    cssOverride={override}
+                />
+            )}
+            <Modal isOpen={modal} size="sm" className="my-modal">
+                <ModalBody style={{ backgroundColor: '#f8f9fa', color: '#333', padding: '20px', maxHeight: '100px', overflowY: 'auto' }}>
+                    Đăng nhập rồi mới thêm vào được khách yêu owii!!!
+                </ModalBody>
+                <ModalFooter style={{ backgroundColor: '#f8f9fa', borderRadius: '0 0 10px 10px', borderTop: 'none', padding: '0px' }}>
+                    <Button color="primary" style={{ backgroundColor: '#007bff', color: '#fff', borderRadius: '5px', marginRight: '10px' }} onClick={handleYes}>Okey đi thôi!!</Button>
+                    <Button color="secondary" style={{ backgroundColor: '#6c757d', color: '#fff', borderRadius: '5px' }} onClick={handleNo}>Honggg</Button>
+                </ModalFooter>
+            </Modal>
         </>
     )
 }

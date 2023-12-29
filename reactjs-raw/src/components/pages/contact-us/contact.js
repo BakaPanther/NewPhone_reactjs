@@ -1,8 +1,14 @@
 import Footer from "../../footer";
+import Header from "../../header";
+import HomeContent from "../homecontent";
 
 export function Contact() {
     return (
         <>
+            <Header />
+        
+            <HomeContent />
+
             <section id="contact-us" className="contact-us section">
                 <div className="container">
                     <div className="contact-head">

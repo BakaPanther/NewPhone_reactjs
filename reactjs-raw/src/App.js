@@ -34,25 +34,10 @@ function App() {
   const isLoginPage= location.pathname ==='/login';
   const isResetPage= location.pathname === '/reset-password';
   const isAuthenPage= location.pathname ==='/authen';
-  // const [sticky,setSticky]= useState(false);
-  // useEffect(()=>{
-  //   document.addEventListener("scroll",checkScroll);
-  //   return () => document.removeEventListener("scroll", checkScroll);
-  // },[]);
-  // const checkScroll=(e)=>{
-  //   const bar=document.getElementById("myHeader");
-  //   console.log(window.scrollY,bar.offsetTop);
-  //   console.log(sticky);
-  //   if(window.scrollY>=bar.offsetTop){
-  //     setSticky(true);
-  //   }else{
-  //     setSticky(false);
-  //   }
-  // };
   return (
     <>
     <div className='App'>
-    {isLoginPage||isResetPage ? <></> : isIndexPage ? <Header/> : isAuthenPage ? <></> : <NocateHeader/>}
+    {/* {isLoginPage||isResetPage ? <></> : isIndexPage ? <Header/> : isAuthenPage ? <></> : <NocateHeader/>} */}
 
     
     <Routes>

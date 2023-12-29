@@ -1,5 +1,6 @@
 import axios from "axios";
 import Footer from "../../footer";
+import Header from "../../header";
 import SingleProduct from "../../single-product";
 import { Categories } from "./categories";
 import { Manufacturers } from "./manufactures";
@@ -99,6 +100,29 @@ export function ProductContainer(){
 	};
     return(
         <>
+		<Header />
+        <section className="product-area shop-sidebar shop section">
+			<div className="container">
+				<div className="row">
+					<div className="col-lg-3 col-md-4 col-12">
+						<div className="shop-sidebar">
+								{/* <!-- Single Widget -->*/}
+								<Categories/>
+                                {/* <!-- End Single Widget -->*/}	
+								<ShopByPrice/>
+									{/* <!--/ End Shop By Price -->
+								<!-- Single Widget --> */}
+								<RecentPost/>
+								{/* <!--/ End Single Widget -->
+								<!-- Single Widget --> */}
+								<Manufacturers/>
+								{/* <!--/ End Single Widget --> */}
+						</div>
+					</div>
+					<div className="col-lg-9 col-md-8 col-12">
+						<div className="row">
+							<ShopTop/>
+						</div>
 		{(!loading1 && !loading2) ? (
 			<div>
 				<section className="product-area shop-sidebar shop section">

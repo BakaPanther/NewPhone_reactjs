@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import Cookies from 'js-cookie';
 import axios from "axios";
 import ClipLoader from "react-spinners/ClipLoader";
+import Header from "../../header";
 export function Cart() {
   //loader
   let [loading, setLoading] = useState(true);
@@ -39,6 +40,7 @@ export function Cart() {
     <>
           {(!loading) ? (
             <div>
+              <Header />
               <BreadCrumbs />
               <ShoppingCart data={cart} setData={setCart}/>
               <Footer />
