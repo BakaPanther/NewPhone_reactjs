@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Footer from "../../footer";
 import EditIcon from '../../../assets/images/edit-icon.png'
 import SingleBoughtProduct from './single-bought-product';
 export default function MyAccount() {
@@ -40,6 +41,7 @@ export default function MyAccount() {
             </div>
             <div>
             </div>
+            <Footer/>
         </>
     )
 }

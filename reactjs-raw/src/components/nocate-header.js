@@ -23,8 +23,8 @@ export function NocateHeader() {
                                     <ul className="list-main">
                                         <li><i className="ti-location-pin"></i> Store location</li>
                                         <li><i className="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
-                                        <li><i className="ti-user"></i> <a href="#">My account</a></li>
-                                        <li><i className="ti-power-off"></i><a href="login.html#">Login</a></li>
+                                        <li><i className="ti-user"></i> <NavLink to='/my-account'>My account</NavLink></li>
+                                        <li><i className="ti-power-off"></i><NavLink to='/login'>Login</NavLink></li>
                                     </ul>
                                 </div>
 
