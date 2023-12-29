@@ -6074,4 +6074,50 @@
 .product-info-content button:hover {
 	background-color: #ddd;
 }
+.my-account-container {
+	margin: 30px 170px;
+}
+.menu-left,.menu-right{
+	background: #edf0f5;
 
+}
+.menu-right {
+	
+}
+.edit-info{
+	button{
+		background: none;
+		border: hidden;
+		font-weight: bold;
+	}
+	button:hover{
+		background: none;
+		border: hidden;
+		color: #F7941D;
+		filter: invert(69%) sepia(76%) saturate(2782%) hue-rotate(348deg) brightness(101%) contrast(94%);
+	}
+	display: block;
+}
+.confirm-edit{
+	display: flex;
+    justify-content: center;
+    gap: 10%;
+}
+.edit-info input{
+	width: 60%;
+    margin: 15px;
+}
+.edit-info label{
+	width: 100px;
+	display: inline-block;
+}
+.bought-product-id{
+
+}
+.bought-product-status,.bought-product-price{
+	text-align: right;
+}
+.single-bought-product{
+	margin: 10px;
+	background: white;
+}

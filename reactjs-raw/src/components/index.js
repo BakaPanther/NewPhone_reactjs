@@ -49,7 +49,7 @@ export function Index() {
 
     return (
         <>
-            {(!loading) ? (
+            {/* {(!loading) ? ( */}
                 <div>
                     <Header />
                     <SliderArea />
@@ -63,7 +63,7 @@ export function Index() {
                     <ServiceArea />
                     <Footer />
                 </div>
-            ) : (
+            {/* ) : (
                 <ClipLoader
                     color={color}
                     loading={true}
@@ -72,7 +72,7 @@ export function Index() {
                     data-testid="loader"
                     cssOverride={override}
                 />
-            )}
+            )} */}
         </>
     )
 }

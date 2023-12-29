@@ -28,6 +28,7 @@ import ResetPassword from './components/reset-password';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import MyAccount from './components/pages/account-info/my-account';
 function App() {
   const location=useLocation();
   const isIndexPage= location.pathname === '/';
@@ -44,6 +45,7 @@ function App() {
       <Route path='/authen' element={<Authen_Regis/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/reset-password' element={<ResetPassword/>}/>
+      <Route path='/my-account' element={<MyAccount/>}/>
       <Route path='/' element={<Index/>}/>
       <Route path='/cart' element={<Cart/>}/>
       <Route path='/product' element={<ProductContainer/>}/>
