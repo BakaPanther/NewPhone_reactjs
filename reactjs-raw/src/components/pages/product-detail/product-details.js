@@ -68,35 +68,32 @@ export default function ProductDetails() {
         setTongTien(quantity * (sanPham.gia_ban || 0));
     }, [quantity, sanPham]);
 
-    //load san phẩm lúc nhấn nút từ trang nào đó
+   
     useEffect(() => {
-        // Thực hiện yêu cầu GET khi component được render
-        axios.get(`http://127.0.0.1:8000/api/dien-thoai-chi-tiet/${id}`)
-            .then(response => {
-                setDienThoai(response.data.data);
-                setLoading1(false)
-            })
-            .catch(error => {
-                // Hiện thông báo nếu có lỗi xảy ra
-                console.error("Lỗi thông số: ", error);
-                setLoading1(false)
-            });
-    }, []); // [] để đảm bảo chỉ gửi yêu cầu một lần khi component mount
-    // console.log(quantity);
-    //load thông số kỹ thuật của điện thoại
-    useEffect(() => {
-        // Thực hiện yêu cầu GET khi component được render
-        axios.get(`http://127.0.0.1:8000/api/thong-so/${id}`)
-            .then(response => {
-                setThongSo(response.data.data);
-                setLoading2(false)
-            })
-            .catch(error => {
-                // Hiện thông báo nếu có lỗi xảy ra
-                setLoading2(false)
-                console.error("Lỗi: ", error);
-            });
-    }, []); // [] để đảm bảo chỉ gửi yêu cầu một lần khi component mount
+        const fetchData = async () => {
+          try {
+            const responseProduct = await axios.get(`http://127.0.0.1:8000/api/dien-thoai-chi-tiet/${id}`);
+            setDienThoai(responseProduct.data.data);
+            setLoading1(false);
+      
+            const responseSpec = await axios.get(`http://127.0.0.1:8000/api/thong-so/${id}`);
+            setThongSo(responseSpec.data.data);
+            setLoading2(false);
+          } catch (error) {
+            // Xử lý lỗi
+            console.error("Có lỗi xảy ra: ", error);
+      
+            // Kiểm tra nếu lỗi là 429 thì reload trang
+            if (error.response && error.response.status === 429) {
+              window.location.reload();
+            }
+          }
+        };
+      
+        fetchData();
+      }, []); // Sử dụng 'id' trong dependency array để theo dõi sự thay đổi của id và fetch dữ liệu mới khi id thay đổi
+      
+
 
     const handlAddCartChange = () => {
 
@@ -133,10 +130,11 @@ export default function ProductDetails() {
     const handleNo = () => {
         setModal(!modal)
     };
-
-    // console.log(dienThoai)
+    console.log(sanPham)
+console.log("dien thoai", sanPham);
     return (
         <>
+        
             <Header />
             {(!loading1 && !loading2) ? (
                 <div>
@@ -151,7 +149,25 @@ export default function ProductDetails() {
                                 </div>
                             </div>
                             <div className="col-8">
-                                <h1>{dienThoai.ten}</h1>
+                            <h1>
+                            {sanPham ? (
+                                <>
+                                {dienThoai.ten} {  }
+                                {sanPham.mau_sac_id && sanPham.mau_sac_id.ten && (
+                                    <>
+                                    {sanPham.mau_sac_id.ten} {  }
+                                    </>
+                                )}
+                                {sanPham.dung_luong_id && sanPham.dung_luong_id.ten && (
+                                    <>
+                                    {sanPham.dung_luong_id.ten} 
+                                    </>
+                                )}
+                                </>
+                            ) : (
+                                <>{dienThoai.ten}</>
+                            )}
+                            </h1>
                                 <ul className="product-capacity">
                                     {
                                         dienThoai &&

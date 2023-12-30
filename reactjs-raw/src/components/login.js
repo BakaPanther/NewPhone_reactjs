@@ -45,9 +45,9 @@ export default function Login() {
 
             });
             notifySuccess('Đăng Nhập Thành Công');
-            // setTimeout(() => {
-            //   window.location.href = "/";
-            // }, 1000);
+            setTimeout(() => {
+              window.location.href = "/";
+            }, 1000);
           })
           .catch((error) => {
             if (error.response && error.response.status === 422) {
