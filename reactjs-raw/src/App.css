@@ -6091,7 +6091,7 @@
 
 .menu-right {}
 
-.edit-info {
+.edit-info{
 	button {
 		background: none;
 		border: hidden;
@@ -6120,7 +6120,7 @@
 }
 
 .edit-info label {
-	width: 100px;
+	width: 100%;
 	display: inline-block;
 }
 
@@ -6207,4 +6207,24 @@
 .compare-detail-container table td {
 	width: 620px;
 	flex-wrap: wrap;
+}
+.cart-totals .single-about-product{
+	margin: 10px;
+    box-shadow: rgb(241 150 48 / 40%) 0px 0px 0px 2px, rgb(220 125 20 / 65%) 0px 4px 6px -1px, rgb(255 184 38 / 8%) 0px 1px 0px inset;	
+}
+.order-details .totals-price {
+	display: flex;
+    justify-content: space-between;
+}
+.order-details .totals-price .price{
+	font-weight: bold;
+    font-size: 18px;
+    color: red;
+    margin: 7px auto;
+}
+.payments{
+	padding: 10px;
+}
+.payment-options{
+
 }
