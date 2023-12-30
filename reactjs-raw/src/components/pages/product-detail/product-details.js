@@ -221,7 +221,7 @@ export default function ProductDetails() {
             )}
             <Modal isOpen={modal} size="sm" className="my-modal">
                 <ModalBody style={{ backgroundColor: '#f8f9fa', color: '#333', padding: '20px', maxHeight: '100px', overflowY: 'auto' }}>
-                    Đăng nhập rồi mới thêm vào được khách yêu owii!!!
+                    Đăng nhập rồi mới thêm vào được khách yêu ơii!!!
                 </ModalBody>
                 <ModalFooter style={{ backgroundColor: '#f8f9fa', borderRadius: '0 0 10px 10px', borderTop: 'none', padding: '0px' }}>
                     <Button color="primary" style={{ backgroundColor: '#007bff', color: '#fff', borderRadius: '5px', marginRight: '10px' }} onClick={handleYes}>Okey đi thôi!!</Button>
