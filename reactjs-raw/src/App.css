@@ -5838,10 +5838,12 @@
 .product-detail-container {
 	margin: 100px;
 }
-.product-detail-container .product-detail-body{
+
+.product-detail-container .product-detail-body {
 	padding: 20px;
 
 }
+
 .product-capacity,
 .product-color {
 	display: flex;
@@ -6022,46 +6024,48 @@
 	background-color: #ffffff;
 	border-radius: 8px;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* CSS cho tiêu đề modal */
-  .my-modal .modal-header {
+}
+
+/* CSS cho tiêu đề modal */
+.my-modal .modal-header {
 	background-color: #f0f0f0;
 	border-bottom: 1px solid #ccc;
 	border-radius: 8px 8px 0 0;
 	padding: 15px;
-  }
-  
-  /* CSS cho phần nội dung */
-  .my-modal .modal-body {
+}
+
+/* CSS cho phần nội dung */
+.my-modal .modal-body {
 	padding: 20px;
-  }
-  
-  /* CSS cho footer */
-  .my-modal .modal-footer {
+}
+
+/* CSS cho footer */
+.my-modal .modal-footer {
 	border-top: 1px solid #ccc;
 	border-radius: 0 0 8px 8px;
 	padding: 15px;
 	text-align: right;
-  }
-  
-  /* CSS cho các nút */
-  .my-modal .modal-footer .btn {
+}
+
+/* CSS cho các nút */
+.my-modal .modal-footer .btn {
 	margin-left: 5px;
 	border-radius: 4px;
 	padding: 8px 20px;
-  }
-  .my-modal .modal-footer .btn-primary {
+}
+
+.my-modal .modal-footer .btn-primary {
 	background-color: #007bff;
 	color: #fff;
 	border: 1px solid #007bff;
-  }
-  .my-modal .modal-footer .btn-secondary {
+}
+
+.my-modal .modal-footer .btn-secondary {
 	background-color: #6c757d;
 	color: #fff;
 	border: 1px solid #6c757d;
-  }
-  
+}
+
 
 .product-info-content button {
 	padding: 10px 20px;
@@ -6075,3 +6079,132 @@
 	background-color: #ddd;
 }
 
+.my-account-container {
+	margin: 30px 170px;
+}
+
+.menu-left,
+.menu-right {
+	background: #edf0f5;
+
+}
+
+.menu-right {}
+
+.edit-info {
+	button {
+		background: none;
+		border: hidden;
+		font-weight: bold;
+	}
+
+	button:hover {
+		background: none;
+		border: hidden;
+		color: #F7941D;
+		filter: invert(69%) sepia(76%) saturate(2782%) hue-rotate(348deg) brightness(101%) contrast(94%);
+	}
+
+	display: block;
+}
+
+.confirm-edit {
+	display: flex;
+	justify-content: center;
+	gap: 10%;
+}
+
+.edit-info input {
+	width: 60%;
+	margin: 15px;
+}
+
+.edit-info label {
+	width: 100px;
+	display: inline-block;
+}
+
+.bought-product-id {}
+
+.bought-product-status,
+.bought-product-price {
+	text-align: right;
+}
+
+.single-bought-product {
+	margin: 10px;
+	background: white;
+}
+
+.compare-container {
+	padding-top: 30px;
+	padding-left: 70px;
+	padding-right: 70px;
+}
+
+.compare-items {
+	display: flex;
+	border: solid 1px black;
+	border-radius: 10px;
+	transition: position 0.3s ease-in-out, opacity 0.3s ease-in-out, background 0.3s ease-in-out;
+}
+
+.compare-items.sticky {
+	display: flex;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	z-index: 3;
+	background:white;
+	.product-a-container,.product-b-container {
+		border-left: solid 1px black;
+		.product-a-img,.product-b-img {
+			padding:10px;
+			width: 100px;
+		}
+		.product-a-name,.product-b-name {
+
+		}
+	}
+}
+
+.product-a-img,.product-b-img {
+	width: 275px;
+	height: auto;
+	margin: auto;
+
+}
+
+.product-a-container,
+.product-b-container {
+	border-left: solid 1px black;
+}
+
+.product-a-name,
+.product-b-name {}
+
+.product-a-price,
+.product-b-price {
+	font-weight: bold;
+	font-size: 15px;
+	color: red;
+}
+
+.compare-detail-container {
+	display: flex;
+	border: solid 2px;
+	border-radius: 10px;
+}
+
+.compare-detail-container table th {
+	width: 284px;
+}
+
+.compare-detail-container table tr {
+	height: 60px;
+}
+
+.compare-detail-container table td {
+	width: 620px;
+	flex-wrap: wrap;
+}
