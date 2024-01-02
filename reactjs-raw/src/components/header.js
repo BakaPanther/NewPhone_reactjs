@@ -21,6 +21,16 @@ function Header() {
     }
     
   }
+  function handleMyAccountClick() {
+    if(Cookies.get('accessToken'))
+    {
+      window.location.href = "/my-account";
+    }
+    else{
+      setModal(true);
+    }
+    
+  }
   const handleYes = () => {
     notifyInfor('Đang chuyển hướng đến đăng nhập');
     setTimeout(() => {
@@ -62,7 +72,7 @@ const handleNo = () => {
                   <ul className="list-main">
                     <li><i className="ti-location-pin"></i> Store location</li>
                     <li><i className="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
-                    <li><i className="ti-user"></i> <NavLink to='/my-account'>My account</NavLink></li>
+                    <li><i className="ti-user"></i> <NavLink onClick={handleMyAccountClick} >My account</NavLink></li>
                     {
                       Cookies.get('accessToken') ? (
                         <li><i className="ti-user"></i><NavLink onClick={handleLogout}>Logout</NavLink></li>
