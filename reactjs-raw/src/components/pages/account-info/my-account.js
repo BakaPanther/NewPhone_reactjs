@@ -43,6 +43,7 @@ export default function MyAccount() {
                     dia_chi: response.data.data.dia_chi
                 }));
 
+
                 // Lưu thông tin cập nhật vào cookies (chuyển đổi thành chuỗi JSON)
                 Cookies.set('user', JSON.stringify(response.data.data));
 
@@ -57,6 +58,7 @@ export default function MyAccount() {
     };
 
 
+    
     return (
         <>
             <Header />
