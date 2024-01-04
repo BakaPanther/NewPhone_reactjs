@@ -30,6 +30,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MyAccount from './components/pages/account-info/my-account';
 import CompareProducts from './components/pages/compare products/compare-produtcts';
+import WishlishProducts from './components/pages/favorite-products/wishlish-products';
 function App() {
   const location=useLocation();
   const isIndexPage= location.pathname === '/';
@@ -50,6 +51,7 @@ function App() {
       <Route path='/' element={<Index/>}/>
       <Route path='/cart' element={<Cart/>}/>
       <Route path='/product' element={<ProductContainer/>}/>
+      <Route path='/wishlish-products' element={<WishlishProducts/>}/>
       <Route path='/product-details/:id' element={<ProductDetails/>}/>
       <Route path='/compare-products' element={<CompareProducts/>}/>
       <Route path='/checkout' element={<CheckOut/>}/>
