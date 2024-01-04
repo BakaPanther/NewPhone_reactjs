@@ -194,8 +194,7 @@ console.log("dien thoai", sanPham);
                                     <div className="product-detail-price col-8">{tongTien}</div>
                                 </div>
                                 <div className="button6">
-                                    <button onClick={handlAddCartChange} className="btn">Thêm vào giỏ hàng</button>
-                                    <a href="#" className="btn">Mua ngay</a>
+                                    <button onClick={handlAddCartChange} className="btn">Mua ngay</button>
                                 </div>
 
                             </div>

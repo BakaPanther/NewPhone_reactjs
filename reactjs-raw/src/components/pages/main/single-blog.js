@@ -4,13 +4,23 @@ import React, { useState, useEffect } from "react";
 import notifyInfor from "../../items/noti_infor";
 import notifyError from "../../items/noti_error";
 import notifySuccess from "../../items/noti_success";
+import ClipLoader from "react-spinners/ClipLoader";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter,Card,CardBody,CardTitle,CardSubtitle,CardText } from 'reactstrap';
 import { NavLink } from "react-router-dom";
 import { FaShoppingCart  } from "react-icons/fa";
 
 
 
+
 function SingleBlog(props) {
+    //loader
+    let [loading, setLoading] = useState(true);
+    let [color, setColor] = useState("#ffffff");
+    const override = {
+        display: "block",
+        margin: "0 auto",
+        borderColor: "red",
+    };
     const [user, setUser] = useState(JSON.parse(Cookies.get('user')));
     const [modal, setModal] = useState(false);
 
@@ -18,8 +28,8 @@ function SingleBlog(props) {
     const addToCart = (id_chi_tiet) =>{
         axios.post('http://127.0.0.1:8000/api/khach-hang/gio-hang-them-moi',{
             khach_hang_id : user.id,
-           chi_tiet_dien_thoai_id : id_chi_tiet,
-           so_luong : 1
+            chi_tiet_dien_thoai_id : id_chi_tiet,
+            so_luong : 1
         })
         .then((response) => {
             notifySuccess('Thêm vào giỏ hàng thành công');
@@ -40,9 +50,7 @@ function SingleBlog(props) {
         }
 
     };
-
-
-
+    
     const handleYes = () => {
         notifyInfor('Đang chuyển hướng đến đăng nhập');
         setTimeout(() => {
@@ -54,8 +62,17 @@ function SingleBlog(props) {
         setModal(!modal)
     };
 
+    useEffect(() => {
+        if (props.data !== null) {
+          setLoading(false);
+        }
+    }, [props.data]); // Chuyển props.data vào mảng dependencies để theo dõi sự thay đổi của nó
+      
+    console.log(" chi tiet ",props.data.chi_tiet_dien_thoai[0]);
     return (
-        <>        
+        <>
+        {(!loading) ? (
+        <div>       
         <Card style={{
             width: '20%',
             borderRadius: '10px',
@@ -66,9 +83,10 @@ function SingleBlog(props) {
             backgroundColor: '#fff', 
             color: '#333' 
         }}>
+            {props && props.data && props.data.hinh_anh && props.data.hinh_anh[0] && props.data.hinh_anh[0].duong_dan && (
             <img
                 alt="Sample"
-                src={`http://localhost:8000/` + props.data.hinh_anh[0].duong_dan}
+                src={`http://localhost:8000/${props.data.hinh_anh[0].duong_dan}`}alt="Hình ảnh"
                 style={{
                     width: '100%',
                     height: 'auto',
@@ -77,14 +95,18 @@ function SingleBlog(props) {
                     borderTopRightRadius: '10px'
                 }}
             />
+            )}
             <CardBody style={{ paddingBottom: '0' }}>
                 <CardTitle tag="h3">
                     <NavLink to={`/product-details/${props.data.id}`} href="#" style={{ textDecoration: 'none', color: '#333' }}>{props.data.ten}</NavLink>
                 </CardTitle>
                 <CardSubtitle className="mb-2 text-muted" tag="h4">
+                   {props && props.data && props.data.chi_tiet_dien_thoai[0] && (
                     <NavLink to={`/product-details/${props.data.id}`} style={{ textDecoration: 'none', color: '#333' }}>{props.data.chi_tiet_dien_thoai[0].gia_ban}</NavLink>
+                   )}
                 </CardSubtitle>
                 <div className="d-flex justify-content-between align-items-center mt-3">
+                {props && props.data && props.data.chi_tiet_dien_thoai[0] && (
                 <Button
                     onClick={() => handleAddToCart(props.data.chi_tiet_dien_thoai[0].id)}
                     style={{
@@ -98,6 +120,7 @@ function SingleBlog(props) {
                 >
                     <FaShoppingCart />
                 </Button>
+                  )}
                 <Button
                     style={{
                         backgroundColor: '#FFA500',
@@ -113,7 +136,6 @@ function SingleBlog(props) {
             </div>
             </CardBody>
         </Card>
-        {/* modal */}
         <Modal isOpen={modal} size="sm"  className="my-modal">
             <ModalBody style={{ backgroundColor: '#f8f9fa', color: '#333', padding: '20px', maxHeight: '100px', overflowY: 'auto' }}>
                 Đăng nhập rồi mới thêm vào được khách yêu owii!!!
@@ -123,6 +145,17 @@ function SingleBlog(props) {
                 <Button color="secondary" style={{ backgroundColor: '#6c757d', color: '#fff', borderRadius: '5px' }} onClick={handleNo}>Honggg</Button>
             </ModalFooter>
         </Modal>
+        </div>
+        ) : (
+            <ClipLoader
+            color={color}
+            loading={true}
+            size={150}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+            cssOverride={override}
+        />
+        )}
         </>
     )
 }

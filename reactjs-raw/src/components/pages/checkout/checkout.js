@@ -13,7 +13,6 @@ export function CheckOut() {
 						<div className="col-lg-8 col-12">
 							<div className="checkout-form">
 								<h2>Make Your Checkout Here</h2>
-								<p>Please register in order to checkout more quickly</p>
 								<CheckOutForm />
 							</div>
 						</div>

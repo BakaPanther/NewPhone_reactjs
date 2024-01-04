@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { InputOrder } from "./input-order";
 import { TotalAmount } from "./total-amount";
+import { CheckOutForm } from "../checkout/checkout-form";
+import { PaymentOptions } from "./pay-option";
 import axios from "axios";
 
 export function ShoppingCart(props) {
 	const [tongtien, setTongTien] = useState(0);
 	const [soluong, setSoLuong] = useState(0);
+	const [payment, setPayment] = useState(0);
 	// Tính tổng số lượng và tổng số tiền khi có sự thay đổi trong props.data
 	useEffect(() => {
 		let TongSoLuong = 0;
@@ -56,6 +59,7 @@ export function ShoppingCart(props) {
 	
 	return (
 		<>
+
 			<div className="shopping-cart section">
 				<div className="container">
 					<div className="row">
@@ -122,9 +126,31 @@ export function ShoppingCart(props) {
 							</table>
 						</div>
 					</div>
+					<CheckOutForm/>
+					<h2>Phương thức thanh toán</h2>
+						<ul style={{ listStyleType: 'none', padding: 0 }}>
+							<li style={{ marginBottom: '10px' }}>
+								<label style={{ display: 'inline-block', marginRight: '10px', fontWeight: 'bold' }}>
+									<input type="radio" name="tien_mat" onClick={() => { setPayment(1)}} />
+									Tiền mặt
+								</label>
+							</li>
+							<li style={{ marginBottom: '10px' }}>
+								<label style={{ display: 'inline-block', marginRight: '10px', fontWeight: 'bold' }}>
+									<input type="radio" name="payment" onClick={() => { setPayment(2)}}/>
+									Chuyển khoản ngân hàng
+								</label>
+							</li>
+							<li style={{ marginBottom: '10px' }}>
+								<label style={{ display: 'inline-block', marginRight: '10px', fontWeight: 'bold' }}>
+									<input type="radio" name="payment"onClick={()=> { setPayment(3)}} />
+									Momo
+								</label>
+							</li>
+						</ul>
 					<div className="row">
 						<div className="col-12">
-							<TotalAmount tongtien={tongtien} soluong={soluong} />
+							<TotalAmount tongtien={tongtien} soluong={soluong} payment={payment} />
 						</div>
 					</div>
 				</div>

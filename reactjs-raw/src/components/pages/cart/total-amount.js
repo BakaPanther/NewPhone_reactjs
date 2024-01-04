@@ -1,4 +1,27 @@
+import axios from "axios";
+import Cookies from "js-cookie";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+
 export function TotalAmount(props) {
+    const [user,setUser] = useState(JSON.parse(Cookies.get('user')));
+    const handlBuy = () => {
+        if(props.payment === 1)
+        {
+            axios.post('http://127.0.0.1:8000/api/phieu-xuat/them-moi', {
+                khach_hang_id : user.id,
+                tong_tien : props.tongtien
+            })
+            .then((response) => {
+                alert('đặt hàng thành công');
+                window.location.reload();
+            })
+            .catch((error) => {
+                // Xử lý lỗi nếu có
+                console.error('Lỗi khi xóa sản phẩm:', error);
+            });
+        }
+    }
     return (
         <>
             <div className="total-amount">
@@ -21,7 +44,7 @@ export function TotalAmount(props) {
                                 <li className="last">Tổng tiền<span>{props.tongtien}</span></li>
                             </ul>
                             <div className="button5">
-                                <a href="#" className="btn">Checkout</a>
+                                <button onClick={handlBuy} className="btn"> Mua ngay </button>
                                 <a href="#" className="btn">Continue shopping</a>
                             </div>
                         </div>

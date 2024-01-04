@@ -42,11 +42,12 @@ export function Index() {
 
     const lst_nha_san_xuat = nhaSanXuat.map((item, key) => {
         if (item.dienThoai && item.dienThoai.length > 0) {
-            const firstSixItems = item.dienThoai.slice(0, 6); // Lấy 6 phần tử đầu tiên
-            return <ShopBlog data={{ ...item, dienThoai: firstSixItems }} key={key} />
+          const firstSixItems = item.dienThoai.slice(0, 6); // Lấy 6 phần tử đầu tiên
+          return <ShopBlog data={{ ...item, dienThoai: firstSixItems }} key={key} />;
         }
-    });
-
+        // Trả về null hoặc một phần tử mặc định nếu item.dienThoai không tồn tại hoặc không có phần tử
+        return null; // hoặc có thể trả về một phần tử mặc định khác
+      });
     return (
         <>
             {(!loading) ? (

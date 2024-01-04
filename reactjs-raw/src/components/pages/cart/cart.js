@@ -1,11 +1,13 @@
 import Footer from "../../footer";
 import { ShoppingCart } from "./shopping-cart";
 import { BreadCrumbs } from "../breadcrumbs";
+import { CheckOutForm } from "../checkout/checkout-form";
 import React, { useState, useEffect } from "react";
 import Cookies from 'js-cookie';
 import axios from "axios";
 import ClipLoader from "react-spinners/ClipLoader";
 import Header from "../../header";
+import { Container } from "reactstrap";
 export function Cart() {
   //loader
   let [loading, setLoading] = useState(true);
@@ -35,15 +37,17 @@ export function Cart() {
         });
     }, 1000);
   },[khach_hang_id]);
-  // console.log(setCart);
   return (
     <>
           {(!loading) ? (
             <div>
               <Header />
               <BreadCrumbs />
+              <Container>
               <ShoppingCart data={cart} setData={setCart}/>
+              </Container>
               <Footer />
+              
             </div>
                 ) : (
                   <ClipLoader
