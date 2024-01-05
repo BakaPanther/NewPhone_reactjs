@@ -110,7 +110,7 @@ export function ProductContainer() {
 		}
 	  };
 	  
-  
+  console.log(dsDienThoai);
 	return (
 		<>
 			{!loading1 && !loading2 && !loading3 ? (
@@ -232,7 +232,7 @@ export function ProductContainer() {
 														{dsDienThoai.map(function (item, key) {
 															return (
 																<div className="col-lg-4 col-md-6 col-12">
-																	<SingleProduct data={item} />
+ 																{item.so_luong > 0 && <SingleProduct data={item} />}
 																</div>
 															)
 														})}
