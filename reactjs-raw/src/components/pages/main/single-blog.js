@@ -72,9 +72,9 @@ function SingleBlog(props) {
     return (
         <>
         {(!loading) ? (
-        <div>       
+        <div className="col-4">       
         <Card style={{
-            width: '20%',
+            width: '100%',
             borderRadius: '10px',
             boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
             transition: '0.3s',

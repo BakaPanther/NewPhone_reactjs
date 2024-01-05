@@ -82,10 +82,10 @@ const handleNo = () => {
         <div className="product-content">
 		{props.data && props.data.dien_thoai_id && (
               <>
-          <h3><NavLink to='/product-details'>{props.data.dien_thoai_id.ten}</NavLink></h3>
+          <h3><NavLink to='/product-details'>{props.data.dien_thoai_id.ten} {props.data.mau_sac_id.ten}</NavLink></h3>
           <div className="product-price">
-            <span className="old">{props.data.mau_sac_id.ten}</span>
-            <span>{props.data.gia_ban}</span>
+            <span className="old"> {} </span>
+            <span>Giá: {props.data.gia_ban}</span>
           </div>
 		  </>
             )}
