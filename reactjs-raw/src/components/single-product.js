@@ -54,7 +54,7 @@ const handleNo = () => {
     
       <div className="single-product">
         <div className="product-img">
-        {props.data && props.data.dien_thoai_id && (
+        {props.data && props.data.dien_thoai_id && props.data.dien_thoai_id.hinh_anh[0]  && (
           <NavLink to={`/product-details/${props.data.dien_thoai_id.id}`}>
             <>
               <img className="default-img" src={`http://localhost:8000/${props.data.dien_thoai_id.hinh_anh[0].duong_dan}`} alt="#" />

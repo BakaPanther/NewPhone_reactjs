@@ -131,7 +131,7 @@ export function ShoppingCart(props) {
 						<ul style={{ listStyleType: 'none', padding: 0 }}>
 							<li style={{ marginBottom: '10px' }}>
 								<label style={{ display: 'inline-block', marginRight: '10px', fontWeight: 'bold' }}>
-									<input type="radio" name="tien_mat" onClick={() => { setPayment(1)}} />
+									<input type="radio" name="payment" onClick={() => { setPayment(1)}} />
 									Tiền mặt
 								</label>
 							</li>

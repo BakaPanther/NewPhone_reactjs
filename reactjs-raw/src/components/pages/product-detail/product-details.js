@@ -55,7 +55,8 @@ export default function ProductDetails() {
 
     //tăng sl mua
     const increaseQuantity = () => {
-        setQuantity(quantity + 1);
+        if(quantity < sanPham.so_luong)   
+            setQuantity(quantity + 1);
     };
     //luu sp đã chọn
     const handlSanPhamChange = (item) => {

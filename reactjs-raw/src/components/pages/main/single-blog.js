@@ -86,7 +86,7 @@ function SingleBlog(props) {
             {props && props.data && props.data.hinh_anh && props.data.hinh_anh[0] && props.data.hinh_anh[0].duong_dan && (
             <img
                 alt="Sample"
-                src={`http://localhost:8000/${props.data.hinh_anh[0].duong_dan}`}alt="Hình ảnh"
+                src={`http://localhost:8000/${props.data.hinh_anh[0].duong_dan}`}
                 style={{
                     width: '100%',
                     height: 'auto',
