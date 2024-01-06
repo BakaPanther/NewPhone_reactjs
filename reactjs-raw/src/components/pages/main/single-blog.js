@@ -72,9 +72,9 @@ function SingleBlog(props) {
     return (
         <>
         {(!loading) ? (
-        <div>       
+        <div className="col-4">       
         <Card style={{
-            width: '20%',
+            width: '100%',
             borderRadius: '10px',
             boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
             transition: '0.3s',
@@ -86,7 +86,7 @@ function SingleBlog(props) {
             {props && props.data && props.data.hinh_anh && props.data.hinh_anh[0] && props.data.hinh_anh[0].duong_dan && (
             <img
                 alt="Sample"
-                src={`http://localhost:8000/${props.data.hinh_anh[0].duong_dan}`}alt="Hình ảnh"
+                src={`http://localhost:8000/${props.data.hinh_anh[0].duong_dan}`} alt="Hình ảnh"
                 style={{
                     width: '100%',
                     height: 'auto',

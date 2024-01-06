@@ -58,6 +58,7 @@ export function TotalAmount(props) {
                 tong_tien : props.tongtien
             })
             .then((response) => {
+                console.log(response);
                 window.location.href = response.data.data;
             })
             .catch((error) => {
