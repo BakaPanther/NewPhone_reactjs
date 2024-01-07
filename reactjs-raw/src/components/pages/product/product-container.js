@@ -9,6 +9,7 @@ import { Manufacturers } from "./manufactures";
 import { RecentPost } from "./recent-post";
 import { ShopByPrice } from "./shop-by-price";
 import { ShopTop } from "./shop-top";
+import ReactPaginate from 'react-paginate';
 
 export function ProductContainer() {
 
@@ -21,11 +22,22 @@ export function ProductContainer() {
 		display: "block",
 		margin: "0 auto",
 		borderColor: "red",
-	};
+	};//loadding
 
 	const [dsDienThoai, setDsDienThoai] = useState({});
 	const [dsNhaSanXuat, setDsNhaSanXuat] = useState({});
 	const [dsDungLuong, setDsDungLuong] = useState({});
+
+	const itemsPerPage = 9; // Số sản phẩm trên mỗi trang
+  	const [currentPage, setCurrentPage] = useState(0);
+	const handlePageChange = ({ selected }) => {
+	setCurrentPage(selected);
+	};
+	const indexOfLastItem = (currentPage + 1) * itemsPerPage;
+  	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+	  const currentItems = Array.isArray(dsDienThoai)
+	  ? dsDienThoai.slice(indexOfFirstItem, indexOfLastItem)
+	  : [];
 
 	const [filters, setfilters] = useState({
 		filters: {
@@ -110,7 +122,7 @@ export function ProductContainer() {
 		}
 	  };
 	  
-  
+  console.log(dsDienThoai);
 	return (
 		<>
 			{!loading1 && !loading2 && !loading3 ? (
@@ -210,15 +222,15 @@ export function ProductContainer() {
 																<li>
 																	<label
 																		onClick={() => addFilter('gia_ban', { gia_dau: 10000000, gia_cuoi: 20000000 })} style={{ textDecoration: 'none' }}
-																		className="checkbox-inline" for="4">
-																		<input name="news" id="4" type="radio" />10 triệu VND - 20 triệu VND<span className="count"></span>
+																		className="checkbox-inline" for="5">
+																		<input name="news" id="5" type="radio" />10 triệu VND - 20 triệu VND<span className="count"></span>
 																	</label>
 																</li>
 																<li>
 																	<label
 																		onClick={() => addFilter('gia_ban', { gia_dau: 20000000, gia_cuoi: 100000000 })} style={{ textDecoration: 'none' }}
-																		className="checkbox-inline" for="5">
-																		<input name="news" id="5" type="radio" />20 triệu VND trở lên<span className="count"></span>
+																		className="checkbox-inline" for="6">
+																		<input name="news" id="6" type="radio" />20 triệu VND trở lên<span className="count"></span>
 																	</label>
 																</li>
 															</ul>
@@ -229,14 +241,23 @@ export function ProductContainer() {
 												</div>
 												<div className="col-lg-9 col-md-8 col-12">
 													<div className="row">
-														{dsDienThoai.map(function (item, key) {
-															return (
-																<div className="col-lg-4 col-md-6 col-12">
-																	<SingleProduct data={item} />
-																</div>
-															)
-														})}
+															{currentItems.map(function (item, key) {
+																return (
+																	<div className="col-lg-4 col-md-6 col-12">
+																	{item.so_luong > 0 && <SingleProduct data={item} />}
+																	</div>
+																)
+															})}
 													</div>
+													{/* Hiển thị phân trang */}
+													<ReactPaginate
+														pageCount={Math.ceil(dsDienThoai.length / itemsPerPage)}
+														pageRangeDisplayed={5} // Số lượng trang được hiển thị
+														marginPagesDisplayed={2} // Số lượng trang ở hai bên trang hiện tại được hiển thị
+														onPageChange={handlePageChange}
+														containerClassName={'pagination'}
+														activeClassName={'active'}
+													/>
 												</div>
 											</div>
 										</div>

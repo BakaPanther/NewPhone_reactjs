@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useLocation  } from 'react-router-dom';
 import notifySuccess from "../../items/noti_success";
+import { Redirect } from 'react-router-dom';
+import notifyError from "../../items/noti_error";
 
 export function TotalAmount(props) {
     const location = useLocation();
@@ -11,7 +13,7 @@ export function TotalAmount(props) {
         // Lấy thông tin từ URL
         const searchParams = new URLSearchParams(location.search);
         const vnp_ResponseCode = searchParams.get('vnp_ResponseCode');
-        const vnp_TransactionNo = searchParams.get('vnp_TransactionNo');
+        const vnp_Amount = searchParams.get('vnp_Amount');
 
     
         // Xử lý logic dựa trên thông tin từ URL
@@ -19,7 +21,8 @@ export function TotalAmount(props) {
             notifySuccess('Thanh toán thành công, đơn hàng đặt thành công')
             axios.post('http://127.0.0.1:8000/api/phieu-xuat/them-moi', {
                 khach_hang_id : user.id,
-                tong_tien : props.tongtien
+                tong_tien : vnp_Amount,
+                trang_thai_thanh_toan : 1
             })
             .then((response) => {
                 setTimeout(() => {
@@ -30,8 +33,54 @@ export function TotalAmount(props) {
                 // Xử lý lỗi nếu có
                 console.error('Lỗi khi xóa sản phẩm:', error);
             });
-        } else {
-          // Xử lý trường hợp giao dịch không thành công
+        }
+        else if(vnp_ResponseCode === '09'){
+            notifySuccess('Thẻ/Tài khoản của khách hàng chưa đăng ký dịch vụ InternetBanking tại ngân hàng.')
+            setTimeout(() => {
+                window.location.href = '/cart'; 
+              }, 3000);
+        }
+        else if(vnp_ResponseCode === '11'){
+            notifySuccess('Đã hết hạn chờ thanh toán. Xin quý khách vui lòng thực hiện lại giao dịch.')
+            setTimeout(() => {
+                window.location.href = '/cart'; 
+              }, 3000);
+        }
+        else if(vnp_ResponseCode === '10'){
+            notifySuccess('Khách hàng xác thực thông tin thẻ/tài khoản không đúng quá 3 lần')
+            setTimeout(() => {
+                window.location.href = '/cart'; 
+              }, 3000);
+        }
+        else if(vnp_ResponseCode === '13'){
+            notifySuccess('Giao dịch không thành công do Quý khách nhập sai mật khẩu xác thực giao dịch (OTP). Xin quý khách vui lòng thực hiện lại giao dịch.')
+            setTimeout(() => {
+                window.location.href = '/cart'; 
+              }, 3000);
+        }
+        else if(vnp_ResponseCode === '24'){
+            notifySuccess('Khách hàng hủy giao dịch')
+            setTimeout(() => {
+                window.location.href = '/cart'; 
+              }, 3000);
+        }
+        else if(vnp_ResponseCode === '51'){
+            notifySuccess('Tài khoản của quý khách không đủ số dư để thực hiện giao dịch.')
+            setTimeout(() => {
+                window.location.href = '/cart'; 
+              }, 3000);
+        }
+        else if(vnp_ResponseCode === '51'){
+            notifySuccess('Tài khoản của quý khách không đủ số dư để thực hiện giao dịch.')
+            setTimeout(() => {
+                window.location.href = '/cart'; 
+              }, 3000);
+        }
+        else{
+            // notifySuccess('Giao dịch thất bại.')
+            // setTimeout(() => {
+            //     window.location.href = '/cart'; 
+            //   }, 3000);
         }
       }, [location]);
     const [user,setUser] = useState(JSON.parse(Cookies.get('user')));
@@ -51,10 +100,9 @@ export function TotalAmount(props) {
                 console.error('Lỗi khi xóa sản phẩm:', error);
             });
         }
-        if(props.payment === 2)
+        else if(props.payment === 2)
         {
             axios.post('http://127.0.0.1:8000/api/thanh-toan-vnpay', {
-                khach_hang_id : user.id,
                 tong_tien : props.tongtien
             })
             .then((response) => {
@@ -66,7 +114,11 @@ export function TotalAmount(props) {
                 console.error('Lỗi khi xóa sản phẩm:', error);
             });
         }
+        else{
+            notifyError('Vui lòng chọn phương thức thanh toán');
+        }
     }
+    console.log(props.tongtien);
     return (
         <>
             <div className="total-amount">

@@ -33,6 +33,7 @@ export function Index() {
                 // Lưu dữ liệu nhận được vào state
                 setNhaSanXuat(response.data.data);
                 setLoading(false);
+                // console.log(response);
             })
             .catch(error => {
                 // Hiện thông báo nếu có lỗi xảy ra

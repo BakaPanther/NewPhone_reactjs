@@ -10,6 +10,7 @@ function SliderArea() {
             .then(response => {
                 // Lưu dữ liệu nhận được vào state
                 setSlider(response.data);
+                console.log(response);
             })
             .catch(error => {
                 // Hiện thông báo nếu có lỗi xảy ra
