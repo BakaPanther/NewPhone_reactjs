@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Footer from "../../footer";
 import EditIcon from '../../../assets/images/edit-icon.png'
 import SingleBoughtProduct from './single-bought-product';
@@ -14,7 +14,7 @@ export default function MyAccount() {
         so_dien_thoai: khach_hang.so_dien_thoai,
         dia_chi: khach_hang.dia_chi
     })
-
+    const [don_hang, setDonHang] = useState({});
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setThong_tin_khach_hang({ ...thong_tin_khach_hang, [name]: value });
@@ -57,8 +57,27 @@ export default function MyAccount() {
             });
     };
 
+    useEffect(() => {
+        axios.get('http://127.0.0.1:8000/api/khach-hang/don-hang', {
+            params: {
+                khach_hang_id: khach_hang.id
+            },
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(response => {
+                // Xử lý dữ liệu response ở đây
+                console.log(response.data);
+                setDonHang(response.data.data);
+            })
+            .catch(error => {
+                // Xử lý lỗi ở đây
+                console.error(error);
+            });
+    }, [token]);
 
-    
+
     return (
         <>
             <Header />
@@ -109,12 +128,7 @@ export default function MyAccount() {
                         <div className="menu-right col-6">
                             <h6>ĐƠN HÀNG ĐÃ MUA </h6>
                             <div className="bought-products">
-                                <SingleBoughtProduct />
-                                <SingleBoughtProduct />
-                                <SingleBoughtProduct />
-                                <SingleBoughtProduct />
-                                <SingleBoughtProduct />
-                                <SingleBoughtProduct />
+                                <SingleBoughtProduct data={don_hang}/>
                             </div>
                         </div>
                     </div>

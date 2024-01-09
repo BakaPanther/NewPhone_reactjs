@@ -29,15 +29,15 @@ export function ProductContainer() {
 	const [dsDungLuong, setDsDungLuong] = useState({});
 
 	const itemsPerPage = 9; // Số sản phẩm trên mỗi trang
-  	const [currentPage, setCurrentPage] = useState(0);
+	const [currentPage, setCurrentPage] = useState(0);
 	const handlePageChange = ({ selected }) => {
-	setCurrentPage(selected);
+		setCurrentPage(selected);
 	};
 	const indexOfLastItem = (currentPage + 1) * itemsPerPage;
-  	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-	  const currentItems = Array.isArray(dsDienThoai)
-	  ? dsDienThoai.slice(indexOfFirstItem, indexOfLastItem)
-	  : [];
+	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+	const currentItems = Array.isArray(dsDienThoai)
+		? dsDienThoai.slice(indexOfFirstItem, indexOfLastItem)
+		: [];
 
 	const [filters, setfilters] = useState({
 		filters: {
@@ -62,7 +62,7 @@ export function ProductContainer() {
 			.catch(error => {
 				// Hiện thông báo nếu có lỗi xảy ra
 				console.error("Lỗi: ", error);
-				
+
 			});
 	}, [filters]);
 
@@ -95,34 +95,34 @@ export function ProductContainer() {
 	// hàm add filters mỗi khi nhấn vào bộ lọc
 	const addFilter = (filterType, filterValue) => {
 		if (filterType === 'gia_ban') {
-		  setfilters(prevState => ({
-			...prevState,
-			filters: {
-			  ...prevState.filters,
-			  [filterType]: filterValue
-			}
-		  }));
+			setfilters(prevState => ({
+				...prevState,
+				filters: {
+					...prevState.filters,
+					[filterType]: filterValue
+				}
+			}));
 		} else {
-		  const updatedFilters = new Set(filters.filters[filterType].map(JSON.stringify));
-		  const isFilterExist = updatedFilters.has(JSON.stringify(filterValue));
-	  
-		  if (!isFilterExist) {
-			updatedFilters.add(JSON.stringify(filterValue));
-		  } else {
-			updatedFilters.delete(JSON.stringify(filterValue));
-		  }
-	  
-		  setfilters(prevState => ({
-			...prevState,
-			filters: {
-			  ...prevState.filters,
-			  [filterType]: Array.from(updatedFilters).map(JSON.parse)
+			const updatedFilters = new Set(filters.filters[filterType].map(JSON.stringify));
+			const isFilterExist = updatedFilters.has(JSON.stringify(filterValue));
+
+			if (!isFilterExist) {
+				updatedFilters.add(JSON.stringify(filterValue));
+			} else {
+				updatedFilters.delete(JSON.stringify(filterValue));
 			}
-		  }));
+
+			setfilters(prevState => ({
+				...prevState,
+				filters: {
+					...prevState.filters,
+					[filterType]: Array.from(updatedFilters).map(JSON.parse)
+				}
+			}));
 		}
-	  };
-	  
-  console.log(dsDienThoai);
+	};
+
+	console.log(dsDienThoai);
 	return (
 		<>
 			{!loading1 && !loading2 && !loading3 ? (
@@ -151,41 +151,41 @@ export function ProductContainer() {
 														<div className="single-widget category">
 															<h3 className="title">Thương hiệu</h3>
 															<ul className="categor-list">
-															{dsNhaSanXuat && dsNhaSanXuat.map(function (item, key) {
-																const isFilterExist = filters.filters.nha_san_xuat.some(filter => filter.nha_san_xuat_id === item.id);
-																return (
-																	<li key={key}>
-																	<label style={{ textDecoration: 'none', display: 'block' }}>
-																		<input
-																		type="checkbox"
-																		checked={isFilterExist}
-																		onChange={() => addFilter('nha_san_xuat', { nha_san_xuat_id: item.id })}
-																		/>
-																		{item.ten}
-																	</label>
-																	</li>
-																);
-															})}
+																{dsNhaSanXuat && dsNhaSanXuat.map(function (item, key) {
+																	const isFilterExist = filters.filters.nha_san_xuat.some(filter => filter.nha_san_xuat_id === item.id);
+																	return (
+																		<li key={key}>
+																			<label style={{ textDecoration: 'none', display: 'block' }}>
+																				<input
+																					type="checkbox"
+																					checked={isFilterExist}
+																					onChange={() => addFilter('nha_san_xuat', { nha_san_xuat_id: item.id })}
+																				/>
+																				{item.ten}
+																			</label>
+																		</li>
+																	);
+																})}
 															</ul>
 														</div>
 														<div className="single-widget category">
 															<h3 className="title">Dung lượng</h3>
 															<ul className="categor-list">
-															{dsDungLuong && dsDungLuong.map(function (item, key) {
-																const isFilterExist = filters.filters.dung_luong.some(filter => filter.dung_luong_id === item.id);
-																return (
-																	<li key={key}>
-																	<label style={{ textDecoration: 'none', display: 'block' }}>
-																		<input
-																		type="checkbox"
-																		checked={isFilterExist}
-																		onChange={() => addFilter('dung_luong', { dung_luong_id: item.id })}
-																		/>
-																		 {item.ten}
-																	</label>
-																	</li>
-																);
-															})}
+																{dsDungLuong && dsDungLuong.map(function (item, key) {
+																	const isFilterExist = filters.filters.dung_luong.some(filter => filter.dung_luong_id === item.id);
+																	return (
+																		<li key={key}>
+																			<label style={{ textDecoration: 'none', display: 'block' }}>
+																				<input
+																					type="checkbox"
+																					checked={isFilterExist}
+																					onChange={() => addFilter('dung_luong', { dung_luong_id: item.id })}
+																				/>
+																				{item.ten}
+																			</label>
+																		</li>
+																	);
+																})}
 															</ul>
 														</div>
 														<div className="single-widget range">
@@ -241,22 +241,23 @@ export function ProductContainer() {
 												</div>
 												<div className="col-lg-9 col-md-8 col-12">
 													<div className="row">
-															{currentItems.map(function (item, key) {
-																return (
-																	<div className="col-lg-4 col-md-6 col-12">
+														{currentItems.map(function (item, key) {
+															return (
+																<div className="col-lg-4 col-md-6 col-12">
 																	{item.so_luong > 0 && <SingleProduct data={item} />}
-																	</div>
-																)
-															})}
+																</div>
+															)
+														})}
 													</div>
 													{/* Hiển thị phân trang */}
 													<ReactPaginate
 														pageCount={Math.ceil(dsDienThoai.length / itemsPerPage)}
-														pageRangeDisplayed={5} // Số lượng trang được hiển thị
+														pageRangeDisplayed={3} // Số lượng trang được hiển thị
 														marginPagesDisplayed={2} // Số lượng trang ở hai bên trang hiện tại được hiển thị
 														onPageChange={handlePageChange}
 														containerClassName={'pagination'}
 														activeClassName={'active'}
+													
 													/>
 												</div>
 											</div>
