@@ -36,9 +36,14 @@ export default function SingleBoughtProduct(props) {
                                     })}
                                 </div>
 
-                                <div className='bought-product-price col-6'>
+                                <div className='bought-product-id col-6'>
                                     <p>Tổng tiền : {item.tong_tien}</p>
+
                                 </div>
+                                <div className='bought-product-product-id col-12'>
+                                    <h6>Trạng thái thanh toán {item.trang_thai_thanh_toan == 1 ? <p>Đã thanh toán</p> : <p>Chưa thanh toán</p>}</h6>
+                                </div>
+
                             </div>
                         </div>
                     );
