@@ -1,6 +1,7 @@
 export function PaymentOptions() {
     return (
         <>
+        <div className="col-6">
         <h2>Phương thức thanh toán</h2>
             <ul style={{ listStyleType: 'none', padding: 0 }}>
                 <li style={{ marginBottom: '10px' }}>
@@ -22,6 +23,7 @@ export function PaymentOptions() {
                     </label>
                 </li>
             </ul>
+            </div>
         </>
     )
 }

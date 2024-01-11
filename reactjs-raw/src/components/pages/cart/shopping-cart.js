@@ -114,7 +114,7 @@ export function ShoppingCart(props) {
 													<span>{item.chi_tiet_dien_thoai_id.gia_ban}</span>
 												</td>
 												<td className="action" data-title="Remove">
-													<button onClick={() => handleRemove(item.chi_tiet_dien_thoai_id.id, item.khach_hang_id.id)}><i className="ti-trash remove-icon"></i></button>
+													<a href="#" onClick={() => handleRemove(item.chi_tiet_dien_thoai_id.id, item.khach_hang_id.id)}><i className="ti-trash remove-icon"></i></a>
 												</td>
 											</tr>
 
@@ -127,8 +127,9 @@ export function ShoppingCart(props) {
 						</div>
 					</div>
 					<CheckOutForm/>
-					<h2>Phương thức thanh toán</h2>
-						<ul style={{ listStyleType: 'none', padding: 0 }}>
+					<PaymentOptions/>
+
+						{/* <ul style={{ listStyleType: 'none', padding: 0 }}>
 							<li style={{ marginBottom: '10px' }}>
 								<label style={{ display: 'inline-block', marginRight: '10px', fontWeight: 'bold' }}>
 									<input type="radio" name="payment" onClick={() => { setPayment(1)}} />
@@ -147,7 +148,7 @@ export function ShoppingCart(props) {
 									Momo
 								</label>
 							</li>
-						</ul>
+						</ul> */}
 					<div className="row">
 						<div className="col-12">
 							<TotalAmount tongtien={tongtien} soluong={soluong} payment={payment} />
