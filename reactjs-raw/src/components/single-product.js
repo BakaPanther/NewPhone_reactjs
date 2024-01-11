@@ -37,6 +37,31 @@ const handleAddToCart = (id) => {
 
 };
 
+const addToWishList = (id_chi_tiet) =>{
+  axios.post('http://127.0.0.1:8000/api/khach-hang/yeu-thich-them-moi',{
+    khach_hang_id : user.id,
+    chi_tiet_dien_thoai_id : id_chi_tiet,
+  })
+  .then((response) => {
+      notifySuccess('Thêm vào yêu thích thành công');
+  })
+  .catch((error) => {
+  
+  });
+}
+
+const handleAddToWishList = (id) => {
+  if(Cookies.get('accessToken') === undefined)
+  {
+      setModal(!modal)
+  }
+  else
+  {
+      addToWishList(id);
+  }
+
+};
+
 
 
 const handleYes = () => {
@@ -68,14 +93,14 @@ const handleNo = () => {
             <div className="product-action">
             {props.data && props.data.dien_thoai_id && (
               <>
-              <NavLink data-toggle="modal"   to={`/product-details/${props.data.dien_thoai_id.id}`} data-target="#exampleModal" title="Quick View" href="#"><i className="ti-eye"></i><span>Quick Shop</span></NavLink>
-              <a title="Wishlist" onClick={() => handleAddToCart(props.data.id)}><i className="ti-heart"></i><span>Add to Cart</span></a>
+              <NavLink data-toggle="modal"   to={`/product-details/${props.data.dien_thoai_id.id}`} data-target="#exampleModal" href="#"><i className="ti-eye"></i><span>Quick view</span></NavLink>
+              <a onClick={() => handleAddToWishList(props.data.id)}><i className="ti-heart"></i><span>Add to Wishlish</span></a>
               </>
             )}
             
             </div>
             <div className="product-action-2">
-              <a title="Add to cart" href="#">Add to cart</a>
+              <a title="Add to cart"  onClick={() => handleAddToCart(props.data.id)}>Add to cart</a>
             </div>
           </div>
         </div>

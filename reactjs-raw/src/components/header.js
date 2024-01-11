@@ -125,7 +125,7 @@ const handleNo = () => {
                 <div className="right-bar">
 
                   <div className="sinlge-bar">
-                    <a href="#" className="single-icon"><i className="fa fa-heart-o" aria-hidden="true"></i></a>
+                    <NavLink to={'/wishlist-products'} className="single-icon"><i className="fa fa-heart-o" aria-hidden="true"></i></NavLink>
                   </div>
                   <div className="sinlge-bar shopping">
                     <a href="#" className="single-icon"><i className="ti-bag"></i> <span className="total-count">2</span>
