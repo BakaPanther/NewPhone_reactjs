@@ -201,7 +201,7 @@ export default function ProductDetails() {
                                 <div className="button6">
                                     <button onClick={handlAddCartChange} className="btn">Mua ngay</button>
                                 </div>
-
+                                <CommentsArea dienThoaiId={id} />
                             </div>
 
                             <Container >
@@ -219,7 +219,7 @@ export default function ProductDetails() {
                                         xs="6"
 
                                     >
-                                        <CommentsArea dienThoaiId={id} />
+                                        
 
                                         <div dangerouslySetInnerHTML={{ __html: dienThoai.mo_ta }} />
                                     </Col>
