@@ -15,6 +15,7 @@ import { Container, Row, Col } from "reactstrap";
 import ClipLoader from "react-spinners/ClipLoader";
 import Header from "../../header";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
+import Comment from "./comment";
 export default function ProductDetails() {
 
     let [loading1, setLoading1] = useState(true);
@@ -55,7 +56,7 @@ export default function ProductDetails() {
 
     //tăng sl mua
     const increaseQuantity = () => {
-        if(quantity < sanPham.so_luong)   
+        if (quantity < sanPham.so_luong)
             setQuantity(quantity + 1);
     };
     //luu sp đã chọn
@@ -69,31 +70,31 @@ export default function ProductDetails() {
         setTongTien(quantity * (sanPham.gia_ban || 0));
     }, [quantity, sanPham]);
 
-   
+
     useEffect(() => {
         const fetchData = async () => {
-          try {
-            const responseProduct = await axios.get(`http://127.0.0.1:8000/api/dien-thoai-chi-tiet/${id}`);
-            setDienThoai(responseProduct.data.data);
-            setLoading1(false);
-      
-            const responseSpec = await axios.get(`http://127.0.0.1:8000/api/thong-so/${id}`);
-            setThongSo(responseSpec.data.data);
-            setLoading2(false);
-          } catch (error) {
-            // Xử lý lỗi
-            console.error("Có lỗi xảy ra: ", error);
-      
-            // Kiểm tra nếu lỗi là 429 thì reload trang
-            if (error.response && error.response.status === 429) {
-              window.location.reload();
+            try {
+                const responseProduct = await axios.get(`http://127.0.0.1:8000/api/dien-thoai-chi-tiet/${id}`);
+                setDienThoai(responseProduct.data.data);
+                setLoading1(false);
+
+                const responseSpec = await axios.get(`http://127.0.0.1:8000/api/thong-so/${id}`);
+                setThongSo(responseSpec.data.data);
+                setLoading2(false);
+            } catch (error) {
+                // Xử lý lỗi
+                console.error("Có lỗi xảy ra: ", error);
+
+                // Kiểm tra nếu lỗi là 429 thì reload trang
+                if (error.response && error.response.status === 429) {
+                    window.location.reload();
+                }
             }
-          }
         };
-      
+
         fetchData();
-      }, []); // Sử dụng 'id' trong dependency array để theo dõi sự thay đổi của id và fetch dữ liệu mới khi id thay đổi
-      
+    }, []); // Sử dụng 'id' trong dependency array để theo dõi sự thay đổi của id và fetch dữ liệu mới khi id thay đổi
+
 
 
     const handlAddCartChange = () => {
@@ -131,11 +132,14 @@ export default function ProductDetails() {
     const handleNo = () => {
         setModal(!modal)
     };
-    console.log(sanPham)
-console.log("dien thoai", sanPham);
+    // console.log(sanPham)
+    // console.log("dien thoai", sanPham);
+
+    
+
     return (
         <>
-        
+
             <Header />
             {(!loading1 && !loading2) ? (
                 <div>
@@ -150,25 +154,25 @@ console.log("dien thoai", sanPham);
                                 </div>
                             </div>
                             <div className="col-8">
-                            <h1>
-                            {sanPham ? (
-                                <>
-                                {dienThoai.ten} {  }
-                                {sanPham.mau_sac_id && sanPham.mau_sac_id.ten && (
-                                    <>
-                                    {sanPham.mau_sac_id.ten} {  }
-                                    </>
-                                )}
-                                {sanPham.dung_luong_id && sanPham.dung_luong_id.ten && (
-                                    <>
-                                    {sanPham.dung_luong_id.ten} 
-                                    </>
-                                )}
-                                </>
-                            ) : (
-                                <>{dienThoai.ten}</>
-                            )}
-                            </h1>
+                                <h1>
+                                    {sanPham ? (
+                                        <>
+                                            {dienThoai.ten} { }
+                                            {sanPham.mau_sac_id && sanPham.mau_sac_id.ten && (
+                                                <>
+                                                    {sanPham.mau_sac_id.ten} { }
+                                                </>
+                                            )}
+                                            {sanPham.dung_luong_id && sanPham.dung_luong_id.ten && (
+                                                <>
+                                                    {sanPham.dung_luong_id.ten}
+                                                </>
+                                            )}
+                                        </>
+                                    ) : (
+                                        <>{dienThoai.ten}</>
+                                    )}
+                                </h1>
                                 <ul className="product-capacity">
                                     {
                                         dienThoai &&
@@ -213,16 +217,21 @@ console.log("dien thoai", sanPham);
                                         className="bg-light border"
                                         sm="8"
                                         xs="6"
+
                                     >
+                                        <CommentsArea dienThoaiId={id} />
+
                                         <div dangerouslySetInnerHTML={{ __html: dienThoai.mo_ta }} />
                                     </Col>
                                 </Row>
 
                             </Container>
                             <SimilarProducts dien_thoai_id={dienThoai.id} nha_san_xuat_id={dienThoai.nha_san_xuat.id} />
-                            <CommentsArea />
+                            <Comment dienThoaiId={id}/>
                         </div>
+
                     </div>
+
                     <Footer />
                 </div>
             ) : (
