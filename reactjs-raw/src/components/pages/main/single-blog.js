@@ -74,7 +74,7 @@ function SingleBlog(props) {
         {(!loading) ? (
         <div className="col-4">       
         <Card style={{
-            width: '100%',
+            width: '75%',
             borderRadius: '10px',
             boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
             transition: '0.3s',
@@ -105,7 +105,25 @@ function SingleBlog(props) {
                     <NavLink to={`/product-details/${props.data.id}`} style={{ textDecoration: 'none', color: '#333' }}>{props.data.chi_tiet_dien_thoai[0].gia_ban}</NavLink>
                    )}
                 </CardSubtitle>
-                <div className="d-flex justify-content-between align-items-center mt-3">
+                <div className="action-position-button" >
+                <Button
+                  style={{
+                    backgroundColor: '#FFA500',
+                    color: '#fff',
+                    transition: '0.3s',
+                    border: '1px solid #FFA500',
+                    right: '105px',
+                }}
+                className="btnHoverEffect">So sánh</Button>
+                <Button
+                  style={{
+                    backgroundColor: '#FFA500',
+                    color: '#fff',
+                    transition: '0.3s',
+                    border: '1px solid #FFA500',
+                }}
+                className="btnHoverEffect"><i className="ti-heart"></i></Button>
+                
                 {props && props.data && props.data.chi_tiet_dien_thoai[0] && (
                 <Button
                     onClick={() => handleAddToCart(props.data.chi_tiet_dien_thoai[0].id)}
@@ -114,25 +132,13 @@ function SingleBlog(props) {
                         color: '#fff',
                         transition: '0.3s',
                         border: '1px solid #FFA500',
-                        marginLeft: '48px'
                     }}
                     className="btnHoverEffect"
                 >
                     <FaShoppingCart />
                 </Button>
+                
                   )}
-                <Button
-                    style={{
-                        backgroundColor: '#FFA500',
-                        color: '#fff',
-                        transition: '0.3s',
-                        border: '1px solid #FFA500',
-                        marginLeft: '10px' 
-                    }}
-                    className="btnHoverEffect"
-                >
-                    Mua ngay
-                </Button>
             </div>
             </CardBody>
         </Card>

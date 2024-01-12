@@ -45,7 +45,6 @@ function ShopHomeList(){
 			</div>
 		</div>
 	</section>
-
     </>
     )
 }
