@@ -140,9 +140,6 @@ export function ProductContainer() {
 									</div>
 								</div>
 								<div className="col-lg-12 col-md-12 col-12">
-									<div className="row">
-										<ShopTop />
-									</div>
 									<section className="product-area shop-sidebar shop section">
 										<div className="container">
 											<div className="row">
@@ -239,8 +236,10 @@ export function ProductContainer() {
 														{/* <Manufacturers /> */}
 													</div>
 												</div>
+												
 												<div className="col-lg-9 col-md-8 col-12">
 													<div className="row">
+													<ShopTop />
 														{currentItems.map(function (item, key) {
 															return (
 																<div className="col-lg-4 col-md-6 col-12">
