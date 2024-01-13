@@ -8,7 +8,18 @@ export default function SingleBoughtProduct(props) {
                         <div className='single-bought-product' key={key}>
                             <div className='row'>
                                 <div className='bought-product-id col-6'>
-                                    <h6>Đơn hàng: {item.trang_thai_don_hang_id}</h6>
+                                    <h6>Mã đơn hàng: PĐH{item.id}</h6>
+                                </div>
+                                <div className='bought-product-id col-6'>
+                                    <h6>
+                                        Trạng thái đơn hàng: {item.trang_thai_don_hang_id === 1
+                                            ? 'Chờ xác nhận'
+                                            : item.trang_thai_don_hang_id === 2
+                                                ? 'Đã xác nhận'
+                                                : item.trang_thai_don_hang_id === 3
+                                                    ? 'Đang vận chuyển'
+                                                    : 'Hủy'}
+                                    </h6>
                                 </div>
 
                                 <div className='bought-product-status col-6'>
@@ -38,6 +49,7 @@ export default function SingleBoughtProduct(props) {
 
                                 <div className='bought-product-id col-6'>
                                     <p>Tổng tiền : {item.tong_tien}</p>
+                                    <p>Tổng tiền cần trả: {item.trang_thai_thanh_toan == 1 ? <p>0đ</p> : <p>{item.tong_tien}</p>}</p>
 
                                 </div>
                                 <div className='bought-product-product-id col-12'>
