@@ -3583,9 +3583,11 @@
 .shopping-summery tbody .action {
 	text-align: center;
 }
-
-.shopping-summery tbody .action a {
-	text-decoration: none;
+.shopping-summery tbody .action {
+	text-align: center;
+}
+.shopping-summery tbody .action a i{
+	cursor: pointer;
 }
 
 .shopping-summery tbody .action a:hover {

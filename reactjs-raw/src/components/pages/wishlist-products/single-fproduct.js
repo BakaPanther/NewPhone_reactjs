@@ -72,10 +72,10 @@ export default function SingleWproduct(props) {
             <span>{item.chi_tiet_dien_thoai_id.gia_ban}</span>
           </td>
           <td className="action" data-title="Add to cart">
-            <a href="#" title="Add to cart" onClick={() => handleAddToCart(item.chi_tiet_dien_thoai_id.id)}><i className="ti-bag"></i></a>
+            <a title="Add to cart" onClick={() => handleAddToCart(item.chi_tiet_dien_thoai_id.id)}><i className="ti-bag"></i></a>
           </td>
           <td className="action" data-title="Remove">
-            <a href="#" onClick={()=> handleRemove(item.chi_tiet_dien_thoai_id.id, item.khach_hang_id.id)}><i className="ti-trash remove-icon"></i></a>
+            <a onClick={()=> handleRemove(item.chi_tiet_dien_thoai_id.id, item.khach_hang_id.id)}><i className="ti-trash remove-icon"></i></a>
           </td>
         </tr >
       ))
