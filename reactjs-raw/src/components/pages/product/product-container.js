@@ -236,10 +236,10 @@ export function ProductContainer() {
 														{/* <Manufacturers /> */}
 													</div>
 												</div>
-												
+
 												<div className="col-lg-9 col-md-8 col-12">
 													<div className="row">
-													<ShopTop />
+														<ShopTop />
 														{currentItems.map(function (item, key) {
 															return (
 																<div className="col-lg-4 col-md-6 col-12">
@@ -256,7 +256,17 @@ export function ProductContainer() {
 														onPageChange={handlePageChange}
 														containerClassName={'pagination'}
 														activeClassName={'active'}
-													
+														previousLabel={'<'}
+														nextLabel={'>'}
+														breakLabel={'...'}
+														breakClassName={'break-me'}
+														pageClassName={'page-item'}
+														pageLinkClassName={'page-link'}
+														previousClassName={'page-item'}
+														nextClassName={'page-item'}
+														previousLinkClassName={'page-link'}
+														nextLinkClassName={'page-link'}
+														disabledClassName={'disabled'}
 													/>
 												</div>
 											</div>
