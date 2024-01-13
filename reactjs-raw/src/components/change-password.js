@@ -9,9 +9,9 @@ export default function ChangePassword(){
                 <div className="reset-password form">
                     <header>Thay đổi mật khẩu</header>
                     <form >
-                        <input type="text" placeholder="Nhập mật khẩu cũ" name="password"/>
-                        <input type="text" placeholder="Nhập mật khẩu mới" name="re-password"/>
-                        <input type="text" placeholder="Xác nhận mật khẩu mới" name="accept-password"/>
+                        <input type="password" placeholder="Nhập mật khẩu cũ" name="password"/>
+                        <input type="password" placeholder="Nhập mật khẩu mới" name="re-password"/>
+                        <input type="password" placeholder="Xác nhận mật khẩu mới" name="accept-password"/>
                         <input type="submit" className="button" value="Xác nhận" />
                     </form>
                     <div className="signup">
