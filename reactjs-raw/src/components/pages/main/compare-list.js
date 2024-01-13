@@ -26,7 +26,7 @@ export default function CompareList() {
                                     <img src={TestImg} alt='' />
                                 </div>
                                 <div className='product-b-name'>
-                                    Tên điện thoại A
+                                    Tên điện thoại B
                                 </div>
                             </div>
                             <div className='delete-compare col-1'>

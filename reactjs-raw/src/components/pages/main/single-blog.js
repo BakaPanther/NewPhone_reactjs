@@ -21,6 +21,30 @@ function SingleBlog(props) {
         margin: "0 auto",
         borderColor: "red",
     };
+    const addToWishList = (id_chi_tiet) =>{
+        axios.post('http://127.0.0.1:8000/api/khach-hang/yeu-thich-them-moi',{
+          khach_hang_id : user.id,
+          chi_tiet_dien_thoai_id : id_chi_tiet,
+        })
+        .then((response) => {
+            notifySuccess('Thêm vào yêu thích thành công');
+        })
+        .catch((error) => {
+        
+        });
+      }
+      
+      const handleAddToWishList = (id) => {
+        if(Cookies.get('accessToken') === undefined)
+        {
+            setModal(!modal)
+        }
+        else
+        {
+            addToWishList(id);
+        }
+      
+      };
     const [user, setUser] = useState(JSON.parse(Cookies.get('user')));
     const [modal, setModal] = useState(false);
 
@@ -115,14 +139,16 @@ function SingleBlog(props) {
                     right: '105px',
                 }}
                 className="btnHoverEffect">So sánh</Button>
+                {props && props.data && props.data.chi_tiet_dien_thoai[0] && (
                 <Button
+                    onClick={()=> handleAddToWishList(props.data.chi_tiet_dien_thoai[0].id)}
                   style={{
                     backgroundColor: '#FFA500',
                     color: '#fff',
                     transition: '0.3s',
                     border: '1px solid #FFA500',
                 }}
-                className="btnHoverEffect"><i className="ti-heart"></i></Button>
+                className="btnHoverEffect"><i className="ti-heart"></i></Button>)}
                 
                 {props && props.data && props.data.chi_tiet_dien_thoai[0] && (
                 <Button
