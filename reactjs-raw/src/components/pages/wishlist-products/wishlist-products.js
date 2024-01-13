@@ -1,5 +1,5 @@
 import Footer from "../../footer";
-import { NocateHeader } from "../../nocate-header";
+import Header from "../../header";
 import SingleWproduct from "./single-fproduct";
 import React, { useState, useEffect } from "react";
 import Cookies from 'js-cookie';
@@ -35,7 +35,7 @@ export default function WishlistProducts() {
     }, [khach_hang_id]);
     return (
         <>
-            <NocateHeader />
+            <Header/>
             <div className="shopping-cart section">
                 <div className="container">
                     <div className="row">

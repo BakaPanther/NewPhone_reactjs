@@ -32,6 +32,7 @@ import MyAccount from './components/pages/account-info/my-account';
 import CompareProducts from './components/pages/compare products/compare-produtcts';
 import WishlistProducts from './components/pages/wishlist-products/wishlist-products';
 import CompareList from './components/pages/main/compare-list';
+import ChangePassword from './components/change-password';
 function App() {
   const location=useLocation();
   const isIndexPage= location.pathname === '/';
@@ -47,6 +48,7 @@ function App() {
     <Routes>
       <Route path='/authen' element={<Authen_Regis/>}/>
       <Route path='/login' element={<Login/>}/>
+      <Route path='/change-password' element={<ChangePassword />}/>
       <Route path='/reset-password' element={<ResetPassword/>}/>
       <Route path='/my-account' element={<MyAccount/>}/>
       <Route path='/' element={<Index/>}/>

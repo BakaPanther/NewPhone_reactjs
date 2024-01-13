@@ -114,7 +114,7 @@ export function ShoppingCart(props) {
 													<span>{item.chi_tiet_dien_thoai_id.gia_ban}</span>
 												</td>
 												<td className="action" data-title="Remove">
-													<a href="#" onClick={() => handleRemove(item.chi_tiet_dien_thoai_id.id, item.khach_hang_id.id)}><i className="ti-trash remove-icon"></i></a>
+													<button onClick={() => handleRemove(item.chi_tiet_dien_thoai_id.id, item.khach_hang_id.id)}><i className="ti-trash remove-icon"></i></button>
 												</td>
 											</tr>
 
@@ -127,8 +127,7 @@ export function ShoppingCart(props) {
 						</div>
 					</div>
 					<CheckOutForm/>
-					{/* <PaymentOptions/> */}
-
+					<h2>Phương thức thanh toán</h2>
 						<ul style={{ listStyleType: 'none', padding: 0 }}>
 							<li style={{ marginBottom: '10px' }}>
 								<label style={{ display: 'inline-block', marginRight: '10px', fontWeight: 'bold' }}>
