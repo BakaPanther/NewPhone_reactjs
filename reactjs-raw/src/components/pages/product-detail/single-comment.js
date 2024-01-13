@@ -83,7 +83,7 @@ export default function SingleComment(props) {
                     onClick={() => handleStarClick(i)}
                     style={{ fontSize: '30px' }} // Tăng kích thước font chữ cho biểu tượng ngôi sao
                 >
-                    &#9733;
+                    ☆
                 </span>
             );
         }
