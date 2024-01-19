@@ -6,10 +6,13 @@ import notifyError from "./items/noti_error";
 import notifySuccess from "./items/noti_success";
 import React, { useState, useEffect } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter,Card,CardBody,CardTitle,CardSubtitle,CardText } from 'reactstrap';
+import { data } from "jquery";
+import { FaUnderline } from "react-icons/fa";
 
 function SingleProduct(props) {
   const [user, setUser] = useState(JSON.parse(Cookies.get('user')));
   const [modal, setModal] = useState(false);
+  const [compare, setCompare] = useState(false);
 
   const addToCart = (id_chi_tiet) =>{
     axios.post('http://127.0.0.1:8000/api/khach-hang/gio-hang-them-moi',{
@@ -62,8 +65,6 @@ const handleAddToWishList = (id) => {
 
 };
 
-
-
 const handleYes = () => {
     notifyInfor('Đang chuyển hướng đến đăng nhập');
     setTimeout(() => {
@@ -74,6 +75,38 @@ const handleYes = () => {
 const handleNo = () => {
     setModal(!modal)
 };
+
+const [select1, setSelect1] = useState(null);
+const [select2, setSelect2] = useState(null);
+
+
+
+const handleProductSelect = (productId) => {
+  console.log("id sản phẩm: ", productId);
+
+  if (select1 === null) {
+    setSelect1(productId);
+  } else if (select2 === null) {
+    if (select1 === productId) {
+      setSelect1(null);
+    } else {
+      setSelect2(productId);
+    }
+  } else {
+    notifyInfor('Đã đủ 2 sản phẩm');
+  }
+};
+
+useEffect(() => {
+  console.log(select1, "  4 ", select2);
+}, [select1, select2]);
+
+
+
+
+
+
+
   return (
     <>
     
@@ -93,12 +126,14 @@ const handleNo = () => {
             <div className="product-action">
             {props.data && props.data.dien_thoai_id && (
               <>
-              <NavLink data-toggle="modal"   to={`/product-details/${props.data.dien_thoai_id.id}`} data-target="#exampleModal" href="#"><i className="ti-eye"></i><span>Quick view</span></NavLink>
+              <a  onClick={() => handleProductSelect(props.data.dien_thoai_id.id)}><i className="ti-eye"></i><span>So sánh</span></a>
+              <NavLink data-toggle="modal"   to={`/product-details/${props.data.dien_thoai_id.id}`} data-target="#exampleModal" href="#"><i className="ti-eye"></i><span>Xem chi tiết</span></NavLink>
               <a onClick={() => handleAddToWishList(props.data.id)}><i className="ti-heart"></i><span>Add to Wishlish</span></a>
               </>
             )}
             
             </div>
+            
             <div className="product-action-2">
               <a title="Add to cart"  onClick={() => handleAddToCart(props.data.id)}>Add to cart</a>
             </div>
@@ -117,7 +152,10 @@ const handleNo = () => {
         </div>
       </div>
         {/* modal */}
-        <Modal isOpen={modal} size="sm"  className="my-modal">
+        <Modal         style={{
+          display: compare ? 'block' : 'none',
+          pointerEvents: compare ? 'auto' : 'none',
+        }}isOpen={modal} size="sm"  className="my-modal">
           <ModalBody style={{ backgroundColor: '#f8f9fa', color: '#333', padding: '20px', maxHeight: '100px', overflowY: 'auto' }}>
               Đăng nhập rồi mới thêm vào được khách yêu owii!!!
           </ModalBody>
