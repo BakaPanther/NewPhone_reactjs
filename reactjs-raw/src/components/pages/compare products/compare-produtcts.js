@@ -2,9 +2,25 @@ import { useEffect, useState } from 'react';
 import TestImg from '../../../assets/images/test-pic.png'
 import Header from '../../header';
 import Footer from '../../footer';
+import { param } from 'jquery';
+import axios from 'axios';
+import ClipLoader from "react-spinners/ClipLoader";
 export default function CompareProducts() {
+    const [loading1, setLoading1] = useState(true);
+	const [loading2, setLoading2] = useState(true);
+    const [loading3, setLoading3] = useState(true);
+	const [loading4, setLoading4] = useState(true);
+    const [color, setColor] = useState("#ffffff");
+	const override = {
+		display: "block",
+		margin: "0 auto",
+		borderColor: "red",
+	};//loadding
     const [scrolled, setScrolled] = useState(false);
-
+    const [dienThoai1, setDienThoai1] = useState({});
+    const [dienThoai2, setDienThoai2] = useState({});
+    const [thongSo1, setThongSo1] = useState({});
+    const [thongSo2, setThongSo2] = useState({});
     useEffect(() => {
         const handleScroll = () => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -22,226 +38,129 @@ export default function CompareProducts() {
             window.removeEventListener('scroll', handleScroll); // Xóa sự kiện khi component unmount
         };
     }, []);
+    useEffect(() => {
+        axios.get('http://127.0.0.1:8000/api/chi-tiet-dien-thoai', {
+            params: {
+                id : localStorage.getItem('id1')
+            }
+        })
+        .then((response) => {
+            setDienThoai1(response.data.data);
+            setLoading1(false);
+        })
+        .catch((error) => {
+            // Xử lý lỗi ở đây
+            console.error('Error:', error);
+        });
+
+        axios.get('http://127.0.0.1:8000/api/chi-tiet-dien-thoai', {
+            params: {
+                id : localStorage.getItem('id2')
+            }
+        })
+        .then((response) => {
+            setDienThoai2(response.data.data);
+            setLoading2(false);
+        })
+        .catch((error) => {
+            // Xử lý lỗi ở đây
+            console.error('Error:', error);
+        });
+
+        axios.get(`http://127.0.0.1:8000/api/thong-so/${localStorage.getItem('id1')}`)
+        .then((response) => {
+            setThongSo1(response.data.data);
+            setLoading3(false);
+        })
+        .catch((error) => {
+            // Xử lý lỗi ở đây
+            console.error('Error:', error);
+        });
+
+        axios.get(`http://127.0.0.1:8000/api/thong-so/${localStorage.getItem('id2')}`)
+        .then((response) => {
+            setThongSo2(response.data.data);
+            setLoading4(false);
+        })
+        .catch((error) => {
+            // Xử lý lỗi ở đây
+            console.error('Error:', error);
+        });
+    }, []);
+    console.log(dienThoai1);
+    console.log(thongSo1);
     return (
         <>
             <Header />
+            {!loading1 && !loading2 && !loading3 && !loading4? (
+				<>
             <div className="compare-container">
                 <ul className={scrolled ? "compare-items sticky" : "compare-items"}>
                     <li className='compare-info col-2'>
                         <p>So sánh điện thoại<br />
-                            <b>{'Điện thoại A'}</b><br />
+                            <b>{dienThoai1.ten}</b><br />
                             &<br />
-                            <b>{'Điện thoại B'}</b><br />
+                            <b>{dienThoai2.ten}</b><br />
                         </p>
                     </li>
                     <li className="product-a-container col-5">
                         <div className="product-a-img">
-                            <img src={TestImg} alt='' />
+                            <img  src={`http://localhost:8000/${dienThoai1.hinh_anh[0].duong_dan}`} alt='' />
                         </div>
                         <div className='product-a-name'>
-                            Tên điện thoại A
+                            {dienThoai1.ten}
                         </div>
                         <div className='product-a-price'>
-                            5,xxx,xxxđ
+                            {dienThoai1.chi_tiet_dien_thoai[0].gia_ban}
                         </div>
                     </li>
                     <li className="product-b-container col-5">
                         <div className="product-b-img">
-                            <img src={TestImg} alt='' />
+                        <img  src={`http://localhost:8000/${dienThoai2.hinh_anh[0].duong_dan}`} alt='' />
                         </div>
                         <div className='product-b-name'>
-                            Tên điện thoại B
+                        {dienThoai2.ten}
                         </div>
                         <div className='product-b-price'>
-                            5,xxx,xxxđ
+                        {dienThoai2.chi_tiet_dien_thoai[0].gia_ban}
                         </div>
                     </li>
                 </ul>
                 <div className='compare-detail-container'>
                     <table>
-                        <tr>
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gb
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr >
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gbaisjdniasnd oiajsndifjna skjdf akjndfkjans fjka sdfndnffff fffffffff fffffffffffffffff ffffffffffffffffffff
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr>
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gb
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr>
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gb
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr>
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gb
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr >
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gbaisjdniasnd oiajsndifjna skjdf akjndfkjans fjka sdfndnffff fffffffff fffffffffffffffff ffffffffffffffffffff
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr>
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gb
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr>
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gb
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr>
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gb
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr >
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gbaisjdniasnd oiajsndifjna skjdf akjndfkjans fjka sdfndnffff fffffffff fffffffffffffffff ffffffffffffffffffff
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr>
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gb
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr>
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gb
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr>
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gb
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr >
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gbaisjdniasnd oiajsndifjna skjdf akjndfkjans fjka sdfndnffff fffffffff fffffffffffffffff ffffffffffffffffffff
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr>
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gb
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr>
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gb
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr>
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gb
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr >
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gbaisjdniasnd oiajsndifjna skjdf akjndfkjans fjka sdfndnffff fffffffff fffffffffffffffff ffffffffffffffffffff
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr>
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gb
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                        <tr>
-                            <th className='compare-name '>Ram</th>
-                            <td className='a-compare-detail '>
-                                8gb
-                            </td>
-                            <td className='b-compare-detail '>
-                                8gb
-                            </td>
-                        </tr>
-                    </table>
+                        <thead>
+                            <tr>
+                            <th></th>
+                            <th>Điện thoại 1</th>
+                            <th>Điện thoại 2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {thongSo1.map((item, key) => (
+                            <tr key={key}>
+                                <th className='compare-name'>{item.thong_so.ten}</th>
+                                <td className='a-compare-detail'>{item.gia_tri}</td>
+                                <td className='b-compare-detail'>
+                                {/* Tìm thông số tương ứng từ thongSo2 */}
+                                {thongSo2[key] ? thongSo2[key].gia_tri : ''}
+                                </td>
+                            </tr>
+                            ))}
+                        </tbody>
+                        </table>
                 </div>
             </div>
+            </>
+			) : (
+				<ClipLoader
+					color={color}
+					loading={true}
+					size={150}
+					aria-label="Loading Spinner"
+					data-testid="loader"
+					cssOverride={override}
+				/>
+			)}
             <Footer/>
         </>
     )

@@ -87,19 +87,28 @@ const handleProductSelect = (productId) => {
   if (select1 === null) {
     setSelect1(productId);
   } else if (select2 === null) {
-    if (select1 === productId) {
-      setSelect1(null);
-    } else {
-      setSelect2(productId);
-    }
+    setSelect2(productId);
   } else {
     notifyInfor('Đã đủ 2 sản phẩm');
   }
 };
 
+// Hàm này giúp đảm bảo không xảy ra lỗi liên quan đến việc cập nhật state
+const resetSelect = () => {
+  setSelect1(null);
+  setSelect2(null);
+};
+
 useEffect(() => {
   console.log(select1, "  4 ", select2);
+  if (select1 !== null && select2 !== null) {
+    localStorage.setItem('id1',select1);
+    localStorage.setItem('id2',select2);
+    window.location.href = '/compare-products';
+   
+  }
 }, [select1, select2]);
+
 
 
 
@@ -126,7 +135,7 @@ useEffect(() => {
             <div className="product-action">
             {props.data && props.data.dien_thoai_id && (
               <>
-              <a  onClick={() => handleProductSelect(props.data.dien_thoai_id.id)}><i className="ti-eye"></i><span>So sánh</span></a>
+              <a  onClick={() => handleProductSelect(props.data.id)}><i className="ti-eye"></i><span>So sánh</span></a>
               <NavLink data-toggle="modal"   to={`/product-details/${props.data.dien_thoai_id.id}`} data-target="#exampleModal" href="#"><i className="ti-eye"></i><span>Xem chi tiết</span></NavLink>
               <a onClick={() => handleAddToWishList(props.data.id)}><i className="ti-heart"></i><span>Add to Wishlish</span></a>
               </>
