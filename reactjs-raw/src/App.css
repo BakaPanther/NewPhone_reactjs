@@ -6245,7 +6245,10 @@
     margin-right: 200px;
     position: sticky;
 	background: white;
-	z-index: 5;
+	z-index: 1000;
+	pointer-events: auto;
+	display: block;
+	bottom: 0;
 }
 .stickycompare-container .compare-list-item{
 	height: 100px;

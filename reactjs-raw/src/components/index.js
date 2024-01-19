@@ -12,7 +12,7 @@ import SmBannerSection from "./pages/main/small-banner-section";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ClipLoader from "react-spinners/ClipLoader";
-import CompareList from "./pages/main/compare-list";
+import TestImg from '../assets/images/test-pic.png'
 
 
 export function Index() {
@@ -63,7 +63,7 @@ export function Index() {
                     <ShopHomeList />
                     {/* <CountDownArea /> */}
                     {lst_nha_san_xuat}
-                    <CompareList/>
+
                     <ServiceArea />
                     <Footer />
                 </div>
