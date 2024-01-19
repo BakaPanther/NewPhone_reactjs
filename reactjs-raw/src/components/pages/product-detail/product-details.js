@@ -106,6 +106,7 @@ export default function ProductDetails() {
         }
         if (Cookies.get('accessToken') === undefined) {
             setModal(!modal)
+
         }
         else {
             axios.post('http://127.0.0.1:8000/api/khach-hang/gio-hang-them-moi', {
@@ -115,6 +116,9 @@ export default function ProductDetails() {
             })
                 .then((response) => {
                     notifySuccess('Thêm vào giỏ hàng thành công');
+                    setTimeout(() => {
+                        window.location.href = "/cart";
+                    }, 2000);
                 })
                 .catch((error) => {
 
@@ -135,7 +139,7 @@ export default function ProductDetails() {
     // console.log(sanPham)
     // console.log("dien thoai", sanPham);
 
-    
+
 
     return (
         <>
@@ -219,7 +223,7 @@ export default function ProductDetails() {
                                         xs="6"
 
                                     >
-                                        
+
 
                                         <div dangerouslySetInnerHTML={{ __html: dienThoai.mo_ta }} />
                                     </Col>
@@ -227,7 +231,7 @@ export default function ProductDetails() {
 
                             </Container>
                             <SimilarProducts dien_thoai_id={dienThoai.id} nha_san_xuat_id={dienThoai.nha_san_xuat.id} />
-                            <Comment dienThoaiId={id}/>
+                            <Comment dienThoaiId={id} />
                         </div>
 
                     </div>

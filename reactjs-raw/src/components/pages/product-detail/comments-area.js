@@ -5,6 +5,7 @@ import StarRating from "./star-rating";
 export default function CommentsArea(props) {
     const [danhgia, setDanhGia] = useState([]);
     const [sosaotrungbinh, setSoSaoTrungBinh] = useState([]);
+    
     useEffect(() => {
         fetchComments();
     }, []);
@@ -35,13 +36,17 @@ export default function CommentsArea(props) {
             console.error('Lỗi khi gửi yêu cầu:', error);
         });
     },[]);
+
+    const updateRatingValue = (value) => {
+        setSoSaoTrungBinh(value);
+    };
     // console.log(danhgia);
     return (
         <>
             <div>
                 <h3><StarRating rating={sosaotrungbinh}/></h3>
                 <div className="comments-container col-8">
-                    <SingleComment data={danhgia} idDienThoai={props.dienThoaiId} updateComments={updateComments} />
+                    <SingleComment data={danhgia} idDienThoai={props.dienThoaiId} updateComments={updateComments}  updateRating={updateRatingValue} />
                 </div>
             </div>
         </>

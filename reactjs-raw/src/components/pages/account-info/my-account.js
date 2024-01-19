@@ -77,7 +77,7 @@ export default function MyAccount() {
                 console.error(error);
             });
     }, [token]);
-
+    console.log(don_hang);
 
     return (
         <>

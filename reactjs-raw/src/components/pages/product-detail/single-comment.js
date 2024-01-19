@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Rating } from 'react-simple-star-rating';
-import LikeDislike from './like-dislike';
+// import { Rating } from 'react-simple-star-rating';
+// import LikeDislike from './like-dislike';
 import RatingStar from './rating-star';
 import Cookies from 'js-cookie';
 import notifySuccess from '../../items/noti_success';
@@ -13,14 +13,14 @@ export default function SingleComment(props) {
     const [moTa, setMoTa] = useState('');
     const [khach_hang_id, setKhach_hang_id] = useState(JSON.parse(Cookies.get('user')));
     const [kiemtradamuathanhcong, setKiemTraDaMuaThanhCong] = useState([]);
-    function handleStarReview() {
+
+    const handleStarReview = () => {
         axios.get('http://127.0.0.1:8000/api/khach-hang/xet-don-hang-da-mua', {
             params: {
                 khach_hang_id: khach_hang_id.id,
             }
         })
             .then(response => {
-                //đoan kiểm tra điện thoại đã mua chưa nếu ko sẽ k đc đánh giá
                 const daMua = response.data.data.some(item => props.idDienThoai == item.dien_thoai_id);
 
                 if (daMua) {
@@ -30,47 +30,42 @@ export default function SingleComment(props) {
                 }
             })
             .catch(error => {
-                // Hiện thông báo nếu có lỗi xảy ra
                 console.error("Lỗi: ", error);
             });
 
         if (!Cookies.get('accessToken')) {
             notifySuccess("Vui lòng đăng nhập");
         }
-    }
+    };
 
     const toggleModal = () => {
         setModal(!modal);
     };
 
     const sendHandle = () => {
-        // console.log('Số sao:', ratingValue);
-        // console.log('Nội dung đánh giá:', moTa);
-
         axios.post('http://127.0.0.1:8000/api/them-moi-danh-gia', {
-            'khach_hang_id': khach_hang_id.id,
-            'dien_thoai_id': props.idDienThoai,
-            'so_sao': ratingValue,
-            'mo_ta': moTa
-        }).then(response => {
-            console.log(response.data.data);
-
-            // Cập nhật danh sách đánh giá bằng cách gọi hàm từ props
-            props.updateComments(response.data.data);
-
-            toggleModal();
-        }).catch(error => {
-            // Hiện thông báo nếu có lỗi xảy ra
-            console.error("Lỗi: ", error);
-        });
-
+            khach_hang_id: khach_hang_id.id,
+            dien_thoai_id: props.idDienThoai,
+            so_sao: ratingValue,
+            mo_ta: moTa
+        })
+            .then(response => {
+                console.log(response.data.data.so_sao_trung_binh);
+                props.updateComments(response.data.data.danh_gia);
+                props.updateRating(response.data.data.so_sao_trung_binh);
+                setRatingValue("");
+                setMoTa("");
+                toggleModal();
+            })
+            .catch(error => {
+                console.error("Lỗi: ", error);
+            });
     };
 
     const handleStarClick = (value) => {
         setRatingValue(value);
     };
 
-    //hàm tạo ngôi sao
     const renderStars = () => {
         const stars = [];
         const maxStars = 5;
@@ -81,9 +76,9 @@ export default function SingleComment(props) {
                     key={i}
                     className={`star ${i <= ratingValue ? 'active' : ''}`}
                     onClick={() => handleStarClick(i)}
-                    style={{ fontSize: '30px' }} // Tăng kích thước font chữ cho biểu tượng ngôi sao
+                    style={{ fontSize: '30px', color: i <= ratingValue ? 'gold' : 'black' }}
                 >
-                    ☆
+                    ★
                 </span>
             );
         }
@@ -93,30 +88,25 @@ export default function SingleComment(props) {
 
     return (
         <>
-            {/* xuất danh sách đánh giá điện thoại đó */}
-            {props.data.map(function (item, key) {
-                return (
-                    <>
-                        {item.dien_thoai_id == props.idDienThoai ? (
-                            <div className="single-comment" key={key}>
-                                <div className="#">{item.khach_hang_id.ten}</div>
-                                <RatingStar sosao={item.so_sao} />
-                                <div className="comment-text">{item.mo_ta}</div>
-                                <div>----------------------------</div>
-                            </div>
-                        ) : (
-                            ''
-                        )}
-                    </>
-                );
-            })}
+            {props.data.map((item, key) => (
+                <>
+                    {item.dien_thoai_id == props.idDienThoai ? (
+                        <div className="single-comment" key={key}>
+                            <div className="#">{item.khach_hang_id.ten}</div>
+                            <RatingStar sosao={item.so_sao} />
+                            <div className="comment-text">{item.mo_ta}</div>
+                            <div>----------------------------</div>
+                        </div>
+                    ) : (
+                        ''
+                    )}
+                </>
+            ))}
 
-            {/* Button để mở modal */}
             <button type="button" className="btn btn-success" onClick={handleStarReview}>
                 Viết đánh giá
             </button>
 
-            {/* Modal */}
             <Modal isOpen={modal} size="lg" className="my-modal">
                 <ModalBody
                     style={{

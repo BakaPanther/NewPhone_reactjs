@@ -95,8 +95,12 @@ export function TotalAmount(props) {
                     tong_tien: props.tongtien
                 })
                     .then((response) => {
-                        alert('đặt hàng thành công');
-                        window.location.reload();
+                        setTimeout(() => {
+                            notifySuccess("Đặt hàng thành công");
+                        }, 2000);
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 3000);
                     })
                     .catch((error) => {
                         // Xử lý lỗi nếu có
