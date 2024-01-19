@@ -77,7 +77,6 @@ function ShopHomeList() {
 								</div>
 							</div>
 							<TopDanhGia data={topdanhgia}/>
-
 						</div>
 					</div>
 				</div>
