@@ -66,7 +66,7 @@ export default function WishlistProducts() {
                 </>
             ) : (
                 <RingLoader
-                    color="#36d7b7"
+                    color="#F7941D"
                     loading
                     cssOverride={{
                         position: 'absolute',
