@@ -151,7 +151,7 @@ useEffect(() => {
         <div className="product-content">
           {props.data && props.data.dien_thoai_id && (
             <>
-              <h3><NavLink to='/product-details'>{props.data.dien_thoai_id.ten} {props.data.mau_sac_id.ten}</NavLink></h3>
+              <h3><NavLink to='/product-details'>{props.data.dien_thoai_id.ten} {props.data.mau_sac_id.ten}  {props.data.dung_luong_id.ten} {' ram '}  {props.data.ram_id.ten}</NavLink></h3>
               <div className="product-price">
                 <span className="old"> { } </span>
                 <span>Giá: {props.data.gia_ban} VNĐ</span>

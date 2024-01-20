@@ -168,7 +168,12 @@ export default function ProductDetails() {
                                             )}
                                             {sanPham.dung_luong_id && sanPham.dung_luong_id.ten && (
                                                 <>
-                                                    {sanPham.dung_luong_id.ten}
+                                                    {sanPham.dung_luong_id.ten}  { 'ram '}
+                                                </>
+                                            )}
+                                                {sanPham.ram_id && sanPham.ram_id.ten && (
+                                                <>
+                                                    {sanPham.ram_id.ten}
                                                 </>
                                             )}
                                         </>
@@ -186,6 +191,7 @@ export default function ProductDetails() {
                                                     <li className="capacity" key={key} onClick={() => handlSanPhamChange(item)}>
                                                         <a className="capacity-text">{item.dung_luong_id.ten}</a>
                                                         <a className="capacity-text">{item.mau_sac_id.ten}</a>
+                                                        <a className="capacity-text">{item.ram_id.ten}</a>
                                                         <a className="capacity-text">{item.gia_ban}</a>
                                                     </li>
                                                 );

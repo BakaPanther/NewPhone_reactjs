@@ -53,7 +53,7 @@ function TopDienThoaiMoi(props) {
                                         <div className="list-image overlay">
                                             <img src={`http://localhost:8000/${item.dien_thoai.hinh_anh[0].duong_dan}`} style={{ width: '100%' }} alt="#" />
                                             <a href="#" className="buy" onClick={() => handleAddToCart(item.id)}><i className="fa fa-shopping-bag"></i></a>
-                                            <h6>{item.dien_thoai.ten} - {item.gia_ban} VNĐ - {item.mau_sac.ten} - {item.dung_luong.ten}</h6>
+                                            <h6>{item.dien_thoai.ten} - {item.gia_ban} VNĐ - {item.mau_sac.ten} - {item.dung_luong.ten} </h6>
                                         </div>
                                     </div>
                                 </div>
