@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import Cookies from 'js-cookie';
 import notifyInfor from "./items/noti_infor";
-import notifyError from "./items/noti_error";
+import notifyError from "./items/noti_error"; 
 import notifySuccess from "./items/noti_success";
 import React, { useState, useEffect } from "react";
 
@@ -65,6 +65,7 @@ function SingleProduct(props) {
 
 
 const handleYes = () => {
+
     notifyInfor('Đang chuyển hướng đến đăng nhập');
     setTimeout(() => {
       window.location.href = "/login";
