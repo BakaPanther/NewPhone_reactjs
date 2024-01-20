@@ -122,7 +122,6 @@ export function ProductContainer() {
 		}
 	};
 
-	console.log(dsDienThoai);
 	return (
 		<>
 			{!loading1 && !loading2 && !loading3 ? (

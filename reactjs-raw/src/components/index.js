@@ -11,8 +11,11 @@ import SliderArea from "./pages/main/slider-area";
 import SmBannerSection from "./pages/main/small-banner-section";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import CompareList from "./pages/main/compare-list";
+
 import { RingLoader } from "react-spinners";
+import ClipLoader from "react-spinners/ClipLoader";
+import TestImg from '../assets/images/test-pic.png'
+
 
 export function Index() {
     //loader
@@ -62,7 +65,6 @@ export function Index() {
                     <ShopHomeList />
                     {/* <CountDownArea /> */}
                     {lst_nha_san_xuat}
-                    <CompareList />
                     <ServiceArea />
                     <Footer />
                 </div>
