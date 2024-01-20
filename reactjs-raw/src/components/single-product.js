@@ -116,6 +116,7 @@ useEffect(() => {
 
 
 
+
   return (
     <>
 
@@ -140,7 +141,6 @@ useEffect(() => {
               <a onClick={() => handleAddToWishList(props.data.id)}><i className="ti-heart"></i><span>Add to Wishlish</span></a>
               </>
             )}
-            
             </div>
             
             <div className="product-action-2">

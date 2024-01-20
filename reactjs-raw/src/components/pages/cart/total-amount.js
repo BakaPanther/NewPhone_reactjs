@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import notifySuccess from "../../items/noti_success";
 import notifyError from "../../items/noti_error";
-
+import Swal from 'sweetalert2'
 export function TotalAmount(props) {
 
     const [user, setUser] = useState(JSON.parse(Cookies.get('user')));
