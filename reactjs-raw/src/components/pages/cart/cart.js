@@ -5,7 +5,7 @@ import { CheckOutForm } from "../checkout/checkout-form";
 import React, { useState, useEffect } from "react";
 import Cookies from 'js-cookie';
 import axios from "axios";
-import ClipLoader from "react-spinners/ClipLoader";
+import { RingLoader } from "react-spinners";
 import Header from "../../header";
 import { Container } from "reactstrap";
 export function Cart() {
@@ -50,13 +50,17 @@ export function Cart() {
               
             </div>
                 ) : (
-                  <ClipLoader
-                  color={color}
-                  loading={true}
-                  size={150}
-                  aria-label="Loading Spinner"
-                  data-testid="loader"
-                  cssOverride={override}
+                  <RingLoader
+                  color="#36d7b7"
+                  loading
+                  cssOverride={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                  }}
+                  size={148}
+                  speedMultiplier={1}
               />
           )}
     </>

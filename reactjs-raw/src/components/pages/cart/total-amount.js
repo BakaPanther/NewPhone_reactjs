@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import notifySuccess from "../../items/noti_success";
 import { Redirect } from 'react-router-dom';
 import notifyError from "../../items/noti_error";
-
+import Swal from 'sweetalert2'
 export function TotalAmount(props) {
     const location = useLocation();
     useEffect(() => {
@@ -96,7 +96,12 @@ export function TotalAmount(props) {
                 })
                     .then((response) => {
                         setTimeout(() => {
-                            notifySuccess("Đặt hàng thành công");
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Thanh toán thành công",
+                                showConfirmButton: false,
+                            });
                         }, 2000);
                         setTimeout(() => {
                             window.location.reload();

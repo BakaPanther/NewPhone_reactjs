@@ -12,7 +12,7 @@ import axios, { Axios } from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from "reactstrap";
-import ClipLoader from "react-spinners/ClipLoader";
+import { RingLoader } from "react-spinners";
 import Header from "../../header";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 import Comment from "./comment";
@@ -143,10 +143,9 @@ export default function ProductDetails() {
 
     return (
         <>
-
-            <Header />
             {(!loading1 && !loading2) ? (
                 <div>
+                    <Header />
                     <div className="product-detail-container">
                         <div className="row">
                             <div className="col-4">
@@ -239,13 +238,17 @@ export default function ProductDetails() {
                     <Footer />
                 </div>
             ) : (
-                <ClipLoader
-                    color={color}
-                    loading={true}
-                    size={150}
-                    aria-label="Loading Spinner"
-                    data-testid="loader"
-                    cssOverride={override}
+                <RingLoader
+                    color="#36d7b7"
+                    loading
+                    cssOverride={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                    }}
+                    size={148}
+                    speedMultiplier={1}
                 />
             )}
             <Modal isOpen={modal} size="sm" className="my-modal">

@@ -11,9 +11,8 @@ import SliderArea from "./pages/main/slider-area";
 import SmBannerSection from "./pages/main/small-banner-section";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import ClipLoader from "react-spinners/ClipLoader";
 import CompareList from "./pages/main/compare-list";
-
+import { RingLoader } from "react-spinners";
 
 export function Index() {
     //loader
@@ -44,12 +43,12 @@ export function Index() {
 
     const lst_nha_san_xuat = nhaSanXuat.map((item, key) => {
         if (item.dienThoai && item.dienThoai.length > 0) {
-          const firstSixItems = item.dienThoai.slice(0, 6); // Lấy 6 phần tử đầu tiên
-          return <ShopBlog data={{ ...item, dienThoai: firstSixItems }} key={key} />;
+            const firstSixItems = item.dienThoai.slice(0, 6); // Lấy 6 phần tử đầu tiên
+            return <ShopBlog data={{ ...item, dienThoai: firstSixItems }} key={key} />;
         }
         // Trả về null hoặc một phần tử mặc định nếu item.dienThoai không tồn tại hoặc không có phần tử
         return null; // hoặc có thể trả về một phần tử mặc định khác
-      });
+    });
     return (
         <>
             {(!loading) ? (
@@ -63,18 +62,22 @@ export function Index() {
                     <ShopHomeList />
                     {/* <CountDownArea /> */}
                     {lst_nha_san_xuat}
-                    <CompareList/>
+                    <CompareList />
                     <ServiceArea />
                     <Footer />
                 </div>
             ) : (
-                <ClipLoader
-                    color={color}
-                    loading={true}
-                    size={150}
-                    aria-label="Loading Spinner"
-                    data-testid="loader"
-                    cssOverride={override}
+                <RingLoader
+                    color="#36d7b7"
+                    loading
+                    cssOverride={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                    }}
+                    size={148}
+                    speedMultiplier={1}
                 />
             )}
         </>
