@@ -25,7 +25,7 @@ const StarRating = ({ rating }) => {
   return (
     <div>
       <h3>Đánh giá</h3>
-      <div style={{ display: 'flex', alignItems: 'center' }}>{renderStars()}</div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>{renderStars()} {rating}</div>
     </div>
   );
 };
