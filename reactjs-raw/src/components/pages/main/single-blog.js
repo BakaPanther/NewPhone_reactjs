@@ -126,7 +126,7 @@ function SingleBlog(props) {
                 </CardTitle>
                 <CardSubtitle className="mb-2 text-muted" tag="h4">
                    {props && props.data && props.data.chi_tiet_dien_thoai[0] && (
-                    <NavLink to={`/product-details/${props.data.id}`} style={{ textDecoration: 'none', color: '#333' }}>{props.data.chi_tiet_dien_thoai[0].gia_ban}</NavLink>
+                    <NavLink to={`/product-details/${props.data.id}`} style={{ textDecoration: 'none', color: '#333' }}>{props.data.chi_tiet_dien_thoai[0].gia_ban} VNĐ</NavLink>
                    )}
                 </CardSubtitle>
                 <div className="action-position-button" >

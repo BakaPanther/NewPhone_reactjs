@@ -7,7 +7,9 @@ import Header from '../../header';
 import axios from 'axios';
 import notifySuccess from '../../items/noti_success';
 import { NavLink } from 'react-router-dom';
+import { RingLoader } from 'react-spinners';
 export default function MyAccount() {
+    let [loading, setLoading] = useState(true);
     const [khach_hang, setKhach_hang] = useState(JSON.parse(Cookies.get('user')));
     const [thong_tin_khach_hang, setThong_tin_khach_hang] = useState({
         ten: khach_hang.ten,
@@ -71,79 +73,97 @@ export default function MyAccount() {
                 // Xử lý dữ liệu response ở đây
                 // console.log(response.data);
                 setDonHang(response.data.data);
+                setLoading(false);
             })
             .catch(error => {
                 // Xử lý lỗi ở đây
                 console.error(error);
             });
     }, [token]);
-
+    console.log(don_hang);
 
     return (
         <>
-            <Header />
-            <div className="my-account-container">
-                <div className='edit-info'>
-                    <div className="row">
-                        <div className="menu-left col-6">
-                            <form className="form" method='POST' onSubmit={handelLuu}>
-                                <div className="row">
-                                    <div className="col-lg-12 col-md-12 col-12">
-                                        <div className="form-group">
-                                            {/* <label>Họ tên<span><button onClick=''><img src={EditIcon} alt='' />Sửa</button></span></label> */}
-                                            <label>Họ tên</label>
-                                            <input type="text" name="ten" value={thong_tin_khach_hang.ten} required="required" onChange={handleInputChange} />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6 col-md-6 col-12">
-                                        <div className="form-group">
-                                            <label>Email</label>
-                                            <input type="email" name="email" value={thong_tin_khach_hang.email} required="required" onChange={handleInputChange} />
-                                        </div>
-                                    </div>
+            {(!loading) ? (
+                <>
+                    <Header />
+                    <div className="my-account-container">
+                        <div className='edit-info'>
+                            <div className="row">
+                                <div className="menu-left col-6">
+                                    <form className="form" method='POST' onSubmit={handelLuu}>
+                                        <div className="row">
+                                            <div className="col-lg-12 col-md-12 col-12">
+                                                <div className="form-group">
+                                                    {/* <label>Họ tên<span><button onClick=''><img src={EditIcon} alt='' />Sửa</button></span></label> */}
+                                                    <label>Họ tên</label>
+                                                    <input type="text" name="ten" value={thong_tin_khach_hang.ten} required="required" onChange={handleInputChange} />
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-6 col-md-6 col-12">
+                                                <div className="form-group">
+                                                    <label>Email</label>
+                                                    <input type="email" name="email" value={thong_tin_khach_hang.email} required="required" onChange={handleInputChange} />
+                                                </div>
+                                            </div>
 
-                                    <div className="col-lg-6 col-md-6 col-12">
-                                        <div className="form-group">
-                                            <label>Số điện thoại</label>
-                                            <input type="text" name="so_dien_thoai" value={thong_tin_khach_hang.so_dien_thoai} required="required" onChange={handleInputChange} />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-12 col-md-12 col-12">
-                                        <div className="form-group">
-                                            <label>Địa chỉ</label>
-                                            <input type="text" name="dia_chi" value={thong_tin_khach_hang.dia_chi} required="required" onChange={handleInputChange} />
-                                        </div>
-                                    </div>
+                                            <div className="col-lg-6 col-md-6 col-12">
+                                                <div className="form-group">
+                                                    <label>Số điện thoại</label>
+                                                    <input type="text" name="so_dien_thoai" value={thong_tin_khach_hang.so_dien_thoai} required="required" onChange={handleInputChange} />
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-12 col-md-12 col-12">
+                                                <div className="form-group">
+                                                    <label>Địa chỉ</label>
+                                                    <input type="text" name="dia_chi" value={thong_tin_khach_hang.dia_chi} required="required" onChange={handleInputChange} />
+                                                </div>
+                                            </div>
 
-                                    {/* <div className="col-lg-6 col-md-6 col-12">
+                                            {/* <div className="col-lg-6 col-md-6 col-12">
                                         <div className="form-group">
                                             <label>Postal Code<span><button onClick=''><img src={EditIcon} alt='' />Sửa</button></span></label>
                                             <input type="text" name="post" value="200000" required="required" />
                                         </div>
                                     </div> */}
 
-                                </div>
-                                <div className='save-edit' style={{ 'text-align': 'center' }}>
-                                    <input type="submit" className="button" value="Lưu Thông Tin" />
-                                </div>
-                            </form>
-                            <div className='save-edit' style={{ 'text-align': 'center' }}>
-                                <NavLink to={"/change-password"}>Đổi Mật Khẩu</NavLink>
-                            </div>
+                                        </div>
+                                        <div className='save-edit' style={{ 'text-align': 'center' }}>
+                                            <input type="submit" className="button" value="Lưu Thông Tin" />
+                                        </div>
+                                    </form>
+                                    <div className='save-edit' style={{ 'text-align': 'center' }}>
+                                        <NavLink to={"/change-password"}>Đổi Mật Khẩu</NavLink>
+                                    </div>
 
-                        </div>
-                        <div className="menu-right col-6">
-                            <h6>ĐƠN HÀNG ĐÃ MUA </h6>
-                            <div className="bought-products">
-                                <SingleBoughtProduct data={don_hang} />
+                                </div>
+                                <div className="menu-right col-6">
+                                    <h6>ĐƠN HÀNG ĐÃ MUA </h6>
+                                    <div className="bought-products">
+                                        <SingleBoughtProduct data={don_hang} />
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                        <div>
                         </div>
                     </div>
-                </div>
-                <div>
-                </div>
-            </div>
-            <Footer />
+                    <Footer />
+                </>
+            ) : (
+                <RingLoader
+                    color="#36d7b7"
+                    loading
+                    cssOverride={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                    }}
+                    size={148}
+                    speedMultiplier={1}
+                />
+            )}
         </>
     )
 }

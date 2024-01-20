@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ClipLoader from "react-spinners/ClipLoader";
 import Footer from "../../footer";
 import Header from "../../header";
 import SingleProduct from "../../single-product";
@@ -10,6 +9,7 @@ import { RecentPost } from "./recent-post";
 import { ShopByPrice } from "./shop-by-price";
 import { ShopTop } from "./shop-top";
 import ReactPaginate from 'react-paginate';
+import { RingLoader } from "react-spinners";
 
 export function ProductContainer() {
 
@@ -279,13 +279,17 @@ export function ProductContainer() {
 
 				</>
 			) : (
-				<ClipLoader
-					color={color}
-					loading={true}
-					size={150}
-					aria-label="Loading Spinner"
-					data-testid="loader"
-					cssOverride={override}
+				<RingLoader
+					color="#36d7b7"
+					loading
+					cssOverride={{
+						position: 'absolute',
+						top: '50%',
+						left: '50%',
+						transform: 'translate(-50%, -50%)',
+					}}
+					size={148}
+					speedMultiplier={1}
 				/>
 			)}
 		</>

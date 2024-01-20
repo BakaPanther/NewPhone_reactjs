@@ -11,8 +11,8 @@ export function NocateHeader() {
 
                                 <div className="top-left">
                                     <ul className="list-main">
-                                        <li><i className="ti-headphone-alt"></i> +090 (090) 123-456</li>
-                                        <li><i className="ti-email"></i> support@newphone.com</li>
+                                        <li><i className="ti-headphone-alt"></i> +84 911297 370</li>
+                                        <li><i className="ti-email"></i> newphone@gmail.com</li>
                                     </ul>
                                 </div>
 
@@ -127,15 +127,15 @@ export function NocateHeader() {
                                             <div className="navbar-collapse">
                                                 <div className="nav-inner">
                                                     <ul className="nav main-menu menu navbar-nav">
-                                                        <li className="active"><NavLink to="/">Home</NavLink></li>
-                                                        <li><NavLink to="/product">Product</NavLink></li>
+                                                        <li className="active"><NavLink to="/">Trang chủ</NavLink></li>
+                                                        <li><NavLink to="/product">Sản phẩm</NavLink></li>
                                                         <li><a href="#">Payment<i className="ti-angle-down"></i><span className="new">New</span></a>
                                                             <ul className="dropdown">
-                                                                <li><NavLink to="/cart">Cart</NavLink></li>
+                                                                <li><NavLink to="/cart">Giỏ hàng</NavLink></li>
                                                                 <li><NavLink to="/checkout">Checkout</NavLink></li>
                                                             </ul>
                                                         </li>
-                                                        <li><a href="contact.html">Contact Us</a></li>
+                                                        <li><a href="contact.html">Liên hệ</a></li>
                                                     </ul>
                                                 </div>
                                             </div>

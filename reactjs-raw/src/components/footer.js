@@ -31,22 +31,25 @@ function Footer() {
 
                                 <div className="single-footer about">
                                     <div className="logo">
-                                        <a href="index.html"><img src="images/logo2.png" alt="#" /></a>
+                                        <a href="index.html"><img src="images/test_logo.png" alt="#" /></a>
                                     </div>
-                                    <p className="text">Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue,  magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</p>
-                                    <p className="call">Got Question? Call us 24/7<span><a href="tel:123456789">+0123 456 789</a></span></p>
+                                    <p className="text">NewPhone là một website bán điện thoại duy động uy tín và tiện lợi. Người dùng có thể dễ dàng xem các sản phẩm mới nhất, tìm kiếm,
+và đăng ký để mua hàng. Ngoài ra còn có thể đánh giá sản phẩm bình luận chắc lượng. Điểm nỗi bật của NewPhone trang chủ thân thiện dễ sử
+dụng, mang đến cho người dùng một trải nghiệm mua sắm tuyệt vời. Nếu bạn đang tìm kiếm một website bán điện thoại di động uy tín và
+đáng tin cậy, thì NewPhone là một lựa chọn tuyệt vời.</p>
+                                    <p className="call">Gọi cho chúng tôi 24/7<span><a href="tel:123456789">+84 911297370</a></span></p>
                                 </div>
                             </div>
                             <div className="col-lg-2 col-md-6 col-12">
 
                                 <div className="single-footer links">
-                                    <h4>Information</h4>
+                                    <h4>Thông tin</h4>
                                     <ul>
-                                        <li><a href="#">About Us</a></li>
-                                        <li><a href="#">Faq</a></li>
-                                        <li><a href="#">Terms & Conditions</a></li>
-                                        <li><a href="#">Contact Us</a></li>
-                                        <li><a href="#">Help</a></li>
+                                        <li><a href="#"></a></li>
+                                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                                        <li><a href="#">Điều khoản và điều kiện</a></li>
+                                        <li><a href="#">Liên hệ</a></li>
+                                        <li><a href="#">Giúp đở</a></li>
                                     </ul>
                                 </div>
 
@@ -54,13 +57,13 @@ function Footer() {
                             <div className="col-lg-2 col-md-6 col-12">
 
                                 <div className="single-footer links">
-                                    <h4>Customer Service</h4>
+                                    <h4>Dịch vụ khách hàng</h4>
                                     <ul>
-                                        <li><a href="#">Payment Methods</a></li>
-                                        <li><a href="#">Money-back</a></li>
-                                        <li><a href="#">Returns</a></li>
-                                        <li><a href="#">Shipping</a></li>
-                                        <li><a href="#">Privacy Policy</a></li>
+                                        <li><a href="#">Phương thức thanh toán</a></li>
+                                        <li><a href="#">Hoàn tiền</a></li>
+                                        <li><a href="#">Trả lại</a></li>
+                                        <li><a href="#">Đang chuyển hàng</a></li>
+                                        <li><a href="#">Chính sách bảo mật</a></li>
                                     </ul>
                                 </div>
 
@@ -68,14 +71,14 @@ function Footer() {
                             <div className="col-lg-3 col-md-6 col-12">
 
                                 <div className="single-footer social">
-                                    <h4>Get In Tuch</h4>
+                                    <h4>Liên lạc</h4>
 
                                     <div className="contact">
                                         <ul>
-                                            <li>NO. 342 - London Oxford Street.</li>
-                                            <li>012 United Kingdom.</li>
-                                            <li>info@eshop.com</li>
-                                            <li>+032 3456 7890</li>
+                                            <li>Thành Phố Hồ Chí Minh.</li>
+                                            <li>588 Huỳnh Tấn Phát.</li>
+                                            <li>newphone@gmail.com</li>
+                                            <li>+84 911297 370</li>
                                         </ul>
                                     </div>
 
@@ -98,12 +101,12 @@ function Footer() {
                             <div className="row">
                                 <div className="col-lg-6 col-12">
                                     <div className="left">
-                                        <p>Copyright © 2020 <a href="http://www.wpthemesgrid.com" target="_blank">Wpthemesgrid</a>  -  All Rights Reserved.</p>
+                                        <p>© 2024 <a href="http://www.wpthemesgrid.com" target="_blank">NewPhone</a>  - Đã đăng ký bản quyền.</p>
                                     </div>
                                 </div>
                                 <div className="col-lg-6 col-12">
                                     <div className="right">
-                                        <img src="images/payments.png" alt="#" />
+                                        <img src="../images/payments.png" alt="#" />
                                     </div>
                                 </div>
                             </div>

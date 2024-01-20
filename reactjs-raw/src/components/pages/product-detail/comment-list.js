@@ -2,17 +2,23 @@ import LikeDislike from "./like-dislike";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import notifyInfor from '../../items/noti_success';
 import Cookies from 'js-cookie';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 
 export default function CommentList(props) {
     const [idtraloibinhluan, setIdTraLoiBinhLuan] = useState(null);
     const [vanban, setVanBan] = useState("");
     const [khach_hang_id, setKhach_hang_id] = useState(JSON.parse(Cookies.get('user')));
     const [vanbanmoi, setVanBanMoi] = useState("");
-
+    const [modal, setModal] = useState(false);
     const handleReply = (commentId) => {
-        setIdTraLoiBinhLuan(commentId);
-        setVanBan("");
+        if(Cookies.get('accessToken')){
+            setIdTraLoiBinhLuan(commentId);
+            setVanBan("");
+        }else{
+            setModal(true);
+        }
     };
 
     const handleCancelReply = () => {
@@ -69,6 +75,16 @@ export default function CommentList(props) {
     const handleX = () => {
         setVanBanMoi("");
     }
+
+    const handleYes = () => {
+        notifyInfor('Đang chuyển hướng đến đăng nhập');
+        setTimeout(() => {
+            window.location.href = "/login";
+        }, 1000);
+    };
+    const handleNo = () => {
+        setModal(!modal)
+    };
     return (
         <>
             {props.data.map(function (item, key) {
@@ -145,6 +161,16 @@ export default function CommentList(props) {
                     </div>
                 </div>
             )}
+              <Modal isOpen={modal} size="sm" className="my-modal">
+                <ModalBody style={{ backgroundColor: '#f8f9fa', color: '#333', padding: '20px', maxHeight: '100px', overflowY: 'auto' }}>
+                    Đăng nhập rồi mới được trả lời bình luận khách yêu owii!!!
+                </ModalBody>
+                <ModalFooter style={{ backgroundColor: '#f8f9fa', borderRadius: '0 0 10px 10px', borderTop: 'none', padding: '0px' }}>
+                    <Button color="primary" style={{ backgroundColor: '#007bff', color: '#fff', borderRadius: '5px', marginRight: '10px' }} onClick={handleYes}>Okey đi thôi!!</Button>
+                    <Button color="secondary" style={{ backgroundColor: '#6c757d', color: '#fff', borderRadius: '5px' }} onClick={handleNo}>Honggg</Button>
+                </ModalFooter>
+            </Modal>
+
         </>
     );
 }

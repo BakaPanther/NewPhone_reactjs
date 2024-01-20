@@ -4,15 +4,16 @@ import SingleWproduct from "./single-fproduct";
 import React, { useState, useEffect } from "react";
 import Cookies from 'js-cookie';
 import axios from "axios";
+import { RingLoader } from "react-spinners";
 export default function WishlistProducts() {
     //loader
     let [loading, setLoading] = useState(true);
-    let [color, setColor] = useState("#ffffff");
-    const override = {
-        display: "block",
-        margin: "0 auto",
-        borderColor: "red",
-    };
+    // let [color, setColor] = useState("#ffffff");
+    // const override = {
+    //     display: "block",
+    //     margin: "0 auto",
+    //     borderColor: "red",
+    // };
     const [wishLish, setWishList] = useState([]);
     const [khach_hang_id, setKhach_hang_id] = useState(JSON.parse(Cookies.get('user')));
 
@@ -35,31 +36,48 @@ export default function WishlistProducts() {
     }, [khach_hang_id]);
     return (
         <>
-            <Header/>
-            <div className="shopping-cart section">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12">
-                            <table className="table shopping-summery">
-                                <thead>
-                                    <tr className="main-hading">
-                                        <th>Điện Thoại</th>
-                                        <th>Màu Sắc</th>
-                                        <th className="text-center">Dung Lượng</th>
-                                        <th className="text-center">Giá Bán</th>
-                                        <th className="text-center"><i className="ti-bag"></i></th>
-                                        <th className="text-center"><i className="ti-trash remove-icon"></i></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <SingleWproduct data={wishLish} setData={setWishList} />
-                                </tbody>
-                            </table>
+            {(!loading) ? (
+                <>
+                    <Header />
+                    <div className="shopping-cart section">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-12">
+                                    <table className="table shopping-summery">
+                                        <thead>
+                                            <tr className="main-hading">
+                                                <th>Điện Thoại</th>
+                                                <th>Màu Sắc</th>
+                                                <th className="text-center">Dung Lượng</th>
+                                                <th className="text-center">Giá Bán</th>
+                                                <th className="text-center"><i className="ti-bag"></i></th>
+                                                <th className="text-center"><i className="ti-trash remove-icon"></i></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <SingleWproduct data={wishLish} setData={setWishList} />
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <Footer />
+                    <Footer />
+                </>
+            ) : (
+                <RingLoader
+                    color="#36d7b7"
+                    loading
+                    cssOverride={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                    }}
+                    size={148}
+                    speedMultiplier={1}
+                />
+            )}
         </>
     )
 }

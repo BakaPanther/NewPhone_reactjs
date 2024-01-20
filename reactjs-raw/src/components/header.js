@@ -3,7 +3,7 @@ import notifySuccess from './items/noti_success';
 import notifyInfor from './items/noti_success';
 import Cookies from 'js-cookie';
 import React, { useState, useEffect } from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter,Card,CardBody,CardTitle,CardSubtitle,CardText } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 function Header() {
   const [modal, setModal] = useState(false);
   function handleLogout() {
@@ -12,35 +12,33 @@ function Header() {
     notifySuccess("Đăng Xuất Thành Công");
   }
   function handleClick() {
-    if(Cookies.get('accessToken'))
-    {
+    if (Cookies.get('accessToken')) {
       window.location.href = "/cart";
     }
-    else{
+    else {
       setModal(true);
     }
-    
+
   }
   function handleMyAccountClick() {
-    if(Cookies.get('accessToken'))
-    {
+    if (Cookies.get('accessToken')) {
       window.location.href = "/my-account";
     }
-    else{
+    else {
       setModal(true);
     }
-    
+
   }
   const handleYes = () => {
     notifyInfor('Đang chuyển hướng đến đăng nhập');
     setTimeout(() => {
       window.location.href = "/login";
     }, 1000);
-};
+  };
 
-const handleNo = () => {
+  const handleNo = () => {
     setModal(!modal)
-};
+  };
   return (
     <>
       {/* <div className="preloader">
@@ -60,8 +58,8 @@ const handleNo = () => {
 
                 <div className="top-left">
                   <ul className="list-main">
-                    <li><i className="ti-headphone-alt"></i> +084 (090) 123-456</li>
-                    <li><i className="ti-email"></i> support@newphone.com</li>
+                    <li><i className="ti-headphone-alt"></i> +84 911 29730</li>
+                    <li><i className="ti-email"></i> newphone@gmail.com</li>
                   </ul>
                 </div>
 
@@ -70,14 +68,14 @@ const handleNo = () => {
 
                 <div className="right-content">
                   <ul className="list-main">
-                    <li><i className="ti-location-pin"></i> Store location</li>
-                    <li><i className="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
-                    <li><i className="ti-user"></i> <NavLink onClick={handleMyAccountClick} >My account</NavLink></li>
+                    <li><i className="ti-location-pin"></i>Vị trí cửa hàng</li>
+                    <li><i className="ti-alarm-clock"></i> <a href="#">Giao dịch hàng ngày</a></li>
+                    <li><i className="ti-user"></i> <NavLink onClick={handleMyAccountClick} >Tài khoản của tôi</NavLink></li>
                     {
                       Cookies.get('accessToken') ? (
-                        <li><i className="ti-user"></i><NavLink onClick={handleLogout}>Logout</NavLink></li>
+                        <li><i className="ti-user"></i><NavLink onClick={handleLogout}>Đăng xuất</NavLink></li>
                       ) : (
-                        <li><i className="ti-power-off"></i><NavLink to='/login'>Login</NavLink></li>
+                        <li><i className="ti-power-off"></i><NavLink to='/login'>Đăng nhập</NavLink></li>
                       )
                     }
                   </ul>
@@ -94,7 +92,7 @@ const handleNo = () => {
               <div className="col-lg-2 col-md-2 col-12">
 
                 <div className="logo">
-                  <NavLink to="/"><img src="images/test_logo.png" alt="logo" /></NavLink>
+                  <NavLink to="/"><img src="../images/test_logo.png" alt="logo" /></NavLink>
                 </div>
 
                 <div className="search-top">
@@ -238,15 +236,15 @@ const handleNo = () => {
                       <div className="navbar-collapse">
                         <div className="nav-inner">
                           <ul className="nav main-menu menu navbar-nav">
-                            <li className="active"><NavLink to={"/"}>Home</NavLink></li>
-                            <li><NavLink to="/product">Product</NavLink></li>
+                            <li className="active"><NavLink to={"/"}>Trang chủ</NavLink></li>
+                            <li><NavLink to="/product">Sản phẩm</NavLink></li>
                             <li><NavLink to="/">Payment<i className="ti-angle-down"></i></NavLink>
                               <ul className="dropdown">
-                                <li><NavLink onClick={handleClick}>Cart</NavLink></li>
+                                <li><NavLink onClick={handleClick}>Giỏ hàng</NavLink></li>
                                 <li><NavLink to="/checkout">Checkout</NavLink></li>
                               </ul>
                             </li>
-                            <li><NavLink to="/contact-us">Contact us</NavLink></li>
+                            <li><NavLink to="/contact-us">Liên hệ</NavLink></li>
                           </ul>
                         </div>
                       </div>
@@ -260,15 +258,15 @@ const handleNo = () => {
         </div>
 
       </header>
-      <Modal isOpen={modal} size="sm"  className="my-modal">
-            <ModalBody style={{ backgroundColor: '#f8f9fa', color: '#333', padding: '20px', maxHeight: '100px', overflowY: 'auto' }}>
-                Đăng nhập rồi mới vào được khách yêu owii!!!
-            </ModalBody>
-            <ModalFooter style={{ backgroundColor: '#f8f9fa', borderRadius: '0 0 10px 10px', borderTop: 'none', padding: '0px' }}>
-                <Button color="primary" style={{ backgroundColor: '#007bff', color: '#fff', borderRadius: '5px', marginRight: '10px' }} onClick={handleYes}>Okey đi thôi!!</Button>
-                <Button color="secondary" style={{ backgroundColor: '#6c757d', color: '#fff', borderRadius: '5px' }} onClick={handleNo}>Honggg</Button>
-            </ModalFooter>
-        </Modal>
+      <Modal isOpen={modal} size="sm" className="my-modal">
+        <ModalBody style={{ backgroundColor: '#f8f9fa', color: '#333', padding: '20px', maxHeight: '100px', overflowY: 'auto' }}>
+          Đăng nhập rồi mới vào được khách yêu owii!!!
+        </ModalBody>
+        <ModalFooter style={{ backgroundColor: '#f8f9fa', borderRadius: '0 0 10px 10px', borderTop: 'none', padding: '0px' }}>
+          <Button color="primary" style={{ backgroundColor: '#007bff', color: '#fff', borderRadius: '5px', marginRight: '10px' }} onClick={handleYes}>Okey đi thôi!!</Button>
+          <Button color="secondary" style={{ backgroundColor: '#6c757d', color: '#fff', borderRadius: '5px' }} onClick={handleNo}>Honggg</Button>
+        </ModalFooter>
+      </Modal>
     </>
 
   );
