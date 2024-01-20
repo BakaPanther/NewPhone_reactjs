@@ -9,7 +9,7 @@ import Swal from 'sweetalert2'
 export function TotalAmount(props) {
 
     const [user, setUser] = useState(JSON.parse(Cookies.get('user')));
-  
+
     const [idPhieuXuat, setIdPhieuXuat] = useState();
     const location = useLocation();
 
@@ -18,32 +18,32 @@ export function TotalAmount(props) {
             khach_hang_id: user.id,
             tong_tien: props.tongtien
         })
-        .then((response) => {
-            notifySuccess('Đặt hàng thành công');
-            console.log(response.data.data);
-            localStorage.setItem('id_phieu_xuat', response.data.data);
-        })
-        .catch((error) => {
-            // Xử lý lỗi nếu có
-            console.error('Lỗi tạo mới:', error);
-        });
+            .then((response) => {
+                notifySuccess('Đặt hàng thành công');
+                console.log(response.data.data);
+                localStorage.setItem('id_phieu_xuat', response.data.data);
+            })
+            .catch((error) => {
+                // Xử lý lỗi nếu có
+                console.error('Lỗi tạo mới:', error);
+            });
     }
     const handlThayDoiTrangThai = () => {
         axios.post('http://127.0.0.1:8000/api/phieu-xuat/cap-nhap-trang-thai', {
-            id : localStorage.getItem('id_phieu_xuat')
+            id: localStorage.getItem('id_phieu_xuat')
         })
-        .then((response) => {
-            localStorage.removeItem('id_phieu_xuat');
-            window.location.href = '/cart';
-        })
-        .catch((error) => {
-            // Xử lý lỗi nếu có
-            console.error('Lỗi khi thay đổi trạng thái:', error);
-        });
+            .then((response) => {
+                localStorage.removeItem('id_phieu_xuat');
+                window.location.href = '/cart';
+            })
+            .catch((error) => {
+                // Xử lý lỗi nếu có
+                console.error('Lỗi khi thay đổi trạng thái:', error);
+            });
     }
 
 
-    
+
 
     useEffect(() => {
         // Lấy thông tin từ URL
@@ -56,7 +56,7 @@ export function TotalAmount(props) {
         if (vnp_ResponseCode === '00') {
             handlThayDoiTrangThai();
             notifySuccess('Thanh Toan Thanh Cong');
-            
+
         } else if (vnp_ResponseCode === '09') {
             notifyError('Thẻ/Tài khoản của khách hàng chưa đăng ký dịch vụ InternetBanking tại ngân hàng.');
             setTimeout(() => {
@@ -90,15 +90,24 @@ export function TotalAmount(props) {
         }
     }, []);
 
-   
+
     const handlBuy = () => {
         if (props.soluong === 0) {
             notifyError("Số lượng phải lớn hơn 0 mới thanh toán được");
         }
         else {
             if (props.payment === 1) {
-                handlTaoMoi();
-                window.location.href = '/cart';
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Đặt hàng thành công",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                setTimeout(() => {
+                    handlTaoMoi();
+                    window.location.href = '/cart';
+                }, 3000);
             }
             else if (props.payment === 2) {
                 axios.post('http://127.0.0.1:8000/api/thanh-toan-vnpay', {
@@ -106,7 +115,7 @@ export function TotalAmount(props) {
                 })
                     .then((response) => {
                         handlTaoMoi();
-                       window.location.href = response.data.data;
+                        window.location.href = response.data.data;
                     })
                     .catch((error) => {
                         // Xử lý lỗi nếu có

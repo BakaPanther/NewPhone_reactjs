@@ -70,7 +70,7 @@ export function Index() {
                 </div>
             ) : (
                 <RingLoader
-                    color="#36d7b7"
+                    color="#F7941D"
                     loading
                     cssOverride={{
                         position: 'absolute',
