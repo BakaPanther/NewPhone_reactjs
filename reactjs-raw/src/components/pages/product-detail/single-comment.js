@@ -21,8 +21,8 @@ export default function SingleComment(props) {
             }
         })
             .then(response => {
+                console.log(response);
                 const daMua = response.data.data.some(item => props.idDienThoai == item.dien_thoai_id);
-
                 if (daMua) {
                     setModal(true);
                 } else {
@@ -76,7 +76,7 @@ export default function SingleComment(props) {
                     key={i}
                     className={`star ${i <= ratingValue ? 'active' : ''}`}
                     onClick={() => handleStarClick(i)}
-                    style={{ fontSize: '30px', color: i <= ratingValue ? 'gold' : 'black' }}
+                    style={{ fontSize: '30px', color: i <= ratingValue ? 'gold' : 'black',cursor: 'pointer' }}
                 >
                     ★
                 </span>
